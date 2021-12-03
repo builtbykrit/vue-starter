@@ -87,6 +87,14 @@ const state = ref({
 - Group route names in a constant (enum-like object) so you don't have to remember them. Plus, they'll automatically update when changed.
 - Group page titles in a constant (enum-like object) so that the text can be changed without modifying other code.
 
+### Authentication
+
+- This starter template includes tested functionality for managing User and Token data in global state. See the `/store` directory for implementation details.
+
+### Notifications
+
+- This starter template includes tested functionality for managing Notification data in global state. See `/modules/notification` and the `/store` directory for implementation details.
+
 ### Logging
 
 - The logging service ([Sentry](https://sentry.io)) is abstracted for portability.
