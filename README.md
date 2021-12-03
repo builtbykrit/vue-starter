@@ -2,6 +2,14 @@
 
 This template should help get you started developing with a Vue web app.
 
+## Getting started
+
+To run this project locally:
+```shell
+npm install
+npm run dev
+```
+
 ## Stack
 
 | Tooling  | Purpose
@@ -134,7 +142,7 @@ const state = ref({
   1. Seamless integration with Github
 - Utilize [Dependabot](https://github.com/dependabot) to mitigate security risks and keep dependencies up-to-date
 - ⚠️ Always test dependencies updates before committing to an updated version.
-- Require that unit, E2E, and lint tests pass before allowing pull requests to be merged.
+- Require that tests to pass before allowing pull requests to be merged. This functionality exists out-of-the-box in this starter template.
 - Use [Act](https://github.com/nektos/act) to test Github Actions locally 
 
 
