@@ -58,6 +58,13 @@ const state = ref({
 </template>
 ```
 
+### Styling
+- ⚠️ This starter template uses Tailwind v3 which is still in beta
+- Why Tailwind:
+  1. Utility classes provide consistent styling
+  2. Faster to implement: no need to write CSS
+  3. Easily purchase unused CSS
+
 ### State management
 
 - When to use a store:
