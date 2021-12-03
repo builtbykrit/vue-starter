@@ -1,9 +1,9 @@
 import { createStore } from "vuex"
-import state from "./state"
-import getters from "./getters"
-import mutations from "./mutations"
 import createPersistedState from "vuex-persistedstate"
 import SecureLS from "secure-ls"
+import notificationModule from "./notification"
+import tokenModule from "./token"
+import userModule from "./user"
 
 const ls = new SecureLS({ isCompression: false })
 const persistedState = createPersistedState({
@@ -15,8 +15,10 @@ const persistedState = createPersistedState({
 })
 
 export default createStore({
-  state,
-  getters,
-  mutations,
+  modules: {
+    notification: notificationModule,
+    token: tokenModule,
+    user: userModule,
+  },
   plugins: [persistedState],
 })

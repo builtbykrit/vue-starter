@@ -1,6 +1,6 @@
-import clock from "../modules/clock"
+import clock from "../../modules/clock"
 
-const getters = {
+const tokenGetters = {
   /**
    * Checks whether the current User's Access Token has expired
    * @param state
@@ -16,8 +16,8 @@ const getters = {
    * @returns {boolean}
    */
   isAuthenticated(state) {
-    return !!state.accessToken && !getters.accessTokenIsExpired(state)
+    return !!state.accessToken && !tokenGetters.accessTokenIsExpired(state)
   },
 }
 
-export default getters
+export default tokenGetters

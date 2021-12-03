@@ -9,7 +9,9 @@ export default {
    */
   injectAuthorizationHeader: (config) => {
     if (store.getters.isAuthenticated) {
-      config.headers["Authorization"] = `Bearer ${store.state.accessToken}`
+      config.headers[
+        "Authorization"
+      ] = `Bearer ${store.state.token.accessToken}`
     }
     return config
   },

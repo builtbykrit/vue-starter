@@ -7,16 +7,16 @@ import store from "../../../src/store"
 describe("interceptors", () => {
   describe("injectAuthorizationHeader", () => {
     it("adds an Authorization header only when a Token exists", () => {
-      store.state.accessToken = null
-      store.state.accessTokenExpiresAt = null
+      store.state.token.accessToken = null
+      store.state.token.accessTokenExpiresAt = null
       jest.spyOn(clock, "isBeforeNow").mockReturnValueOnce(false)
       let config = interceptors.injectAuthorizationHeader({
         headers: [],
       })
       expect(config.headers).not.toContain("Authorization")
 
-      store.state.accessToken = mocks.token
-      store.state.accessTokenExpiresAt = 123512351235235
+      store.state.token.accessToken = mocks.token
+      store.state.token.accessTokenExpiresAt = 123512351235235
       jest.spyOn(clock, "isBeforeNow").mockReturnValueOnce(true)
       config = interceptors.injectAuthorizationHeader({
         headers: [],

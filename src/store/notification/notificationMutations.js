@@ -1,16 +1,6 @@
-import notification from "../modules/notification"
+import notification from "../../modules/notification"
 
-const mutations = {
-  /**
-   * Clears authentication data from state
-   * @param state
-   */
-  clearAuthentication(state) {
-    state.accessToken = null
-    state.accessTokenExpiresAt = null
-    state.refreshToken = null
-  },
-
+const notificationMutations = {
   /**
    * Stores a Notification to state
    * @param state
@@ -27,7 +17,7 @@ const mutations = {
    */
   postErrorNotification(state, message) {
     const n = notification.createErrorNotification(message)
-    mutations.postNotification(state, n)
+    notificationMutations.postNotification(state, n)
   },
 
   /**
@@ -37,7 +27,7 @@ const mutations = {
    */
   postSuccessNotification(state, message) {
     const n = notification.createSuccessNotification(message)
-    mutations.postNotification(state, n)
+    notificationMutations.postNotification(state, n)
   },
 
   /**
@@ -50,33 +40,6 @@ const mutations = {
       (n) => n.id !== notificationId
     )
   },
-
-  /**
-   * Stores an Access Token to state
-   * @param state
-   * @param token
-   */
-  setAccessToken(state, token) {
-    state.accessToken = token
-  },
-
-  /**
-   * Stores a Refresh Token to state
-   * @param state
-   * @param token
-   */
-  setRefreshToken(state, token) {
-    state.refreshToken = token
-  },
-
-  /**
-   * Stores the current User's data to state
-   * @param state
-   * @param user
-   */
-  setCurrentUser(state, user) {
-    state.currentUser = user
-  },
 }
 
-export default mutations
+export default notificationMutations

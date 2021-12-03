@@ -1,8 +1,8 @@
-import getters from "../../../src/store/getters"
-import state from "../../../src/store/state"
+import state from "../../../../src/store/token/tokenState"
+import getters from "../../../../src/store/token/tokenGetters"
 import dayjs from "dayjs"
 
-describe("getters", () => {
+describe("tokenGetters", () => {
   beforeEach(() => {
     jest.restoreAllMocks()
   })
