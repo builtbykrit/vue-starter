@@ -6,6 +6,8 @@ export default function () {
     accessTokenExpiresAt: null,
     // A User object
     currentUser: null,
+    // A list of messages to display to the User
+    notifications: [],
     // An OAuth 2 refresh token
     refreshToken: null,
   }
