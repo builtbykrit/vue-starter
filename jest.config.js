@@ -7,9 +7,4 @@ module.exports = {
   moduleFileExtensions: ["js", "vue"],
   testEnvironment: "jsdom",
   collectCoverage: true,
-  collectCoverageFrom: [
-    "src/components/**/*.{js,vue}",
-    "!node_modules/**",
-    "!src/components/**/index.js",
-  ],
 }
