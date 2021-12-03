@@ -1,0 +1,12 @@
+# Keeps the project's dependencies updated to the latest versions by automatically generating a PR
+# when a new version of a dependency exists.
+
+version: 2
+updates:
+  # Enable version updates for npm
+  - package-ecosystem: "npm"
+    # Look for `package.json` and `lock` files in the `root` directory
+    directory: "/"
+    # Check the npm registry for updates every week
+    schedule:
+      interval: "weekly"
