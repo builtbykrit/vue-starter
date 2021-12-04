@@ -5,6 +5,9 @@ module.exports = {
   },
   testMatch: ["**/tests/**/*.spec.js"],
   moduleFileExtensions: ["js", "vue"],
+  moduleNameMapper: {
+    "@/(.*)": "<rootDir>/src/$1",
+  },
   testEnvironment: "jsdom",
   collectCoverage: true,
 }
