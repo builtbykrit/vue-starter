@@ -1,4 +1,5 @@
 import { defineConfig, loadEnv } from "vite"
+import svgLoader from "vite-svg-loader"
 import vue from "@vitejs/plugin-vue"
 import path from "path"
 
@@ -18,7 +19,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     define: envWithProcessPrefix,
-    plugins: [vue()],
+    plugins: [vue(), svgLoader()],
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "/src"),
