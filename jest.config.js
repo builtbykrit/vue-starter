@@ -6,9 +6,8 @@ module.exports = {
   testMatch: ["**/tests/**/*.spec.js"],
   moduleFileExtensions: ["js", "vue"],
   moduleNameMapper: {
-    ".+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)(\\?component)?$":
-      "jest-transform-stub",
-    "@/(.*)": "<rootDir>/src/$1",
+    ".+\\.(svg)(\\?component)?$": "<rootDir>/tests/svgMock.vue",
+    "^@/(.*)$": "<rootDir>/src/$1",
   },
   testEnvironment: "jsdom",
   collectCoverage: true,
