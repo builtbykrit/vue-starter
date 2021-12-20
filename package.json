@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.16.4",
-    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-env": "^7.16.5",
     "@vitejs/plugin-vue": "^2.0.1",
     "@vue/test-utils": "^2.0.0-rc.17",
     "@vue/vue3-jest": "^27.0.0-alpha.4",
