@@ -31,7 +31,7 @@ npm run dev
 
 ### Frontend framework
 
-- Prefix component names with 'v' (e.g. `vButton.vue`)
+- Prefix component names with 'V' (e.g. `VButton.vue`)
 - Store Views in a separate directory from Components.
 - The template uses the `<script setup>` syntactic sugar for brevity. Check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more or see below for an example:
 
