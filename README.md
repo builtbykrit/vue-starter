@@ -125,8 +125,6 @@ const state = ref({
 - Why [Jest](https://jestjs.io/) for unit testing:
   1. Tests run faster (no need to start Cypress first)
   2. Popular, mature unit testing library
-- Why [Cypress](https://www.cypress.io/) for E2E testing:
-  1. Runs tests in the browser
 - Store reusable mocked data for use in tests. For example, store a mock User that can be used for any tests requiring a User.
 
 ### Linting
