@@ -116,17 +116,6 @@ const state = ref({
 - Only events occurring in `staging` and `production` environments are sent to the logging service. Events occurring in `development` environments are simply logged to the console.
 - When User data exists, it is bound to logged events.
 
-### Testing
-
-- Why write tests:
-  1. Better code reliability
-  2. Fosters good code quality
-  3. Documents which use cases have been considered
-- Why [Jest](https://jestjs.io/) for unit testing:
-  1. Tests run faster (no need to start Cypress first)
-  2. Popular, mature unit testing library
-- Store reusable mocked data for use in tests. For example, store a mock User that can be used for any tests requiring a User.
-
 ### Linting
 
 - Noteworthy linting rules:
