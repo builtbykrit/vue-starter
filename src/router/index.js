@@ -10,7 +10,7 @@ const routes = [
       requiresAuth: false,
       splash: false,
     },
-    component: () => import("../views/Sandbox.vue"),
+    component: () => import("../views/sandbox/LibrarySandbox.vue"),
   },
 ]
 
