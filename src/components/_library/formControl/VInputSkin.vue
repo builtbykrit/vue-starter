@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div class="flex flex-col w-full">
     <!-- Label -->
-    <label :for="inputId">
+    <VLabel :input-id="inputId">
       <slot name="label">
         {{ label }}
       </slot>
-    </label>
+    </VLabel>
 
     <!-- Input -->
     <slot />
@@ -16,7 +16,8 @@
 </template>
 
 <script setup>
-import VErrorMessages from "@/components/_library/formControl/VErrorMessages"
+import VErrorMessages from "@/components/_library/formControl/VErrorMessages.vue"
+import VLabel from "@/components/_library/formControl/VLabel.vue"
 
 defineProps({
   inputId: { type: String, required: true },

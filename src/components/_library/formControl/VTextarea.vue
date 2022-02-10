@@ -1,0 +1,83 @@
+<template>
+  <VInputSkin :input-id="internalId" :label="label">
+    <template #label>
+      <slot name="label" />
+    </template>
+
+    <textarea
+      :id="internalId"
+      ref="textarea"
+      v-model="internalValue"
+      :rows="rows"
+      class="w-full border-gray-300 rounded px-1.5 py-1 min-h-[34px] resize-none"
+      :class="{
+        'hover:resize-y': !autoGrow,
+      }"
+    />
+  </VInputSkin>
+</template>
+
+<script>
+import { v4 as uuid } from "uuid"
+import VInputSkin from "@/components/_library/formControl/VInputSkin.vue"
+
+export default {
+  name: "VTextarea",
+  components: { VInputSkin },
+  props: {
+    modelValue: { type: String, required: true },
+    id: { type: String, default: undefined },
+    label: { type: String, default: undefined },
+    rows: { type: Number, default: 3 },
+    autoGrow: Boolean,
+    readonly: Boolean,
+  },
+  emits: ["update:modelValue"],
+  computed: {
+    internalId() {
+      if (this.id) return this.id
+      return uuid()
+    },
+    internalValue: {
+      get() {
+        return this.modelValue
+      },
+      set(val) {
+        this.$emit("update:modelValue", val)
+      },
+    },
+  },
+  watch: {
+    internalValue(val) {
+      if (this.autoGrow) {
+        this.resizeTextarea(val)
+      }
+    },
+  },
+  mounted() {
+    if (this.autoGrow) {
+      this.resizeTextarea(this.internalValue)
+    }
+  },
+  methods: {
+    resizeTextarea(val = "") {
+      const textarea = this.$refs.textarea
+
+      if (val.length === 0) {
+        textarea.rows = this.rows
+        return
+      }
+
+      textarea.rows = this.rows
+
+      const styles = window.getComputedStyle(textarea)
+      const paddingTop = parseInt(styles.paddingTop)
+      const paddingBottom = parseInt(styles.paddingBottom)
+      const padding = paddingTop + paddingBottom
+      const initialHeight = (parseInt(styles.height) - padding) / textarea.rows
+      const scrollHeight = textarea.scrollHeight - padding
+      textarea.rows = Math.ceil(scrollHeight / initialHeight)
+    },
+  },
+}
+</script>
