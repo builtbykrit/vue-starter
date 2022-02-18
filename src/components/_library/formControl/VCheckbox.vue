@@ -1,20 +1,18 @@
 <template>
-  <div>
-    <VLabel :input-id="internalId" class="flex items-center">
-      <input
-        :id="internalId"
-        :value="value"
-        :checked="checked"
-        :disabled="disabled"
-        type="checkbox"
-        class="rounded h-5 w-5 focus:ring-offset-0 focus:ring-blue-500/50"
-        @input="onChange"
-      />
-      <span class="ml-2">
-        <slot name="label">{{ label }}</slot>
-      </span>
-    </VLabel>
-  </div>
+  <VLabel :input-id="internalId" class="flex items-center">
+    <input
+      :id="internalId"
+      :value="value"
+      :checked="checked"
+      :disabled="disabled"
+      type="checkbox"
+      class="rounded h-5 w-5 focus:ring-offset-0 focus:ring-blue-500/50"
+      @input="onChange"
+    />
+    <span class="ml-2">
+      <slot name="label">{{ label }}</slot>
+    </span>
+  </VLabel>
 </template>
 
 <script>
@@ -25,7 +23,7 @@ export default {
   name: "VCheckbox",
   components: { VLabel },
   props: {
-    modelValue: { type: [String, Array], required: true },
+    modelValue: { type: [Boolean, Array], required: true },
     id: { type: String, default: undefined },
     label: { type: String, default: undefined },
     value: { type: [Boolean, String, Number], default: true },

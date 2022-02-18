@@ -30,9 +30,7 @@
       </VCard>
     </SandboxRow>
 
-    <VDivider />
-
-    <FormControlsSandbox />
+    <FormControlsSandbox class="mt-8" />
   </div>
 </template>
 
@@ -41,6 +39,5 @@ import SandboxRow from "@/views/sandbox/SandboxRow.vue"
 import VButton from "@/components/_library/buttons/VButton.vue"
 import VButtonGroup from "@/components/_library/buttons/VButtonGroup.vue"
 import VCard from "@/components/_library/VCard.vue"
-import VDivider from "@/components/_library/VDivider.vue"
 import FormControlsSandbox from "@/views/sandbox/FormControlsSandbox.vue"
 </script>

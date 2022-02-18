@@ -31,7 +31,7 @@
       </div>
 
       <ListboxOptions
-        class="absolute w-full rounded shadow max-h-56 overflow-y-auto mt-1 focus:outline-0"
+        class="absolute w-full rounded shadow max-h-56 overflow-y-auto mt-1 focus:outline-0 z-10"
       >
         <ListboxOption
           v-for="item in items"

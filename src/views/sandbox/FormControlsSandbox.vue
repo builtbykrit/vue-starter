@@ -1,47 +1,100 @@
 <template>
-  <SandboxRow title="VTextField">
-    <VTextField v-model="textField" label="Text Field" />
-    <VTextField v-model="numberField" label="Number Field" type="number" />
-    <VTextField
-      v-model="passwordField"
-      label="Password Field"
-      type="password"
-    />
-  </SandboxRow>
-  <SandboxRow title="VTextarea">
-    <VTextarea v-model="textarea" label="Textarea" />
-    <VTextarea v-model="textarea" label="Autogrow Textarea" auto-grow />
-  </SandboxRow>
-  <SandboxRow title="VSelect">
-    <VSelect
-      v-model="selectedItem"
-      label="Select"
-      placeholder="Select an item"
-      :items="selectItems"
-    />
-    <VSelect
-      v-model="selectedItem"
-      label="Typeahead"
-      placeholder="Start typing..."
-      :items="selectItems"
-      typeahead
-      clearable
-    />
-  </SandboxRow>
-  <SandboxRow title="VCheckbox">
-    <div class="flex items-center gap-2">
-      <VCheckbox v-model="singleCheckbox" label="Checkbox" />
-      <span class="text-gray-500">value: {{ singleCheckbox }}</span>
+  <div>
+    <div class="flex justify-between">
+      <h2 class="text-xl font-semibold">Form Controls</h2>
+      <VSwitch v-model="readonlyInputs" label="Read Only" />
     </div>
-    <div class="flex items-center gap-2">
-      <VCheckbox v-model="checkboxGroup" label="Option 1" :value="1" />
-      <VCheckbox v-model="checkboxGroup" label="Option 2" :value="2" />
-      <VCheckbox v-model="checkboxGroup" label="Option 3" :value="3" />
-      <span class="text-gray-500 ml-3">value: {{ checkboxGroup }}</span>
-    </div>
-  </SandboxRow>
-  <SandboxRow title="VSwitch"></SandboxRow>
-  <SandboxRow title="VRadio"></SandboxRow>
+    <VDivider class="mb-3" />
+    <SandboxRow title="VTextField">
+      <VTextField
+        v-model="textField"
+        label="Text Field"
+        :readonly="readonlyInputs"
+      />
+      <VTextField
+        v-model="numberField"
+        label="Number Field"
+        type="number"
+        :readonly="readonlyInputs"
+      />
+      <VTextField
+        v-model="passwordField"
+        label="Password Field"
+        type="password"
+        :readonly="readonlyInputs"
+      />
+    </SandboxRow>
+    <SandboxRow title="VTextarea">
+      <VTextarea
+        v-model="textarea"
+        label="Textarea"
+        :readonly="readonlyInputs"
+      />
+      <VTextarea
+        v-model="textarea"
+        label="Autogrow Textarea"
+        auto-grow
+        :readonly="readonlyInputs"
+      />
+    </SandboxRow>
+    <SandboxRow title="VSelect">
+      <VSelect
+        v-model="selectedItem"
+        label="Select"
+        placeholder="Select an item"
+        :items="selectItems"
+        :readonly="readonlyInputs"
+      />
+      <VSelect
+        v-model="selectedItem"
+        label="Typeahead"
+        placeholder="Start typing..."
+        :items="selectItems"
+        :readonly="readonlyInputs"
+        typeahead
+        clearable
+      />
+    </SandboxRow>
+    <SandboxRow title="VCheckbox">
+      <div class="flex items-center gap-2">
+        <VCheckbox
+          v-model="singleCheckbox"
+          :readonly="readonlyInputs"
+          label="Checkbox"
+        />
+        <span class="text-gray-500">value: {{ singleCheckbox }}</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <VCheckbox
+          v-model="checkboxGroup"
+          :readonly="readonlyInputs"
+          label="Option 1"
+          :value="1"
+        />
+        <VCheckbox
+          v-model="checkboxGroup"
+          :readonly="readonlyInputs"
+          label="Option 2"
+          :value="2"
+        />
+        <VCheckbox
+          v-model="checkboxGroup"
+          :readonly="readonlyInputs"
+          label="Option 3"
+          :value="3"
+        />
+        <span class="text-gray-500 ml-3">value: {{ checkboxGroup }}</span>
+      </div>
+    </SandboxRow>
+    <SandboxRow title="VSwitch">
+      <VSwitch
+        v-model="switchEnabled"
+        :readonly="readonlyInputs"
+        label="Switch"
+      />
+    </SandboxRow>
+    <SandboxRow title="VRadio"></SandboxRow>
+  </div>
 </template>
 
 <script setup>
@@ -52,6 +105,8 @@ import VTextField from "@/components/_library/formControl/VTextField.vue"
 import VTextarea from "@/components/_library/formControl/VTextarea.vue"
 import VSelect from "@/components/_library/formControl/VSelect.vue"
 import VCheckbox from "@/components/_library/formControl/VCheckbox.vue"
+import VSwitch from "@/components/_library/formControl/VSwitch.vue"
+import VDivider from "@/components/_library/VDivider.vue"
 
 const selectItems = [
   { text: "Item 1", value: 1 },
@@ -60,6 +115,8 @@ const selectItems = [
   { text: "Item 4", value: 4 },
 ]
 
+const readonlyInputs = ref(false)
+
 const textField = ref("")
 const numberField = ref(0)
 const passwordField = ref("password")
@@ -67,4 +124,5 @@ const textarea = ref("")
 const selectedItem = ref(undefined)
 const singleCheckbox = ref(true)
 const checkboxGroup = ref([])
+const switchEnabled = ref(false)
 </script>

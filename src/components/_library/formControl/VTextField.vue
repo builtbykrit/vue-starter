@@ -10,7 +10,11 @@
       :type="type"
       :step="step"
       :readonly="readonly"
-      class="w-full border-gray-300 rounded px-1.5 py-1"
+      class="w-full rounded py-1"
+      :class="{
+        'border-transparent px-0': readonly,
+        'border-gray-300 px-1.5': !readonly,
+      }"
     />
   </VInputSkin>
 </template>
