@@ -14,16 +14,21 @@
   </SandboxRow>
   <SandboxRow title="VSelect">
     <VSelect v-model="selectedItem" label="Select" :items="selectItems" />
-    <VSelect
-      v-model="selectedItem"
-      label="Searchable Select"
-      :items="selectItems"
-      searchable
-    />
   </SandboxRow>
-  <SandboxRow title="VCheckbox"></SandboxRow>
-  <SandboxRow title="VRadio"></SandboxRow>
+  <SandboxRow title="VCheckbox">
+    <div class="flex items-center gap-2">
+      <VCheckbox v-model="singleCheckbox" label="Checkbox" />
+      <span class="text-gray-500">value: {{ singleCheckbox }}</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <VCheckbox v-model="checkboxGroup" label="Option 1" :value="1" />
+      <VCheckbox v-model="checkboxGroup" label="Option 2" :value="2" />
+      <VCheckbox v-model="checkboxGroup" label="Option 3" :value="3" />
+      <span class="text-gray-500 ml-3">value: {{ checkboxGroup }}</span>
+    </div>
+  </SandboxRow>
   <SandboxRow title="VSwitch"></SandboxRow>
+  <SandboxRow title="VRadio"></SandboxRow>
 </template>
 
 <script setup>
@@ -33,6 +38,7 @@ import SandboxRow from "@/views/sandbox/SandboxRow.vue"
 import VTextField from "@/components/_library/formControl/VTextField.vue"
 import VTextarea from "@/components/_library/formControl/VTextarea.vue"
 import VSelect from "@/components/_library/formControl/VSelect.vue"
+import VCheckbox from "@/components/_library/formControl/VCheckbox.vue"
 
 const selectItems = [
   { text: "Item 1", value: 1 },
@@ -46,4 +52,6 @@ const numberField = ref(0)
 const passwordField = ref("password")
 const textarea = ref("")
 const selectedItem = ref(0)
+const singleCheckbox = ref(true)
+const checkboxGroup = ref([])
 </script>

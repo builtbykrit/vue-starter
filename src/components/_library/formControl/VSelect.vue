@@ -8,7 +8,7 @@
       </ListboxButton>
 
       <ListboxOptions
-        class="absolute w-full rounded shadow max-h-56 overflow-y-auto mt-1"
+        class="absolute w-full rounded shadow max-h-56 overflow-y-auto mt-1 focus:outline-0"
       >
         <ListboxOption
           v-for="item in items"
