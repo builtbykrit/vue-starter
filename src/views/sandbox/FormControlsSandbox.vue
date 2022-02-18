@@ -13,7 +13,20 @@
     <VTextarea v-model="textarea" label="Autogrow Textarea" auto-grow />
   </SandboxRow>
   <SandboxRow title="VSelect">
-    <VSelect v-model="selectedItem" label="Select" :items="selectItems" />
+    <VSelect
+      v-model="selectedItem"
+      label="Select"
+      placeholder="Select an item"
+      :items="selectItems"
+    />
+    <VSelect
+      v-model="selectedItem"
+      label="Typeahead"
+      placeholder="Start typing..."
+      :items="selectItems"
+      typeahead
+      clearable
+    />
   </SandboxRow>
   <SandboxRow title="VCheckbox">
     <div class="flex items-center gap-2">
@@ -51,7 +64,7 @@ const textField = ref("")
 const numberField = ref(0)
 const passwordField = ref("password")
 const textarea = ref("")
-const selectedItem = ref(0)
+const selectedItem = ref(undefined)
 const singleCheckbox = ref(true)
 const checkboxGroup = ref([])
 </script>
