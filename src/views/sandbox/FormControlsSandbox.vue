@@ -101,11 +101,11 @@
 import { ref } from "vue"
 import SandboxRow from "@/views/sandbox/SandboxRow.vue"
 
-import VTextField from "@/components/_library/formControl/VTextField.vue"
-import VTextarea from "@/components/_library/formControl/VTextarea.vue"
-import VSelect from "@/components/_library/formControl/VSelect.vue"
-import VCheckbox from "@/components/_library/formControl/VCheckbox.vue"
-import VSwitch from "@/components/_library/formControl/VSwitch.vue"
+import VTextField from "@/components/_library/formControls/VTextField.vue"
+import VTextarea from "@/components/_library/formControls/VTextarea.vue"
+import VSelect from "@/components/_library/formControls/VSelect.vue"
+import VCheckbox from "@/components/_library/formControls/VCheckbox.vue"
+import VSwitch from "@/components/_library/formControls/VSwitch.vue"
 import VDivider from "@/components/_library/VDivider.vue"
 
 const selectItems = [

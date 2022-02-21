@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import VLabel from "@/components/_library/formControl/VLabel.vue"
+import VLabel from "@/components/_library/formControls/VLabel.vue"
 import { v4 as uuid } from "uuid"
 
 export default {

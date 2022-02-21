@@ -9,9 +9,12 @@
       ref="textarea"
       v-model="internalValue"
       :rows="rows"
-      class="w-full border-gray-300 rounded px-1.5 py-1 min-h-[34px] resize-none"
+      :readonly="readonly"
+      class="w-full border-gray-300 rounded py-1 min-h-[34px] resize-none"
       :class="{
-        'hover:resize-y': !autoGrow,
+        'border-transparent px-0': readonly,
+        'border-gray-300 px-1.5': !readonly,
+        'hover:resize-y': !autoGrow && !readonly,
       }"
     />
   </VInputSkin>
@@ -19,7 +22,7 @@
 
 <script>
 import { v4 as uuid } from "uuid"
-import VInputSkin from "@/components/_library/formControl/VInputSkin.vue"
+import VInputSkin from "@/components/_library/formControls/VInputSkin.vue"
 
 export default {
   name: "VTextarea",
@@ -28,7 +31,7 @@ export default {
     modelValue: { type: String, required: true },
     id: { type: String, default: undefined },
     label: { type: String, default: undefined },
-    rows: { type: Number, default: 3 },
+    rows: { type: Number, default: 2 },
     autoGrow: Boolean,
     readonly: Boolean,
   },

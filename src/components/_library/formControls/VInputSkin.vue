@@ -16,8 +16,8 @@
 </template>
 
 <script setup>
-import VErrorMessages from "@/components/_library/formControl/VErrorMessages.vue"
-import VLabel from "@/components/_library/formControl/VLabel.vue"
+import VErrorMessages from "@/components/_library/formControls/VErrorMessages.vue"
+import VLabel from "@/components/_library/formControls/VLabel.vue"
 
 defineProps({
   inputId: { type: String, required: true },

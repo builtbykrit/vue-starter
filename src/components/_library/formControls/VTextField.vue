@@ -22,12 +22,12 @@
 <script>
 import { v4 as uuid } from "uuid"
 
-import VInputSkin from "@/components/_library/formControl/VInputSkin.vue"
+import VInputSkin from "@/components/_library/formControls/VInputSkin.vue"
 
 export default {
   components: { VInputSkin },
   props: {
-    modelValue: { type: [String, Number], required: true },
+    modelValue: { type: [String, Number], default: "" },
     id: { type: String, default: undefined },
     label: { type: String, default: undefined },
     type: { type: String, default: "text" },

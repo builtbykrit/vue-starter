@@ -7,11 +7,16 @@
           :id="internalId"
           :selected-text="selectedItem?.[itemText]"
           :placeholder="placeholder"
+          :readonly="readonly"
         />
         <ListboxButton
           v-else
           as="div"
-          class="w-full h-[34px] border border-gray-300 rounded px-1.5 py-1"
+          class="w-full h-[34px] border rounded py-1"
+          :class="{
+            'border-transparent px-0': readonly,
+            'border-gray-300 px-1.5': !readonly,
+          }"
         >
           <template v-if="!!selectedItem"
             >{{ selectedItem[itemText] }}
@@ -24,6 +29,7 @@
             <XIcon class="h-4 w-4 text-gray-400" />
           </button>
           <SelectorIcon
+            v-if="!readonly"
             class="h-5 w-5 text-gray-400 pointer-events-none"
             aria-hidden="true"
           />
@@ -58,14 +64,14 @@
 
 <script setup>
 import { v4 as uuid } from "uuid"
-import VInputSkin from "@/components/_library/formControl/VInputSkin.vue"
+import VInputSkin from "@/components/_library/formControls/VInputSkin.vue"
 import {
   Listbox,
   ListboxButton,
   ListboxOption,
   ListboxOptions,
 } from "@headlessui/vue"
-import ListboxInput from "@/components/_library/formControl/ListboxInput.vue"
+import ListboxInput from "@/components/_library/formControls/ListboxInput.vue"
 import { SelectorIcon, XIcon } from "@heroicons/vue/solid"
 import { computed } from "vue"
 

@@ -3,8 +3,12 @@
     <input
       v-model="searchText"
       type="text"
-      class="pointer-events-auto block w-full border-gray-300 rounded px-1.5 py-1 placeholder:text-sm"
       :placeholder="placeholder"
+      class="pointer-events-auto block w-full rounded py-1 placeholder:text-sm"
+      :class="{
+        'border-transparent px-0': readonly,
+        'border-gray-300 px-1.5': !readonly,
+      }"
       @click="openListbox"
       @focus="openListbox"
       @keydown="onKeydown"
@@ -19,6 +23,7 @@ const props = defineProps({
   id: { type: String, required: true },
   selectedText: { type: String, default: undefined },
   placeholder: { type: String, default: undefined },
+  readonly: Boolean,
 })
 const emit = defineEmits(["update:modelValue"])
 const symbols = Object.getOwnPropertySymbols(
