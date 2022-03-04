@@ -4,7 +4,7 @@
       :id="internalId"
       :value="value"
       :checked="checked"
-      :disabled="disabled"
+      :disabled="disabled || readonly"
       type="checkbox"
       class="rounded h-5 w-5 focus:ring-offset-0 focus:ring-blue-500/50"
       @input="onChange"
@@ -27,6 +27,7 @@ export default {
     id: { type: String, default: undefined },
     label: { type: String, default: undefined },
     value: { type: [Boolean, String, Number], default: true },
+    readonly: Boolean,
     disabled: Boolean,
   },
   emits: ["update:modelValue"],

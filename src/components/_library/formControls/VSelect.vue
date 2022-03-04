@@ -1,16 +1,23 @@
 <template>
   <VInputSkin :input-id="internalId" :label="label">
-    <Listbox v-model="internalValue" as="div" class="relative">
+    <Listbox
+      v-model="internalValue"
+      :disabled="readonly"
+      as="div"
+      class="relative"
+    >
       <div class="relative">
         <ListboxInput
           v-if="typeahead"
           :id="internalId"
+          ref="select"
           :selected-text="selectedItem?.[itemText]"
           :placeholder="placeholder"
           :readonly="readonly"
         />
         <ListboxButton
           v-else
+          ref="select"
           as="div"
           class="w-full h-[34px] border rounded py-1"
           :class="{
@@ -62,7 +69,7 @@
   </VInputSkin>
 </template>
 
-<script setup>
+<script>
 import { v4 as uuid } from "uuid"
 import VInputSkin from "@/components/_library/formControls/VInputSkin.vue"
 import {
@@ -73,40 +80,61 @@ import {
 } from "@headlessui/vue"
 import ListboxInput from "@/components/_library/formControls/ListboxInput.vue"
 import { SelectorIcon, XIcon } from "@heroicons/vue/solid"
-import { computed } from "vue"
 
-const props = defineProps({
-  modelValue: { type: [String, Number], default: undefined },
-  id: { type: String, default: undefined },
-  label: { type: String, default: undefined },
-  items: { type: Array, required: true },
-  itemValue: { type: String, default: "value" },
-  itemText: { type: String, default: "text" },
-  itemKey: { type: String, default: "value" },
-  placeholder: { type: String, default: undefined },
-  readonly: Boolean,
-  typeahead: Boolean,
-  clearable: Boolean,
-})
-const emit = defineEmits(["update:modelValue"])
-
-const internalId = computed(() => {
-  if (props.id) return props.id
-  return uuid()
-})
-
-const internalValue = computed({
-  get: () => props.modelValue,
-  set: (val) => emit("update:modelValue", val),
-})
-
-const selectedItem = computed(() =>
-  props.items.find((item) => item[props.itemValue] === internalValue.value)
-)
-
-const clearInput = () => {
-  internalValue.value = null
+export default {
+  components: {
+    VInputSkin,
+    Listbox,
+    ListboxButton,
+    ListboxOption,
+    ListboxOptions,
+    ListboxInput,
+    SelectorIcon,
+    XIcon,
+  },
+  props: {
+    modelValue: { type: [String, Number], default: undefined },
+    id: { type: String, default: undefined },
+    label: { type: String, default: undefined },
+    items: { type: Array, required: true },
+    itemValue: { type: String, default: "value" },
+    itemText: { type: String, default: "text" },
+    itemKey: { type: String, default: "value" },
+    placeholder: { type: String, default: undefined },
+    readonly: Boolean,
+    typeahead: Boolean,
+    clearable: Boolean,
+    autoFocus: Boolean,
+  },
+  emits: ["update:modelValue"],
+  computed: {
+    internalId() {
+      if (this.id) return this.id
+      return uuid()
+    },
+    internalValue: {
+      get() {
+        return this.modelValue
+      },
+      set(val) {
+        this.$emit("update:modelValue", val)
+      },
+    },
+    selectedItem() {
+      return this.items.find(
+        (item) => item[this.itemValue] === this.internalValue
+      )
+    },
+  },
+  mounted() {
+    if (this.autoFocus && this.typeahead) {
+      this.$refs.select.focus()
+    }
+  },
+  methods: {
+    clearInput() {
+      this.internalValue = null
+    },
+  },
 }
 </script>
-
-<style scoped></style>

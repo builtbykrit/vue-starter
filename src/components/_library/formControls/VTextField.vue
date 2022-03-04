@@ -6,13 +6,15 @@
 
     <input
       :id="internalId"
+      ref="input"
       v-model="internalValue"
       :type="type"
       :step="step"
       :readonly="readonly"
       class="w-full rounded py-1"
       :class="{
-        'border-transparent px-0': readonly,
+        'border-transparent focus:border-transparent focus:ring-0 px-0':
+          readonly,
         'border-gray-300 px-1.5': !readonly,
       }"
     />
@@ -33,6 +35,7 @@ export default {
     type: { type: String, default: "text" },
     step: { type: Number, default: 1 },
     readonly: Boolean,
+    autofocus: Boolean,
   },
   emits: ["update:modelValue"],
   computed: {
@@ -48,6 +51,11 @@ export default {
         this.$emit("update:modelValue", val)
       },
     },
+  },
+  mounted() {
+    if (this.autofocus) {
+      this.$refs.input.focus()
+    }
   },
 }
 </script>

@@ -4,9 +4,11 @@
       v-model="searchText"
       type="text"
       :placeholder="placeholder"
+      :readonly="readonly"
       class="pointer-events-auto block w-full rounded py-1 placeholder:text-sm"
       :class="{
-        'border-transparent px-0': readonly,
+        'border-transparent focus:border-transparent focus:ring-0 px-0':
+          readonly,
         'border-gray-300 px-1.5': !readonly,
       }"
       @click="openListbox"
