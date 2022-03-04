@@ -6,7 +6,7 @@
       :checked="checked"
       :disabled="disabled || readonly"
       type="checkbox"
-      class="rounded h-5 w-5 focus:ring-offset-0 focus:ring-blue-500/50"
+      class="rounded h-5 w-5 border-gray-300 focus:ring-offset-0 focus:ring-blue-500/50"
       @input="onChange"
     />
     <span class="ml-2">

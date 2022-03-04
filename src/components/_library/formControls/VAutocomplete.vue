@@ -1,28 +1,25 @@
 <template>
   <VInputSkin :input-id="internalId" :label="label">
-    <Listbox
+    <Combobox
       v-model="internalValue"
       :disabled="readonly || disabled"
       as="div"
       class="relative"
     >
       <div class="relative">
-        <ListboxButton
-          as="div"
-          class="w-full h-[34px] border rounded py-1"
+        <ComboboxInput
+          :display-value="() => selectedItem?.[itemText] ?? ''"
+          :placeholder="placeholder"
+          class="w-full placeholder:text-sm h-[34px] border rounded py-1"
           :class="{
-            'border-transparent px-0': readonly,
+            'border-transparent focus:border-transparent focus:ring-0 px-0':
+              readonly,
             'border-gray-300 px-1.5': !readonly,
           }"
-        >
-          <template v-if="!!selectedItem"
-            >{{ selectedItem[itemText] }}
-          </template>
-          <span v-else class="text-sm text-gray-500">{{ placeholder }}</span>
-        </ListboxButton>
-
+          @change="searchText = $event.target.value"
+        />
         <div class="absolute inset-y-0 right-0 pr-2 gap-1 flex items-center">
-          <button v-if="clearable && !!selectedItem" @click="clearInput">
+          <button v-if="!!selectedItem" @click="clearInput">
             <XIcon class="h-4 w-4 text-gray-400" />
           </button>
           <SelectorIcon
@@ -33,11 +30,11 @@
         </div>
       </div>
 
-      <ListboxOptions
+      <ComboboxOptions
         class="absolute w-full rounded shadow max-h-56 overflow-y-auto mt-1 focus:outline-0 z-10"
       >
-        <ListboxOption
-          v-for="item in items"
+        <ComboboxOption
+          v-for="item in filteredItems"
           v-slot="{ active, selected }"
           :key="item[itemKey]"
           as="template"
@@ -53,30 +50,32 @@
           >
             {{ item[itemText] }}
           </li>
-        </ListboxOption>
-      </ListboxOptions>
-    </Listbox>
+        </ComboboxOption>
+      </ComboboxOptions>
+    </Combobox>
   </VInputSkin>
 </template>
 
 <script>
-import { v4 as uuid } from "uuid"
-import VInputSkin from "@/components/_library/formControls/VInputSkin.vue"
 import {
-  Listbox,
-  ListboxButton,
-  ListboxOption,
-  ListboxOptions,
+  Combobox,
+  ComboboxInput,
+  ComboboxOption,
+  ComboboxOptions,
 } from "@headlessui/vue"
 import { SelectorIcon, XIcon } from "@heroicons/vue/solid"
 
+import VInputSkin from "@/components/_library/formControls/VInputSkin.vue"
+import { v4 as uuid } from "uuid"
+
 export default {
+  name: "VAutocomplete",
   components: {
+    ComboboxOption,
+    ComboboxOptions,
+    ComboboxInput,
     VInputSkin,
-    Listbox,
-    ListboxButton,
-    ListboxOption,
-    ListboxOptions,
+    Combobox,
     SelectorIcon,
     XIcon,
   },
@@ -91,9 +90,11 @@ export default {
     placeholder: { type: String, default: undefined },
     readonly: Boolean,
     disabled: Boolean,
-    clearable: Boolean,
   },
   emits: ["update:modelValue"],
+  data: () => ({
+    searchText: "",
+  }),
   computed: {
     internalId() {
       if (this.id) return this.id
@@ -112,11 +113,23 @@ export default {
         (item) => item[this.itemValue] === this.internalValue
       )
     },
+    filteredItems() {
+      if (this.searchText === "") return this.items
+
+      return this.items.filter((item) =>
+        item[this.itemText]
+          .toLowerCase()
+          .includes(this.searchText.toLowerCase())
+      )
+    },
   },
   methods: {
     clearInput() {
+      this.searchText = ""
       this.internalValue = null
     },
   },
 }
 </script>
+
+<style scoped></style>

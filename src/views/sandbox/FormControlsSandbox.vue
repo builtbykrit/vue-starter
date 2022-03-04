@@ -15,12 +15,13 @@
         v-model="numberField"
         label="Number Field"
         type="number"
+        :step="0.5"
         :readonly="readonlyInputs"
       />
       <VTextField
         v-model="passwordField"
-        label="Password Field"
         type="password"
+        label="Password Field"
         :readonly="readonlyInputs"
       />
     </SandboxRow>
@@ -44,14 +45,16 @@
         placeholder="Select an item"
         :items="selectItems"
         :readonly="readonlyInputs"
+        clearable
       />
-      <VSelect
-        v-model="selectedItem"
-        label="Typeahead"
+    </SandboxRow>
+    <SandboxRow title="VAutocomplete">
+      <VAutocomplete
+        v-model="autocompleteItem"
+        label="Autocomplete (typeahead)"
         placeholder="Start typing..."
         :items="selectItems"
         :readonly="readonlyInputs"
-        typeahead
         clearable
       />
     </SandboxRow>
@@ -66,25 +69,44 @@
       </div>
       <div class="flex items-center gap-2">
         <VCheckbox
+          v-for="n in 3"
+          :key="n"
           v-model="checkboxGroup"
           :readonly="readonlyInputs"
-          label="Option 1"
-          :value="1"
-        />
-        <VCheckbox
-          v-model="checkboxGroup"
-          :readonly="readonlyInputs"
-          label="Option 2"
-          :value="2"
-        />
-        <VCheckbox
-          v-model="checkboxGroup"
-          :readonly="readonlyInputs"
-          label="Option 3"
-          :value="3"
+          :label="`Option ${n}`"
+          :value="n"
         />
         <span class="text-gray-500 ml-3">value: {{ checkboxGroup }}</span>
       </div>
+    </SandboxRow>
+    <SandboxRow title="VRadio">
+      <div class="flex items-center gap-2">
+        <VRadio
+          v-model="singleRadio"
+          :readonly="readonlyInputs"
+          label="Radio"
+        />
+        <span class="text-gray-500">value: {{ singleRadio }}</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <VRadio
+          v-for="n in 3"
+          :key="n"
+          v-model="radioMultiple"
+          :value="n"
+          :readonly="readonlyInputs"
+          label="Radio"
+        />
+        <span class="text-gray-500 ml-3">value: {{ radioMultiple }}</span>
+      </div>
+    </SandboxRow>
+    <SandboxRow title="VRadioGroup">
+      <VRadioGroup
+        v-model="radioGroup"
+        :items="selectItems"
+        :readonly="readonlyInputs"
+        horizontal
+      />
     </SandboxRow>
     <SandboxRow title="VSwitch">
       <VSwitch
@@ -93,8 +115,6 @@
         label="Switch"
       />
     </SandboxRow>
-    <SandboxRow title="VRadio"></SandboxRow>
-    <SandboxRow title="VRadioGroup"></SandboxRow>
   </div>
 </template>
 
@@ -105,9 +125,12 @@ import SandboxRow from "@/views/sandbox/SandboxRow.vue"
 import VTextField from "@/components/_library/formControls/VTextField.vue"
 import VTextarea from "@/components/_library/formControls/VTextarea.vue"
 import VSelect from "@/components/_library/formControls/VSelect.vue"
+import VAutocomplete from "@/components/_library/formControls/VAutocomplete.vue"
 import VCheckbox from "@/components/_library/formControls/VCheckbox.vue"
 import VSwitch from "@/components/_library/formControls/VSwitch.vue"
 import VDivider from "@/components/_library/VDivider.vue"
+import VRadio from "@/components/_library/formControls/VRadio.vue"
+import VRadioGroup from "@/components/_library/formControls/VRadioGroup.vue"
 
 const selectItems = [
   { text: "Item 1", value: 1 },
@@ -123,7 +146,11 @@ const numberField = ref(0)
 const passwordField = ref("password")
 const textarea = ref("")
 const selectedItem = ref(undefined)
+const autocompleteItem = ref(1)
 const singleCheckbox = ref(true)
 const checkboxGroup = ref([])
 const switchEnabled = ref(false)
+const singleRadio = ref(true)
+const radioMultiple = ref(1)
+const radioGroup = ref(1)
 </script>

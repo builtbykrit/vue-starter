@@ -1,5 +1,8 @@
 <template>
-  <div class="flex shadow" :class="{ 'flex-col': orientation === 'vertical' }">
+  <div
+    class="flex shadow rounded"
+    :class="{ 'flex-col': orientation === 'vertical' }"
+  >
     <div v-if="$slots['title'] || title" class="px-2 pb-1 pt-2">
       <slot name="title">
         <div class="text-lg font-semibold">{{ title }}</div>
