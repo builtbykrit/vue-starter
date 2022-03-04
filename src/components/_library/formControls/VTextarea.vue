@@ -29,7 +29,7 @@ export default {
   name: "VTextarea",
   components: { VInputSkin },
   props: {
-    modelValue: { type: String, required: true },
+    modelValue: { type: String, default: "" },
     id: { type: String, default: undefined },
     label: { type: String, default: undefined },
     rows: { type: Number, default: 2 },
@@ -82,9 +82,10 @@ export default {
       const paddingTop = parseInt(styles.paddingTop)
       const paddingBottom = parseInt(styles.paddingBottom)
       const padding = paddingTop + paddingBottom
-      const initialHeight = (parseInt(styles.height) - padding) / textarea.rows
-      const scrollHeight = textarea.scrollHeight - padding
-      textarea.rows = Math.ceil(scrollHeight / initialHeight)
+      const height = !!styles.height ? styles.height : padding * 2
+      const initialHeight = (parseInt(height) - padding) / textarea.rows
+      let scrollHeight = textarea.scrollHeight - padding
+      textarea.rows = Math.ceil(scrollHeight / initialHeight) ?? this.rows
     },
   },
 }

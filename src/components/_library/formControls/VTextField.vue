@@ -20,11 +20,11 @@
         }"
       />
 
-      <div class="absolute inset-y-0 right-0 flex items-center pr-2">
-        <button
-          v-if="type === 'password'"
-          @click="showPassword = !showPassword"
-        >
+      <div
+        v-if="type === 'password'"
+        class="absolute inset-y-0 right-0 flex items-center pr-2"
+      >
+        <button data-cy="passwordToggle" @click="showPassword = !showPassword">
           <EyeOffIcon v-if="showPassword" class="h-5 w-5 text-gray-300" />
           <EyeIcon v-else class="h-5 w-5 text-gray-300" />
         </button>

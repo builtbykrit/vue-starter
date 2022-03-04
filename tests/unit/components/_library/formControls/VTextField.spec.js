@@ -58,6 +58,26 @@ describe("VTextField", () => {
       const input = wrapper.find("input")
       expect(input.element.type).toBe("password")
     })
+    it("should render a 'showPassword' toggle", () => {
+      const wrapper = mount(VTextField, {
+        props: { type: "password" },
+      })
+
+      const passwordToggle = wrapper.find('[data-cy="passwordToggle"]')
+      expect(passwordToggle).toBeTruthy()
+    })
+    it("should change input type when 'showPassword' toggle is clicked", async () => {
+      const wrapper = mount(VTextField, {
+        props: { type: "password" },
+      })
+
+      const input = wrapper.find("input")
+      expect(input.element.type).toBe("password")
+
+      const passwordToggle = wrapper.find('[data-cy="passwordToggle"]')
+      await passwordToggle.trigger("click")
+      expect(input.element.type).toBe("text")
+    })
   })
 
   describe("When `readonly` prop is `true`", () => {
