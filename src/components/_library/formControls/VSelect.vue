@@ -1,6 +1,7 @@
 <template>
   <VInputSkin :input-id="internalId" :label="label">
     <Listbox
+      :id="internalId"
       v-model="internalValue"
       :disabled="readonly || disabled"
       as="div"

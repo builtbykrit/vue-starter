@@ -8,6 +8,7 @@
     >
       <div class="relative">
         <ComboboxInput
+          :id="internalId"
           :display-value="() => selectedItem?.[itemText] ?? ''"
           :placeholder="placeholder"
           class="w-full placeholder:text-sm h-[34px] border rounded py-1"

@@ -23,7 +23,7 @@ export default {
   name: "VRadio",
   components: { VLabel },
   props: {
-    modelValue: { type: [Boolean, Number, String], required: true },
+    modelValue: { type: [Boolean, Number, String], default: undefined },
     id: { type: String, default: undefined },
     label: { type: String, default: undefined },
     value: { type: [Boolean, String, Number], default: true },

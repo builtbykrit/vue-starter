@@ -27,8 +27,9 @@ export default {
   components: { SwitchLabel, VLabel, SwitchGroup, Switch },
   props: {
     id: { type: String, default: undefined },
-    modelValue: { type: Boolean, required: true },
+    modelValue: { type: Boolean, default: false },
     label: { type: String, default: undefined },
+    readonly: Boolean,
   },
   emits: ["update:modelValue"],
   computed: {

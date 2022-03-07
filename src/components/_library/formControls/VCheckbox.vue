@@ -23,7 +23,7 @@ export default {
   name: "VCheckbox",
   components: { VLabel },
   props: {
-    modelValue: { type: [Boolean, Array], required: true },
+    modelValue: { type: [Boolean, Array], default: undefined },
     id: { type: String, default: undefined },
     label: { type: String, default: undefined },
     value: { type: [Boolean, String, Number], default: true },
