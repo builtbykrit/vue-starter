@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="flex justify-between">
-      <h2 class="text-xl font-semibold">Form Controls</h2>
+      <h2 class="text-xl font-semibold">Form Control Components</h2>
       <VSwitch v-model="readonlyInputs" label="Read Only" />
     </div>
     <VDivider class="mb-3" />
@@ -95,7 +95,7 @@
           v-model="radioMultiple"
           :value="n"
           :readonly="readonlyInputs"
-          label="Radio"
+          :label="`Option ${n}`"
         />
         <span class="text-gray-500 ml-3">value: {{ radioMultiple }}</span>
       </div>
