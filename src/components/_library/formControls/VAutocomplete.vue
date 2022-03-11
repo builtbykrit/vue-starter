@@ -1,15 +1,10 @@
 <template>
-  <VInputSkin :input-id="internalId" :label="label">
-    <Combobox
-      v-model="internalValue"
-      :disabled="readonly || disabled"
-      as="div"
-      class="relative"
-    >
+  <VInputSkin ref="trigger" :input-id="internalId" :label="label">
+    <Combobox v-model="internalValue" :disabled="readonly || disabled" as="div">
       <div class="relative">
         <ComboboxInput
           :id="internalId"
-          :display-value="() => selectedItem?.[itemText] ?? ''"
+          :display-value="itemDisplay"
           :placeholder="placeholder"
           class="w-full placeholder:text-sm h-[34px] border rounded py-1"
           :class="{
@@ -17,7 +12,7 @@
               readonly,
             'border-gray-300 px-1.5': !readonly,
           }"
-          @change="searchText = $event.target.value"
+          @change="onChange"
         />
         <div class="absolute inset-y-0 right-0 pr-2 gap-1 flex items-center">
           <button v-if="!!selectedItem" @click="clearInput">
@@ -31,33 +26,37 @@
         </div>
       </div>
 
-      <ComboboxOptions
-        class="absolute w-full rounded shadow max-h-56 overflow-y-auto mt-1 focus:outline-0 z-10"
-      >
-        <ComboboxOption
-          v-for="item in filteredItems"
-          v-slot="{ active, selected }"
-          :key="item[itemKey]"
-          as="template"
-          :value="item[itemValue]"
+      <div ref="container" class="absolute w-full z-20">
+        <ComboboxOptions
+          class="bg-white rounded shadow max-h-56 overflow-y-auto focus:outline-0"
         >
-          <li
-            class="px-2 py-1"
-            :class="{
-              'bg-blue-500/25': selected && !active,
-              'bg-blue-500 text-white': active,
-              'bg-white text-black': !active && !selected,
-            }"
+          <ComboboxOption
+            v-for="item in filteredItems"
+            v-slot="{ active, selected }"
+            :key="item[itemKey]"
+            as="template"
+            :value="item[itemValue]"
           >
-            {{ item[itemText] }}
-          </li>
-        </ComboboxOption>
-      </ComboboxOptions>
+            <li
+              class="px-2 py-1"
+              :class="{
+                'bg-blue-500/25': selected && !active,
+                'bg-blue-500 text-white': active,
+                'bg-white text-black': !active && !selected,
+              }"
+            >
+              {{ item[itemText] }}
+            </li>
+          </ComboboxOption>
+        </ComboboxOptions>
+      </div>
     </Combobox>
   </VInputSkin>
 </template>
 
-<script>
+<script setup>
+import { ref, computed } from "vue"
+import { v4 as uuid } from "uuid"
 import {
   Combobox,
   ComboboxInput,
@@ -65,72 +64,53 @@ import {
   ComboboxOptions,
 } from "@headlessui/vue"
 import { SelectorIcon, XIcon } from "@heroicons/vue/solid"
-
 import VInputSkin from "@/components/_library/formControls/VInputSkin.vue"
-import { v4 as uuid } from "uuid"
+import { usePopper } from "@/mixins/usePopper"
 
-export default {
-  name: "VAutocomplete",
-  components: {
-    ComboboxOption,
-    ComboboxOptions,
-    ComboboxInput,
-    VInputSkin,
-    Combobox,
-    SelectorIcon,
-    XIcon,
-  },
-  props: {
-    modelValue: { type: [String, Number], default: undefined },
-    id: { type: String, default: undefined },
-    label: { type: String, default: undefined },
-    items: { type: Array, required: true },
-    itemValue: { type: String, default: "value" },
-    itemText: { type: String, default: "text" },
-    itemKey: { type: String, default: "value" },
-    placeholder: { type: String, default: undefined },
-    readonly: Boolean,
-    disabled: Boolean,
-  },
-  emits: ["update:modelValue"],
-  data: () => ({
-    searchText: "",
-  }),
-  computed: {
-    internalId() {
-      if (this.id) return this.id
-      return uuid()
-    },
-    internalValue: {
-      get() {
-        return this.modelValue
-      },
-      set(val) {
-        this.$emit("update:modelValue", val)
-      },
-    },
-    selectedItem() {
-      return this.items.find(
-        (item) => item[this.itemValue] === this.internalValue
-      )
-    },
-    filteredItems() {
-      if (this.searchText === "") return this.items
+const props = defineProps({
+  modelValue: { type: [String, Number], default: undefined },
+  id: { type: String, default: undefined },
+  label: { type: String, default: undefined },
+  items: { type: Array, default: () => [] },
+  itemValue: { type: String, default: "value" },
+  itemText: { type: String, default: "text" },
+  itemKey: { type: String, default: "value" },
+  placeholder: { type: String, default: undefined },
+  readonly: Boolean,
+  disabled: Boolean,
+})
+const emit = defineEmits(["update:modelValue"])
 
-      return this.items.filter((item) =>
-        item[this.itemText]
-          .toLowerCase()
-          .includes(this.searchText.toLowerCase())
-      )
-    },
-  },
-  methods: {
-    clearInput() {
-      this.searchText = ""
-      this.internalValue = null
-    },
-  },
+let [trigger, container] = usePopper({
+  placement: "bottom",
+  modifiers: [{ name: "offset", options: { offset: [0, 4] } }],
+})
+
+const searchText = ref("")
+const internalId = computed(() => (props.id ? props.id : uuid()))
+const internalValue = computed({
+  get: () => props.modelValue,
+  set: (value) => emit("update:modelValue", value),
+})
+const selectedItem = computed(() =>
+  props.items.find((item) => item[props.itemValue] === internalValue.value)
+)
+const filteredItems = computed(() => {
+  if (searchText.value === "") return props.items
+
+  return props.items.filter((item) =>
+    item[props.itemText].toLowerCase().includes(searchText.value?.toLowerCase())
+  )
+})
+
+const itemDisplay = () => {
+  return selectedItem.value?.[props.itemText] ?? ""
+}
+const onChange = (event) => {
+  searchText.value = event.target.value
+}
+const clearInput = () => {
+  searchText.value = ""
+  internalValue.value = null
 }
 </script>
-
-<style scoped></style>

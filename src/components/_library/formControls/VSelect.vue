@@ -1,5 +1,5 @@
 <template>
-  <VInputSkin :input-id="internalId" :label="label">
+  <VInputSkin ref="trigger" :input-id="internalId" :label="label">
     <Listbox
       :id="internalId"
       v-model="internalValue"
@@ -34,33 +34,36 @@
         </div>
       </div>
 
-      <ListboxOptions
-        class="absolute w-full rounded shadow max-h-56 overflow-y-auto mt-1 focus:outline-0 z-10"
-      >
-        <ListboxOption
-          v-for="item in items"
-          v-slot="{ active, selected }"
-          :key="item[itemKey]"
-          as="template"
-          :value="item[itemValue]"
+      <div ref="container" class="absolute w-full z-20">
+        <ListboxOptions
+          class="bg-white rounded shadow max-h-56 overflow-y-auto focus:outline-0"
         >
-          <li
-            class="px-2 py-1"
-            :class="{
-              'bg-blue-500/25': selected && !active,
-              'bg-blue-500 text-white': active,
-              'bg-white text-black': !active && !selected,
-            }"
+          <ListboxOption
+            v-for="item in items"
+            v-slot="{ active, selected }"
+            :key="item[itemKey]"
+            as="template"
+            :value="item[itemValue]"
           >
-            {{ item[itemText] }}
-          </li>
-        </ListboxOption>
-      </ListboxOptions>
+            <li
+              class="px-2 py-1"
+              :class="{
+                'bg-blue-500/25': selected && !active,
+                'bg-blue-500 text-white': active,
+                'bg-white text-black': !active && !selected,
+              }"
+            >
+              {{ item[itemText] }}
+            </li>
+          </ListboxOption>
+        </ListboxOptions>
+      </div>
     </Listbox>
   </VInputSkin>
 </template>
 
-<script>
+<script setup>
+import { computed } from "vue"
 import { v4 as uuid } from "uuid"
 import VInputSkin from "@/components/_library/formControls/VInputSkin.vue"
 import {
@@ -70,54 +73,38 @@ import {
   ListboxOptions,
 } from "@headlessui/vue"
 import { SelectorIcon, XIcon } from "@heroicons/vue/solid"
+import { usePopper } from "@/mixins/usePopper"
 
-export default {
-  components: {
-    VInputSkin,
-    Listbox,
-    ListboxButton,
-    ListboxOption,
-    ListboxOptions,
-    SelectorIcon,
-    XIcon,
-  },
-  props: {
-    modelValue: { type: [String, Number], default: undefined },
-    id: { type: String, default: undefined },
-    label: { type: String, default: undefined },
-    items: { type: Array, required: true },
-    itemValue: { type: String, default: "value" },
-    itemText: { type: String, default: "text" },
-    itemKey: { type: String, default: "value" },
-    placeholder: { type: String, default: undefined },
-    readonly: Boolean,
-    disabled: Boolean,
-    clearable: Boolean,
-  },
-  emits: ["update:modelValue"],
-  computed: {
-    internalId() {
-      if (this.id) return this.id
-      return uuid()
-    },
-    internalValue: {
-      get() {
-        return this.modelValue
-      },
-      set(val) {
-        this.$emit("update:modelValue", val)
-      },
-    },
-    selectedItem() {
-      return this.items.find(
-        (item) => item[this.itemValue] === this.internalValue
-      )
-    },
-  },
-  methods: {
-    clearInput() {
-      this.internalValue = null
-    },
-  },
+const props = defineProps({
+  modelValue: { type: [String, Number], default: undefined },
+  id: { type: String, default: undefined },
+  label: { type: String, default: undefined },
+  items: { type: Array, default: () => [] },
+  itemValue: { type: String, default: "value" },
+  itemText: { type: String, default: "text" },
+  itemKey: { type: String, default: "value" },
+  placeholder: { type: String, default: undefined },
+  readonly: Boolean,
+  disabled: Boolean,
+  clearable: Boolean,
+})
+const emit = defineEmits(["update:modelValue"])
+
+let [trigger, container] = usePopper({
+  placement: "bottom",
+  modifiers: [{ name: "offset", options: { offset: [0, 4] } }],
+})
+
+const internalId = computed(() => (props.id ? props.id : uuid()))
+const internalValue = computed({
+  get: () => props.modelValue,
+  set: (value) => emit("update:modelValue", value),
+})
+const selectedItem = computed(() =>
+  props.items.find((item) => item[props.itemValue] === internalValue.value)
+)
+
+const clearInput = () => {
+  internalValue.value = null
 }
 </script>
