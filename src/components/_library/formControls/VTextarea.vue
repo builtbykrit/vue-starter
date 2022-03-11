@@ -21,72 +21,61 @@
   </VInputSkin>
 </template>
 
-<script>
+<script setup>
+import { computed, onMounted, watch, ref } from "vue"
 import { v4 as uuid } from "uuid"
 import VInputSkin from "@/components/_library/formControls/VInputSkin.vue"
 
-export default {
-  name: "VTextarea",
-  components: { VInputSkin },
-  props: {
-    modelValue: { type: String, default: "" },
-    id: { type: String, default: undefined },
-    label: { type: String, default: undefined },
-    rows: { type: Number, default: 2 },
-    autoGrow: Boolean,
-    autoFocus: Boolean,
-    readonly: Boolean,
-  },
-  emits: ["update:modelValue"],
-  computed: {
-    internalId() {
-      if (this.id) return this.id
-      return uuid()
-    },
-    internalValue: {
-      get() {
-        return this.modelValue
-      },
-      set(val) {
-        this.$emit("update:modelValue", val)
-      },
-    },
-  },
-  watch: {
-    internalValue(val) {
-      if (this.autoGrow) {
-        this.resizeTextarea(val)
-      }
-    },
-  },
-  mounted() {
-    if (this.autoGrow) {
-      this.resizeTextarea(this.internalValue)
-    }
-    if (this.autofocus) {
-      this.$refs.textarea.focus()
-    }
-  },
-  methods: {
-    resizeTextarea(val = "") {
-      const textarea = this.$refs.textarea
+const props = defineProps({
+  modelValue: { type: String, default: "" },
+  id: { type: String, default: undefined },
+  label: { type: String, default: undefined },
+  rows: { type: Number, default: 2 },
+  autoGrow: Boolean,
+  autoFocus: Boolean,
+  readonly: Boolean,
+})
+const emit = defineEmits(["update:modelValue"])
 
-      if (val.length === 0) {
-        textarea.rows = this.rows
-        return
-      }
+const textarea = ref(null)
+const internalId = computed(() => (props.id ? props.id : uuid()))
+const internalValue = computed({
+  get: () => props.modelValue,
+  set: (value) => emit("update:modelValue", value),
+})
 
-      textarea.rows = this.rows
+const resizeTextarea = () => {
+  const textareaValue = internalValue.value
 
-      const styles = window.getComputedStyle(textarea)
-      const paddingTop = parseInt(styles.paddingTop)
-      const paddingBottom = parseInt(styles.paddingBottom)
-      const padding = paddingTop + paddingBottom
-      const height = !!styles.height ? styles.height : padding * 2
-      const initialHeight = (parseInt(height) - padding) / textarea.rows
-      let scrollHeight = textarea.scrollHeight - padding
-      textarea.rows = Math.ceil(scrollHeight / initialHeight) ?? this.rows
-    },
-  },
+  if (textareaValue.length === 0) {
+    textarea.value.rows = props.rows
+    return
+  }
+
+  textarea.value.rows = props.rows
+
+  const styles = window.getComputedStyle(textarea.value)
+  const paddingTop = parseInt(styles.paddingTop)
+  const paddingBottom = parseInt(styles.paddingBottom)
+  const padding = paddingTop + paddingBottom
+  const height = !!styles.height ? styles.height : padding * 2
+  const initialHeight = (parseInt(height) - padding) / textarea.value.rows
+  let scrollHeight = textarea.value.scrollHeight - padding
+  textarea.value.rows = Math.ceil(scrollHeight / initialHeight) ?? props.rows
 }
+
+onMounted(() => {
+  if (props.autoGrow) {
+    resizeTextarea()
+  }
+  if (props.autoFocus) {
+    textarea.value.focus()
+  }
+})
+
+watch(internalValue, () => {
+  if (props.autoGrow) {
+    resizeTextarea()
+  }
+})
 </script>

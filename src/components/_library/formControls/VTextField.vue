@@ -24,7 +24,7 @@
         v-if="type === 'password'"
         class="absolute inset-y-0 right-0 flex items-center pr-2"
       >
-        <button data-cy="passwordToggle" @click="showPassword = !showPassword">
+        <button data-cy="passwordToggle" @click="toggleShowPassword">
           <EyeOffIcon v-if="showPassword" class="h-5 w-5 text-gray-300" />
           <EyeIcon v-else class="h-5 w-5 text-gray-300" />
         </button>
@@ -33,49 +33,42 @@
   </VInputSkin>
 </template>
 
-<script>
+<script setup>
+import { computed, onMounted, ref } from "vue"
 import { v4 as uuid } from "uuid"
-
 import VInputSkin from "@/components/_library/formControls/VInputSkin.vue"
 import { EyeIcon, EyeOffIcon } from "@heroicons/vue/solid"
 
-export default {
-  components: { VInputSkin, EyeIcon, EyeOffIcon },
-  props: {
-    modelValue: { type: [String, Number], default: "" },
-    id: { type: String, default: undefined },
-    label: { type: String, default: undefined },
-    type: { type: String, default: "text" },
-    step: { type: Number, default: 1 },
-    readonly: Boolean,
-    autofocus: Boolean,
-  },
-  emits: ["update:modelValue"],
-  data: () => ({
-    showPassword: false,
-  }),
-  computed: {
-    internalId() {
-      if (this.id) return this.id
-      return uuid()
-    },
-    internalValue: {
-      get() {
-        return this.modelValue
-      },
-      set(val) {
-        this.$emit("update:modelValue", val)
-      },
-    },
-    internalType() {
-      if (this.type !== "password") return this.type
-      return this.showPassword ? "text" : "password"
-    },
-  },
-  mounted() {
-    if (this.autofocus) {
-      this.$refs.input.focus()
-    }
-  },
+const props = defineProps({
+  modelValue: { type: [String, Number], default: "" },
+  id: { type: String, default: undefined },
+  label: { type: String, default: undefined },
+  type: { type: String, default: "text" },
+  step: { type: Number, default: 1 },
+  readonly: Boolean,
+  autofocus: Boolean,
+})
+const emit = defineEmits(["update:modelValue"])
+
+const input = ref(null)
+const showPassword = ref(false)
+const internalId = computed(() => (props.id ? props.id : uuid()))
+const internalValue = computed({
+  get: () => props.modelValue,
+  set: (value) => emit("update:modelValue", value),
+})
+const internalType = computed(() => {
+  if (props.type !== "password") return props.type
+  return showPassword.value ? "text" : "password"
+})
+
+const toggleShowPassword = () => {
+  showPassword.value = !showPassword.value
 }
+
+onMounted(() => {
+  if (props.autofocus) {
+    input.value.focus()
+  }
+})
 </script>

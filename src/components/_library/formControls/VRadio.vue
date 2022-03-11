@@ -15,37 +15,23 @@
   </VLabel>
 </template>
 
-<script>
-import VLabel from "@/components/_library/formControls/VLabel.vue"
+<script setup>
+import { computed } from "vue"
 import { v4 as uuid } from "uuid"
+import VLabel from "@/components/_library/formControls/VLabel.vue"
 
-export default {
-  name: "VRadio",
-  components: { VLabel },
-  props: {
-    modelValue: { type: [Boolean, Number, String], default: undefined },
-    id: { type: String, default: undefined },
-    label: { type: String, default: undefined },
-    value: { type: [Boolean, String, Number], default: true },
-    readonly: Boolean,
-    disabled: Boolean,
-  },
-  emits: ["update:modelValue"],
-  computed: {
-    internalId() {
-      if (this.id) return this.id
-      return uuid()
-    },
-    selected() {
-      return this.modelValue === this.value
-    },
-  },
-  methods: {
-    onChange() {
-      this.$emit("update:modelValue", this.value)
-    },
-  },
-}
+const props = defineProps({
+  modelValue: { type: [Boolean, Number, String], default: undefined },
+  id: { type: String, default: undefined },
+  label: { type: String, default: undefined },
+  value: { type: [Boolean, String, Number], default: true },
+  readonly: Boolean,
+  disabled: Boolean,
+})
+const emit = defineEmits(["update:modelValue"])
+
+const internalId = computed(() => (props.id ? props.id : uuid()))
+const selected = computed(() => props.modelValue === props.value)
+
+const onChange = () => emit("update:modelValue", props.value)
 </script>
-
-<style scoped></style>

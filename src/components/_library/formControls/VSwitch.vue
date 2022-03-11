@@ -17,34 +17,23 @@
   </SwitchGroup>
 </template>
 
-<script>
+<script setup>
+import { computed } from "vue"
+import { v4 as uuid } from "uuid"
 import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue"
 import VLabel from "@/components/_library/formControls/VLabel.vue"
-import { v4 as uuid } from "uuid"
 
-export default {
-  name: "VSwitch",
-  components: { SwitchLabel, VLabel, SwitchGroup, Switch },
-  props: {
-    id: { type: String, default: undefined },
-    modelValue: { type: Boolean, default: false },
-    label: { type: String, default: undefined },
-    readonly: Boolean,
-  },
-  emits: ["update:modelValue"],
-  computed: {
-    internalId() {
-      if (this.id) return this.id
-      return uuid()
-    },
-    internalValue: {
-      get() {
-        return this.modelValue
-      },
-      set(val) {
-        this.$emit("update:modelValue", val)
-      },
-    },
-  },
-}
+const props = defineProps({
+  id: { type: String, default: undefined },
+  modelValue: { type: Boolean, default: false },
+  label: { type: String, default: undefined },
+  readonly: Boolean,
+})
+const emit = defineEmits(["update:modelValue"])
+
+const internalId = computed(() => (props.id ? props.id : uuid()))
+const internalValue = computed({
+  get: () => props.modelValue,
+  set: (value) => emit("update:modelValue", value),
+})
 </script>

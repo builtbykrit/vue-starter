@@ -15,59 +15,48 @@
   </VLabel>
 </template>
 
-<script>
-import VLabel from "@/components/_library/formControls/VLabel.vue"
+<script setup>
+import { computed } from "vue"
 import { v4 as uuid } from "uuid"
+import VLabel from "@/components/_library/formControls/VLabel.vue"
 
-export default {
-  name: "VCheckbox",
-  components: { VLabel },
-  props: {
-    modelValue: { type: [Boolean, Array], default: undefined },
-    id: { type: String, default: undefined },
-    label: { type: String, default: undefined },
-    value: { type: [Boolean, String, Number], default: true },
-    readonly: Boolean,
-    disabled: Boolean,
-  },
-  emits: ["update:modelValue"],
-  computed: {
-    internalId() {
-      if (this.id) return this.id
-      return uuid()
-    },
-    checked() {
-      if (this.modelValue === true) return true
+const props = defineProps({
+  modelValue: { type: [Boolean, Array], default: undefined },
+  id: { type: String, default: undefined },
+  label: { type: String, default: undefined },
+  value: { type: [Boolean, String, Number], default: true },
+  readonly: Boolean,
+  disabled: Boolean,
+})
+const emit = defineEmits(["update:modelValue"])
 
-      return !!(
-        Array.isArray(this.modelValue) && this.modelValue.includes(this.value)
+const internalId = computed(() => (props.id ? props.id : uuid()))
+const checked = computed(() => {
+  if (props.modelValue === true) return true
+  return !!(
+    Array.isArray(props.modelValue) && props.modelValue.includes(props.value)
+  )
+})
+
+const onChange = () => {
+  // when there's only a single checkbox, return a boolean
+  if (typeof props.modelValue === "boolean" || !props.modelValue) {
+    emit("update:modelValue", !checked.value)
+  } else {
+    // when there's multiple checkboxes, return an array with/without this checkbox's value
+    const updatedValues = Array.isArray(props.modelValue)
+      ? props.modelValue
+      : []
+
+    if (checked.value) {
+      emit(
+        "update:modelValue",
+        updatedValues.filter((v) => v !== props.value)
       )
-    },
-  },
-  methods: {
-    onChange() {
-      // when there's only a single checkbox, return a boolean
-      if (typeof this.modelValue === "boolean" || !this.modelValue) {
-        this.$emit("update:modelValue", !this.checked)
-      } else {
-        // when there's multiple checkboxes, return an array with/without this checkbox's value
-        const updatedValues = Array.isArray(this.modelValue)
-          ? this.modelValue
-          : []
-
-        if (this.checked) {
-          this.$emit(
-            "update:modelValue",
-            updatedValues.filter((v) => v !== this.value)
-          )
-        } else {
-          updatedValues.push(this.value)
-          this.$emit("update:modelValue", updatedValues)
-        }
-      }
-    },
-  },
+    } else {
+      updatedValues.push(props.value)
+      emit("update:modelValue", updatedValues)
+    }
+  }
 }
 </script>
-
-<style scoped></style>
