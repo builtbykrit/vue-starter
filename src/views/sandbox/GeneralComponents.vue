@@ -32,6 +32,13 @@
         </template>
       </VCard>
     </SandboxRow>
+    <SandboxRow title="VMenu">
+      <VMenu :items="menuItems">
+        <template #activator>
+          <VButton>Menu</VButton>
+        </template>
+      </VMenu>
+    </SandboxRow>
   </div>
 </template>
 
@@ -41,6 +48,11 @@ import SandboxRow from "@/views/sandbox/SandboxRow.vue"
 import VButton from "@/components/_library/buttons/VButton.vue"
 import VButtonGroup from "@/components/_library/buttons/VButtonGroup.vue"
 import VCard from "@/components/_library/VCard.vue"
-</script>
+import VMenu from "@/components/_library/VMenu.vue"
 
-<style scoped></style>
+const menuItems = [
+  { text: "Link Item", name: "link", to: "https://www.krit.com/" },
+  { text: "Span Item", name: "span" },
+  { text: "Disabled Item", name: "disabled", disabled: true },
+]
+</script>
