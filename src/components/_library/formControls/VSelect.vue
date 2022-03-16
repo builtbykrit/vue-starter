@@ -1,5 +1,10 @@
 <template>
-  <VInputSkin ref="trigger" :input-id="internalId" :label="label">
+  <VInputSkin
+    ref="trigger"
+    :input-id="internalId"
+    :label="label"
+    :messages="errorMessages"
+  >
     <Listbox
       :id="internalId"
       v-model="internalValue"
@@ -14,6 +19,7 @@
           :class="{
             'border-transparent px-0': readonly,
             'border-gray-300 px-1.5': !readonly,
+            'border-red-500 bg-red-100/25': hasError,
           }"
         >
           <template v-if="!!selectedItem"
@@ -73,7 +79,8 @@ import {
   ListboxOptions,
 } from "@headlessui/vue"
 import { SelectorIcon, XIcon } from "@heroicons/vue/solid"
-import { usePopper } from "@/mixins/usePopper"
+import { usePopper } from "@/composables/usePopper"
+import { useValidation } from "@/composables/useValidation"
 
 const props = defineProps({
   modelValue: { type: [String, Number], default: undefined },
@@ -87,6 +94,14 @@ const props = defineProps({
   readonly: Boolean,
   disabled: Boolean,
   clearable: Boolean,
+  validation: {
+    type: Object,
+    default: () => ({
+      $dirty: false,
+      $error: false,
+      $errors: [],
+    }),
+  },
 })
 const emit = defineEmits(["update:modelValue"])
 
@@ -94,6 +109,7 @@ let [trigger, container] = usePopper({
   placement: "bottom",
   modifiers: [{ name: "offset", options: { offset: [0, 4] } }],
 })
+const { hasError, errorMessages } = useValidation(props.validation)
 
 const internalId = computed(() => (props.id ? props.id : uuid()))
 const internalValue = computed({

@@ -1,5 +1,5 @@
 <template>
-  <VInputSkin :input-id="internalId" :label="label">
+  <VInputSkin :input-id="internalId" :label="label" :messages="errorMessages">
     <template #label>
       <slot name="label" />
     </template>
@@ -15,6 +15,7 @@
         'border-transparent focus:border-transparent focus:ring-0 px-0':
           readonly,
         'border-gray-300 px-1.5': !readonly,
+        'border-red-500 bg-red-100/25': hasError,
         'hover:resize-y': !autoGrow && !readonly,
       }"
     />
@@ -25,6 +26,7 @@
 import { computed, onMounted, watch, ref } from "vue"
 import { v4 as uuid } from "uuid"
 import VInputSkin from "@/components/_library/formControls/VInputSkin.vue"
+import { useValidation } from "@/composables/useValidation"
 
 const props = defineProps({
   modelValue: { type: String, default: "" },
@@ -34,6 +36,14 @@ const props = defineProps({
   autoGrow: Boolean,
   autoFocus: Boolean,
   readonly: Boolean,
+  validation: {
+    type: Object,
+    default: () => ({
+      $dirty: false,
+      $error: false,
+      $errors: [],
+    }),
+  },
 })
 const emit = defineEmits(["update:modelValue"])
 
@@ -43,6 +53,7 @@ const internalValue = computed({
   get: () => props.modelValue,
   set: (value) => emit("update:modelValue", value),
 })
+const { hasError, errorMessages } = useValidation(props.validation)
 
 const resizeTextarea = () => {
   const textareaValue = internalValue.value

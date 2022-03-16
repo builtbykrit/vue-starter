@@ -29,12 +29,17 @@ const props = defineProps({
   disabled: Boolean,
   icon: Boolean,
   loading: Boolean,
+  dense: Boolean,
 })
 
 const buttonComponent = computed(() => (!!props.to ? "RouterLink" : "button"))
 const buttonStyles = computed(() => variantStyles[props.variant])
 const padding = computed(() =>
-  props.icon || props.variant === "link" ? "p-px" : "px-4 py-2"
+  props.icon || props.variant === "link"
+    ? "p-px"
+    : props.dense
+    ? "px-2 py-1"
+    : "px-4 py-2"
 )
 const borderRadius = computed(() => (props.circle ? "rounded-full" : "rounded"))
 

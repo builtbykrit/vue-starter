@@ -1,5 +1,10 @@
 <template>
-  <VInputSkin ref="trigger" :input-id="internalId" :label="label">
+  <VInputSkin
+    ref="trigger"
+    :input-id="internalId"
+    :label="label"
+    :messages="errorMessages"
+  >
     <Combobox v-model="internalValue" :disabled="readonly || disabled" as="div">
       <div class="relative">
         <ComboboxInput
@@ -11,6 +16,7 @@
             'border-transparent focus:border-transparent focus:ring-0 px-0':
               readonly,
             'border-gray-300 px-1.5': !readonly,
+            'border-red-500 bg-red-100/25': hasError,
           }"
           @change="onChange"
         />
@@ -65,7 +71,8 @@ import {
 } from "@headlessui/vue"
 import { SelectorIcon, XIcon } from "@heroicons/vue/solid"
 import VInputSkin from "@/components/_library/formControls/VInputSkin.vue"
-import { usePopper } from "@/mixins/usePopper"
+import { usePopper } from "@/composables/usePopper"
+import { useValidation } from "@/composables/useValidation"
 
 const props = defineProps({
   modelValue: { type: [String, Number], default: undefined },
@@ -78,6 +85,14 @@ const props = defineProps({
   placeholder: { type: String, default: undefined },
   readonly: Boolean,
   disabled: Boolean,
+  validation: {
+    type: Object,
+    default: () => ({
+      $dirty: false,
+      $error: false,
+      $errors: [],
+    }),
+  },
 })
 const emit = defineEmits(["update:modelValue"])
 
@@ -85,6 +100,7 @@ let [trigger, container] = usePopper({
   placement: "bottom",
   modifiers: [{ name: "offset", options: { offset: [0, 4] } }],
 })
+const { hasError, errorMessages } = useValidation(props.validation)
 
 const searchText = ref("")
 const internalId = computed(() => (props.id ? props.id : uuid()))

@@ -38,7 +38,7 @@
 
 <script setup>
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue"
-import { usePopper } from "@/mixins/usePopper"
+import { usePopper } from "@/composables/usePopper"
 
 defineProps({
   items: { type: Array, default: () => [] },

@@ -1,10 +1,8 @@
 <template>
   <VTextField
     :id="id"
+    v-bind="props"
     v-model="internalValue"
-    :label="label"
-    :readonly="readonly"
-    :autofocus="autofocus"
     @blur="updateExternalValue"
   />
 </template>

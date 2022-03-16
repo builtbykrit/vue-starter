@@ -16,6 +16,8 @@
     "@sentry/tracing": "^6.16.1",
     "@sentry/vue": "^6.17.4",
     "@tailwindcss/forms": "^0.4.0",
+    "@vuelidate/core": "^2.0.0-alpha.35",
+    "@vuelidate/validators": "^2.0.0-alpha.27",
     "axios": "^0.25.0",
     "dayjs": "^1.10.7",
     "uuid": "^8.3.2",

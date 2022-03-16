@@ -1,5 +1,5 @@
 <template>
-  <ul v-if="messages.length > 0" :id="`${inputId}-errors`" class="mt-1">
+  <ul v-if="messages.length > 0" :id="`${inputId}-errors`" class="mt-px">
     <li
       v-for="(message, index) in messages"
       :key="index"
