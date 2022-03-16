@@ -1,5 +1,5 @@
 <template>
-  <VInputSkin :input-id="internalId" :label="label">
+  <VInputSkin :input-id="internalId" :label="label" :messages="errorMessages">
     <template #label>
       <slot name="label" />
     </template>
@@ -17,6 +17,7 @@
           'border-transparent focus:border-transparent focus:ring-0 px-0':
             readonly,
           'border-gray-300 px-1.5': !readonly,
+          'border-red-500 bg-red-100/25': hasError,
         }"
         @blur="$emit('blur')"
       />
@@ -39,6 +40,7 @@ import { computed, onMounted, ref } from "vue"
 import { v4 as uuid } from "uuid"
 import VInputSkin from "@/components/_library/formControls/VInputSkin.vue"
 import { EyeIcon, EyeOffIcon } from "@heroicons/vue/solid"
+import { useValidation } from "@/composables/useValidation"
 
 const props = defineProps({
   modelValue: { type: [String, Number], default: "" },
@@ -48,6 +50,14 @@ const props = defineProps({
   step: { type: Number, default: 1 },
   readonly: Boolean,
   autofocus: Boolean,
+  validation: {
+    type: Object,
+    default: () => ({
+      $dirty: false,
+      $error: false,
+      $errors: [],
+    }),
+  },
 })
 const emit = defineEmits(["update:modelValue", "blur"])
 
@@ -62,6 +72,8 @@ const internalType = computed(() => {
   if (props.type !== "password") return props.type
   return showPassword.value ? "text" : "password"
 })
+
+const { hasError, errorMessages } = useValidation(props.validation)
 
 const toggleShowPassword = () => {
   showPassword.value = !showPassword.value
