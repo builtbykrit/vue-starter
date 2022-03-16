@@ -25,6 +25,19 @@
         :readonly="readonlyInputs"
       />
     </SandboxRow>
+    <SandboxRow title="VTimeField">
+      <VTimeField
+        v-model="timeField"
+        label="Time Field"
+        :readonly="readonlyInputs"
+      />
+      <VTimeField
+        v-model="timeField"
+        label="Time Field (24h)"
+        display-format="hh:mm"
+        :readonly="readonlyInputs"
+      />
+    </SandboxRow>
     <SandboxRow title="VTextarea">
       <VTextarea
         v-model="textarea"
@@ -131,6 +144,7 @@ import VSwitch from "@/components/_library/formControls/VSwitch.vue"
 import VDivider from "@/components/_library/VDivider.vue"
 import VRadio from "@/components/_library/formControls/VRadio.vue"
 import VRadioGroup from "@/components/_library/formControls/VRadioGroup.vue"
+import VTimeField from "@/components/_library/formControls/VTimeField.vue"
 
 const selectItems = [
   { text: "Item 1", value: 1 },
@@ -144,6 +158,7 @@ const readonlyInputs = ref(false)
 const textField = ref("")
 const numberField = ref(0)
 const passwordField = ref("password")
+const timeField = ref("09:00")
 const textarea = ref(
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam porttitor accumsan velit ac faucibus. Curabitur luctus, felis eu placerat suscipit, leo magna gravida lectus, non volutpat lacus nibh sed risus. Nulla eget sapien dignissim erat fringilla pretium. Proin aliquam accumsan dolor. Integer feugiat malesuada vehicula. Quisque lacinia vestibulum vehicula. Sed euismod aliquet tellus, nec rutrum velit ultrices at. Nulla ex ipsum, hendrerit sed mauris eget, faucibus malesuada est. Pellentesque vel nisi vel eros tempus feugiat."
 )

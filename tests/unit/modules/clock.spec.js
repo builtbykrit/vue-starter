@@ -10,4 +10,16 @@ describe("clock", () => {
       expect(clock.isBeforeNow(futureDate)).toBeFalsy()
     })
   })
+  describe("isValid", () => {
+    it("returns TRUE only if the date is valid", () => {
+      expect(clock.isValid("01-01-2020")).toBeTruthy()
+      expect(clock.isValid("15-15-2020")).toBeFalsy()
+    })
+  })
+  describe("format", () => {
+    it("returns the formatted value of a date", () => {
+      const date = clock.format("01-01-2020", "MMMM D, YYYY")
+      expect(date).toBe("January 1, 2020")
+    })
+  })
 })

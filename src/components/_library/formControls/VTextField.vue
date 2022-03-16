@@ -18,6 +18,7 @@
             readonly,
           'border-gray-300 px-1.5': !readonly,
         }"
+        @blur="$emit('blur')"
       />
 
       <div
@@ -48,7 +49,7 @@ const props = defineProps({
   readonly: Boolean,
   autofocus: Boolean,
 })
-const emit = defineEmits(["update:modelValue"])
+const emit = defineEmits(["update:modelValue", "blur"])
 
 const input = ref(null)
 const showPassword = ref(false)
