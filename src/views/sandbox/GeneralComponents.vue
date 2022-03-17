@@ -43,12 +43,12 @@
 </template>
 
 <script setup>
-import VDivider from "@/components/_library/VDivider.vue"
+import VDivider from "@/components/_library/general/VDivider.vue"
 import SandboxRow from "@/views/sandbox/SandboxRow.vue"
 import VButton from "@/components/_library/buttons/VButton.vue"
 import VButtonGroup from "@/components/_library/buttons/VButtonGroup.vue"
-import VCard from "@/components/_library/VCard.vue"
-import VMenu from "@/components/_library/VMenu.vue"
+import VCard from "@/components/_library/general/VCard.vue"
+import VMenu from "@/components/_library/general/VMenu.vue"
 
 const menuItems = [
   { text: "Link Item", name: "link", to: "https://www.krit.com/" },

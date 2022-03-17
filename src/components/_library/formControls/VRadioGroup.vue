@@ -37,7 +37,7 @@ import { computed } from "vue"
 import { v4 as uuid } from "uuid"
 import { RadioGroup, RadioGroupOption } from "@headlessui/vue"
 import { CheckCircleIcon } from "@heroicons/vue/solid"
-import VCard from "@/components/_library/VCard.vue"
+import VCard from "@/components/_library/general/VCard.vue"
 
 const props = defineProps({
   modelValue: { type: [String, Number], default: undefined },
