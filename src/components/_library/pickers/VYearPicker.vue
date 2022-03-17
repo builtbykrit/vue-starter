@@ -17,43 +17,29 @@
 import VDatePickerSkin from "@/components/_library/pickers/VDatePickerSkin.vue"
 import VPickerButton from "@/components/_library/pickers/VPickerButton.vue"
 import clock from "@/modules/clock"
+import { computed } from "vue"
 
 defineEmits(["update:modelValue"])
 const props = defineProps({
-  /**
-   * The first year that should be displayed
-   */
-  firstYear: {
-    type: Number,
-    default: clock.currentYear(),
-  },
-
-  /**
-   * The maximum number of years that should be displayed
-   */
-  maxYearsToDisplay: {
-    type: Number,
-    default: 5,
-  },
-
-  /**
-   * A year, expressed in YYYY format
-   */
   modelValue: {
     type: Number,
     required: true,
   },
+  firstYear: {
+    type: Number,
+    default: clock.getYear(),
+  },
+  maxYearsToDisplay: {
+    type: Number,
+    default: 5,
+  },
 })
 
-/**
- * A list of the years that are displayable
- */
-const displayableYears = clock.years(props.firstYear, props.maxYearsToDisplay)
-
-/**
- * Checks whether a year is the currently selected year
- * @param year
- * @returns {boolean}
- */
+const displayableYears = computed(() => {
+  let startYear = props.firstYear
+  const years = []
+  for (let i = 0; i < props.maxYearsToDisplay; i++) years.push(startYear++)
+  return years
+})
 const isSelectedYear = (year) => year === props.modelValue
 </script>

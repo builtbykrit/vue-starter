@@ -19,7 +19,7 @@
         <li
           v-for="(dayOfWeek, index) in orderedDaysOfWeek()"
           :key="`${randomKey}-${index}`"
-          class="text-center text-primary-base text-xs font-fancy font-semibold py-2 col-span-1"
+          class="text-center text-gray-900 text-xs font-semibold py-2 col-span-1"
         >
           {{ dayOfWeek }}
         </li>
@@ -56,102 +56,44 @@ import { computed, reactive } from "vue"
 
 const emit = defineEmits(["update:modelValue"])
 const props = defineProps({
-  /** The selected date: YYYY-MM-DD */
   modelValue: { type: String, default: undefined },
-  /** When true, the entire week of the selected date will appear selected. */
   week: Boolean,
-  /** Minimum date, everything before this will be disabled */
   min: { type: String, default: undefined },
-  /** Maximum date, everything after this will be disabled */
   max: { type: String, default: undefined },
-  weekStartDay: {
-    type: String,
-    default: "sunday",
-    validator: (value) => value === "sunday" || value === "monday",
-  },
 })
 
-/**
- * A date representing the currently displayed month
- */
 const state = reactive({
   displayedMonth: props.modelValue ?? props.min,
   hoverDate: null,
 })
 
-/**
- * Returns a list of numeric dates in the displayed month (e.g. [1, 2, 3, ...31]
- * @type {ComputedRef<*>}
- */
 const displayableDays = computed(() =>
   clock.getDaysInMonth(state.displayedMonth)
 )
-
-/**
- * Returns the name of the currently displayed month
- * @type {ComputedRef<*>}
- */
 const displayedMonthName = computed(() =>
   clock.format(state.displayedMonth, "MMMM")
 )
 
-/**
- * Calculates the selected date
- * @param day
- * @returns {string}
- */
 const selectedDate = (day) => {
   const selectedYearAndMonth = clock.format(state.displayedMonth, "YYYY-MM")
   return clock.format(`${selectedYearAndMonth}-${day}`)
 }
-
-/**
- * Handler for date selection
- * @param day
- */
 const pickDate = (day) => {
   emit("update:modelValue", selectedDate(day))
 }
-
-/**
- * Checks if a date is the currently selected date
- * @param day
- * @returns {boolean}
- */
 const isSelectedDate = (day) => selectedDate(day) === props.modelValue
 
-/**
- * Checks if a date is in the same week as the currently selected date
- * @param day
- * @param dateInWeek
- * @returns {boolean}
- */
-const isInSameWeek = (day, dateInWeek = props.modelValue) => {
-  const weekFunc =
-    props.weekStartDay === "monday" ? clock.isoWeek : clock.weekOfYear
-  return weekFunc(selectedDate(day)) === weekFunc(dateInWeek)
-}
+const isInSameWeek = (day, dateInWeek = props.modelValue) =>
+  clock.isSame(selectedDate(day), dateInWeek, "week")
 
-/**
- * Checks if a date is the first day of the selected week
- * @param day
- * @returns {boolean}
- */
 const isFirstDayOfSelectedWeek = (day) => {
   const dayOfWeek = clock.getDayOfWeek(selectedDate(day))
-  return dayOfWeek === clock.weekStartDay()
+  return dayOfWeek === 0
 }
-
-/**
- * Checks if a date is the last day of the selected week
- * @param day
- * @returns {boolean}
- */
 const isLastDayOfSelectedWeek = (day) => {
   const dayOfWeek = clock.getDayOfWeek(selectedDate(day))
-  return dayOfWeek === clock.weekEndDay()
+  return dayOfWeek === 6
 }
-
 const isDisabled = (day) => {
   if (!props.min && !props.max) return false
 
@@ -165,29 +107,15 @@ const isDisabled = (day) => {
   }
 }
 
-/**
- * Regresses the displayed month
- * @returns {dayjs.Dayjs}
- */
 const goBackMonth = () =>
   (state.displayedMonth = clock.getPrevious("month", state.displayedMonth))
-
-/**
- * Advances the displayed month
- * @returns {dayjs.Dayjs}
- */
 const goForwardMonth = () =>
   (state.displayedMonth = clock.getNext("month", state.displayedMonth))
 
-/**
- * Calculates the 1-indexed column number where the first day of the month should be displayed
- * @param day
- * @returns {string|number}
- */
 const offset = (day) => {
   if (day !== 1) return "auto"
   const monthStartsOn = clock.getMonthStartDay(state.displayedMonth)
-  const weekStartsOn = clock.getWeekStartDay()
+  const weekStartsOn = 0
   let offset
   if (monthStartsOn >= weekStartsOn) {
     offset = monthStartsOn - weekStartsOn
@@ -197,23 +125,12 @@ const offset = (day) => {
   return Math.min(++offset, 7)
 }
 
-/**
- * A list of weekday abbreviations based on the preferred first day of the week
- * @returns {*[]}
- */
 const orderedDaysOfWeek = () => {
-  const arr = [...clock.daysOfWeek()]
-  if (props.weekStartDay === "monday") arr.push(arr.shift())
-  return arr
+  return [...clock.daysOfWeek()].map((day) => day[0])
 }
 
-/**
- * Sets the date being hovered over
- * @param day
- */
 const setHoverDate = (day = null) => {
   state.hoverDate = day ? selectedDate(day) : null
 }
-
 const randomKey = uuid()
 </script>

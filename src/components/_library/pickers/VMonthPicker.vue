@@ -20,9 +20,6 @@ import clock from "@/modules/clock"
 
 const emit = defineEmits(["update:modelValue"])
 const props = defineProps({
-  /**
-   * Zero-index numeric representation of a month (e.g. January = 0)
-   */
   modelValue: {
     type: Number,
     validator: (val) => (val >= 0) & (val <= 11),
@@ -30,17 +27,8 @@ const props = defineProps({
   },
 })
 
-/**
- * Returns a list of abbreviated names for the months of the year
- * @type {MonthNames}
- */
-const displayableMonths = clock.monthsOfYearShort()
+const displayableMonths = clock.monthsOfYear(true)
 
-/**
- * Checks whether a month is the currently selected month
- * @param month
- * @returns {boolean}
- */
 const isSelectedMonth = (month) =>
   props.modelValue === displayableMonths.indexOf(month)
 

@@ -7,7 +7,8 @@ const tokenGetters = {
    * @returns {boolean}
    */
   accessTokenIsExpired(state) {
-    return clock.isBeforeNow(state.accessTokenExpiresAt ?? 0)
+    const expirationDate = clock.parseUnix(state.accessTokenExpiresAt ?? 0)
+    return clock.isBefore(expirationDate, undefined, "second")
   },
 
   /**
