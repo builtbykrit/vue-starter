@@ -51,9 +51,9 @@ const clock = {
    * ===========================================================
    */
   getPrevious: (unit, date = undefined) =>
-    dayjs(date).subtract(1, unit).format(this.internalDateFormat),
+    dayjs(date).subtract(1, unit).format(clock.internalDateFormat),
   getNext: (unit, date = undefined) =>
-    dayjs(date).add(1, unit).format(this.internalDateFormat),
+    dayjs(date).add(1, unit).format(clock.internalDateFormat),
   getDayOfWeek: (date = undefined) => dayjs(date).day(),
   getDaysInMonth: (date = undefined) => dayjs(date).daysInMonth(),
   getWeekOfYear: (date = undefined) => dayjs(date).week(),

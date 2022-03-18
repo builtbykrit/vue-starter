@@ -14,12 +14,55 @@ describe("clock", () => {
         "Sat",
       ])
     })
+
+    describe("monthsOfYear", () => {
+      it("returns a list of months", () => {
+        expect(clock.monthsOfYear()).toStrictEqual([
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ])
+      })
+      it("returns a shorthand list of months", () => {
+        expect(clock.monthsOfYear(true)).toStrictEqual([
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+        ])
+      })
+    })
   })
 
   describe("Formatters", () => {
     it("format returns the formatted value of a date", () => {
       const date = clock.format("01-01-2020", "MMMM D, YYYY")
       expect(date).toBe("January 1, 2020")
+    })
+    it("formatForServer returns the server formatted value of a date", () => {
+      const date = clock.formatForServer("01-01-2020")
+      expect(date).toBe("2020-01-01T00:00-07:00")
+    })
+    it("parseUnix returns the server formatted value of a unix date", () => {
+      const date = clock.parseUnix(1577862000)
+      expect(date).toBe("2020-01-01T00:00-07:00")
     })
   })
 
@@ -94,7 +137,59 @@ describe("clock", () => {
     })
   })
 
-  describe("Getters", () => {})
+  describe("Getters", () => {
+    describe("getPrevious", () => {
+      it("returns previous day date when unit is 'day'", () => {
+        expect(clock.getPrevious("day", "2020-01-01")).toBe("2019-12-31")
+      })
+      it("returns previous week date when unit is 'week'", () => {
+        expect(clock.getPrevious("week", "2020-01-01")).toBe("2019-12-25")
+      })
+      it("returns previous month date when unit is 'month'", () => {
+        expect(clock.getPrevious("month", "2020-01-01")).toBe("2019-12-01")
+      })
+      it("returns previous year date when unit is 'year'", () => {
+        expect(clock.getPrevious("year", "2020-01-01")).toBe("2019-01-01")
+      })
+    })
+
+    describe("getNext", () => {
+      it("returns next day date when unit is 'day'", () => {
+        expect(clock.getNext("day", "2020-01-01")).toBe("2020-01-02")
+      })
+      it("returns next week date when unit is 'week'", () => {
+        expect(clock.getNext("week", "2020-01-01")).toBe("2020-01-08")
+      })
+      it("returns next month date when unit is 'month'", () => {
+        expect(clock.getNext("month", "2020-01-01")).toBe("2020-02-01")
+      })
+      it("returns next year date when unit is 'year'", () => {
+        expect(clock.getNext("year", "2020-01-01")).toBe("2021-01-01")
+      })
+    })
+
+    it("getDayOfWeek returns the 0 indexed day number", () => {
+      expect(clock.getDayOfWeek("2020-01-01")).toBe(3)
+    })
+    it("getDaysInMonth returns the number of days in a month", () => {
+      expect(clock.getDaysInMonth("2020-01-01")).toBe(31)
+    })
+    it("getWeekOfYear returns the week number", () => {
+      expect(clock.getWeekOfYear("2020-01-01")).toBe(1)
+    })
+    it("getMonth returns the 0 indexed month number", () => {
+      expect(clock.getMonth("2020-01-01")).toBe(0)
+    })
+    it("getMonthStartDay returns the week day number for the first day of the month", () => {
+      expect(clock.getMonthStartDay("2020-01-01")).toBe(3)
+    })
+    it("getQuarter returns the quarter number", () => {
+      expect(clock.getQuarter("2020-01-01")).toBe(1)
+    })
+    it("getYear returns the year number", () => {
+      expect(clock.getYear("2020-01-01")).toBe(2020)
+    })
+  })
 
   describe("Setters", () => {})
 })
