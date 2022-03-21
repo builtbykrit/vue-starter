@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils"
-import VSelect from "@/components/_library/formControls/VSelect"
+import VSelect from "@/components/_library/forms/VSelect"
 import { Listbox, ListboxButton } from "@headlessui/vue"
 
 describe("VSelect", () => {

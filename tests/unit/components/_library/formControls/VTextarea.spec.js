@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils"
-import VTextarea from "@/components/_library/formControls/VTextarea"
+import VTextarea from "@/components/_library/forms/VTextarea"
 
 describe("VTextarea", () => {
   it("should render a textarea with id", () => {

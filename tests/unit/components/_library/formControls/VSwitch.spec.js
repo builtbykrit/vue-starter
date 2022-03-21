@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils"
-import VSwitch from "@/components/_library/formControls/VSwitch"
+import VSwitch from "@/components/_library/forms/VSwitch"
 
 describe("VSwitch", () => {
   it("should render an input with id", () => {

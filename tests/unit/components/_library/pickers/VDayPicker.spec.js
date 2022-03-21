@@ -1,4 +1,4 @@
-import VDayPicker from "@/components/_library/pickers/VDayPicker.vue"
+import VDayPicker from "@/components/_library/forms/pickers/VDayPicker.vue"
 import { mount } from "@vue/test-utils"
 
 describe("VDayPicker", () => {

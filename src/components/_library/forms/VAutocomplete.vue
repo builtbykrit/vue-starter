@@ -46,8 +46,8 @@
             <li
               class="px-2 py-1"
               :class="{
-                'bg-blue-500/25': selected && !active,
-                'bg-blue-500 text-white': active,
+                'bg-primary-500/25': selected && !active,
+                'bg-primary-500 text-white': active,
                 'bg-white text-black': !active && !selected,
               }"
             >
@@ -70,7 +70,7 @@ import {
   ComboboxOptions,
 } from "@headlessui/vue"
 import { SelectorIcon, XIcon } from "@heroicons/vue/solid"
-import VInputSkin from "@/components/_library/formControls/VInputSkin.vue"
+import VInputSkin from "@/components/_library/forms/VInputSkin.vue"
 import { usePopper } from "@/composables/usePopper"
 import { useValidation } from "@/composables/useValidation"
 

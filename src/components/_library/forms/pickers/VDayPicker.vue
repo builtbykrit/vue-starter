@@ -48,8 +48,8 @@
 </template>
 
 <script setup>
-import VDatePickerSkin from "@/components/_library/pickers/VDatePickerSkin.vue"
-import VPickerButton from "@/components/_library/pickers/VPickerButton.vue"
+import VDatePickerSkin from "@/components/_library/forms/pickers/VDatePickerSkin.vue"
+import VPickerButton from "@/components/_library/forms/pickers/VPickerButton.vue"
 import clock from "@/modules/clock"
 import { v4 as uuid } from "uuid"
 import { computed, reactive } from "vue"

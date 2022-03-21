@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils"
-import VTextField from "@/components/_library/formControls/VTextField.vue"
+import VTextField from "@/components/_library/forms/VTextField.vue"
 
 describe("VTextField", () => {
   it("should render an input with id", () => {

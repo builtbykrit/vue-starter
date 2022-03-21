@@ -9,9 +9,9 @@
         'first rounded-l': firstOfSet,
         'last rounded-r': lastOfSet,
         'bg-white text-gray-200': disabled,
-        'group-hover bg-blue-100 text-gray-900': setIsHovered && !selected,
-        'selected bg-blue-500 text-white': selected && !disabled,
-        'bg-white text-gray-400 hover:bg-blue-100 hover:text-gray-900':
+        'group-hover bg-primary-100 text-gray-900': setIsHovered && !selected,
+        'selected bg-primary-500 text-white': selected && !disabled,
+        'bg-white text-gray-400 hover:bg-primary-100 hover:text-gray-900':
           !disabled && !selected && !setIsHovered,
       },
     ]"

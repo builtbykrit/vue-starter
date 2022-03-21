@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils"
-import VTimeField from "@/components/_library/formControls/VTimeField"
+import VTimeField from "@/components/_library/forms/VTimeField"
 
 describe("VTimeField", () => {
   it("should render an input with id", () => {

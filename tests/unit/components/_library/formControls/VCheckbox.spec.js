@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils"
-import VCheckbox from "@/components/_library/formControls/VCheckbox"
+import VCheckbox from "@/components/_library/forms/VCheckbox"
 
 describe("VCheckbox", () => {
   it("should render an input with id", () => {

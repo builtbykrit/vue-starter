@@ -24,10 +24,10 @@ import clock from "@/modules/clock"
 
 import SandboxRow from "@/views/sandbox/SandboxRow.vue"
 import VDivider from "@/components/_library/general/VDivider.vue"
-import VDayPicker from "@/components/_library/pickers/VDayPicker.vue"
-import VMonthPicker from "@/components/_library/pickers/VMonthPicker.vue"
-import VQuarterPicker from "@/components/_library/pickers/VQuarterPicker.vue"
-import VYearPicker from "@/components/_library/pickers/VYearPicker.vue"
+import VDayPicker from "@/components/_library/forms/pickers/VDayPicker.vue"
+import VMonthPicker from "@/components/_library/forms/pickers/VMonthPicker.vue"
+import VQuarterPicker from "@/components/_library/forms/pickers/VQuarterPicker.vue"
+import VYearPicker from "@/components/_library/forms/pickers/VYearPicker.vue"
 
 const state = reactive({
   dayPicker: clock.format(),

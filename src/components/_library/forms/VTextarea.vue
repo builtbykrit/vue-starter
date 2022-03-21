@@ -25,7 +25,7 @@
 <script setup>
 import { computed, onMounted, watch, ref } from "vue"
 import { v4 as uuid } from "uuid"
-import VInputSkin from "@/components/_library/formControls/VInputSkin.vue"
+import VInputSkin from "@/components/_library/forms/VInputSkin.vue"
 import { useValidation } from "@/composables/useValidation"
 
 const props = defineProps({

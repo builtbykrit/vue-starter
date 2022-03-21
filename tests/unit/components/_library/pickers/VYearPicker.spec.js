@@ -1,4 +1,4 @@
-import VYearPicker from "@/components/_library/pickers/VYearPicker.vue"
+import VYearPicker from "@/components/_library/forms/pickers/VYearPicker.vue"
 import { mount } from "@vue/test-utils"
 
 describe("VYearPicker", () => {

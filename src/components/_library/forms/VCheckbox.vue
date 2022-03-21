@@ -6,7 +6,7 @@
       :checked="checked"
       :disabled="disabled || readonly"
       type="checkbox"
-      class="rounded h-5 w-5 border-gray-300 focus:ring-offset-0 focus:ring-blue-500/50"
+      class="rounded h-5 w-5 border-gray-300 focus:ring-offset-0 focus:ring-primary-500/50"
       @input="onChange"
     />
     <span class="ml-2">
@@ -18,7 +18,7 @@
 <script setup>
 import { computed } from "vue"
 import { v4 as uuid } from "uuid"
-import VLabel from "@/components/_library/formControls/VLabel.vue"
+import VLabel from "@/components/_library/forms/VLabel.vue"
 
 const props = defineProps({
   modelValue: { type: [Boolean, Array], default: undefined },

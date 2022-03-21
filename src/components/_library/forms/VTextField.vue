@@ -38,7 +38,7 @@
 <script setup>
 import { computed, onMounted, ref } from "vue"
 import { v4 as uuid } from "uuid"
-import VInputSkin from "@/components/_library/formControls/VInputSkin.vue"
+import VInputSkin from "@/components/_library/forms/VInputSkin.vue"
 import { EyeIcon, EyeOffIcon } from "@heroicons/vue/solid"
 import { useValidation } from "@/composables/useValidation"
 

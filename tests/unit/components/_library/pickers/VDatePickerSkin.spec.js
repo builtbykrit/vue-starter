@@ -1,4 +1,4 @@
-import VDatePickerSkin from "@/components/_library/pickers/VDatePickerSkin.vue"
+import VDatePickerSkin from "@/components/_library/forms/pickers/VDatePickerSkin.vue"
 import { mount } from "@vue/test-utils"
 
 describe("VDatePickerSkin", () => {

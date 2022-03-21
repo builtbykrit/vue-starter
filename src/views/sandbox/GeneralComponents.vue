@@ -39,16 +39,20 @@
         </template>
       </VMenu>
     </SandboxRow>
+    <SandboxRow title="VToast">
+      <VToast :notification="{ message: 'Test Toast' }" />
+    </SandboxRow>
   </div>
 </template>
 
 <script setup>
 import VDivider from "@/components/_library/general/VDivider.vue"
 import SandboxRow from "@/views/sandbox/SandboxRow.vue"
-import VButton from "@/components/_library/buttons/VButton.vue"
-import VButtonGroup from "@/components/_library/buttons/VButtonGroup.vue"
+import VButton from "@/components/_library/general/buttons/VButton.vue"
+import VButtonGroup from "@/components/_library/general/buttons/VButtonGroup.vue"
 import VCard from "@/components/_library/general/VCard.vue"
 import VMenu from "@/components/_library/general/VMenu.vue"
+import VToast from "@/components/_library/general/VToast.vue"
 
 const menuItems = [
   { text: "Link Item", name: "link", to: "https://www.krit.com/" },

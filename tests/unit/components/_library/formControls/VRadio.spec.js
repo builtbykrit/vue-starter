@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils"
-import VRadio from "@/components/_library/formControls/VRadio"
+import VRadio from "@/components/_library/forms/VRadio"
 
 describe("VRadio", () => {
   it("should render an input with id", () => {

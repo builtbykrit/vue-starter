@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils"
-import VAutocomplete from "@/components/_library/formControls/VAutocomplete"
+import VAutocomplete from "@/components/_library/forms/VAutocomplete"
 import { Combobox, ComboboxInput } from "@headlessui/vue"
 
 describe("VAutocomplete", () => {

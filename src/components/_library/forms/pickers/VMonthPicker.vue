@@ -14,8 +14,8 @@
 </template>
 
 <script setup>
-import VDatePickerSkin from "@/components/_library/pickers/VDatePickerSkin.vue"
-import VPickerButton from "@/components/_library/pickers/VPickerButton.vue"
+import VDatePickerSkin from "@/components/_library/forms/pickers/VDatePickerSkin.vue"
+import VPickerButton from "@/components/_library/forms/pickers/VPickerButton.vue"
 import clock from "@/modules/clock"
 
 const emit = defineEmits(["update:modelValue"])

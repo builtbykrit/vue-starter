@@ -6,7 +6,7 @@
     <Switch
       :id="internalId"
       v-model="internalValue"
-      :class="internalValue ? 'bg-blue-600' : 'bg-gray-200'"
+      :class="internalValue ? 'bg-primary-600' : 'bg-gray-200'"
       class="relative inline-flex items-center h-6 transition-colors rounded-full w-11 focus:outline-none focus:ring-2 focus:ring-offset-0"
     >
       <span
@@ -21,7 +21,7 @@
 import { computed } from "vue"
 import { v4 as uuid } from "uuid"
 import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue"
-import VLabel from "@/components/_library/formControls/VLabel.vue"
+import VLabel from "@/components/_library/forms/VLabel.vue"
 
 const props = defineProps({
   id: { type: String, default: undefined },

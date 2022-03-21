@@ -15,8 +15,8 @@
           <VCard
             class="cursor-pointer"
             :class="{
-              'ring-2 ring-offset-2 ring-offset-blue-500': active,
-              'bg-blue-500 bg-opacity-75 text-white': checked,
+              'ring-2 ring-offset-2 ring-offset-primary-500': active,
+              'bg-primary-500 bg-opacity-75 text-white': checked,
             }"
           >
             <div class="flex items-center gap-3">

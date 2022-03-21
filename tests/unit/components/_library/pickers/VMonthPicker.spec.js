@@ -1,4 +1,4 @@
-import VMonthPicker from "@/components/_library/pickers/VMonthPicker.vue"
+import VMonthPicker from "@/components/_library/forms/pickers/VMonthPicker.vue"
 import { mount } from "@vue/test-utils"
 
 describe("VMonthPicker", () => {

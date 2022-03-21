@@ -10,7 +10,7 @@
 <script setup>
 import { ref } from "vue"
 import clock from "@/modules/clock"
-import VTextField from "@/components/_library/formControls/VTextField.vue"
+import VTextField from "@/components/_library/forms/VTextField.vue"
 
 const props = defineProps({
   modelValue: { type: [String, Number], default: "" },

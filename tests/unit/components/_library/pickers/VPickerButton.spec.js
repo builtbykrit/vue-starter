@@ -1,4 +1,4 @@
-import VPickerButton from "@/components/_library/pickers/VPickerButton.vue"
+import VPickerButton from "@/components/_library/forms/pickers/VPickerButton.vue"
 import { mount } from "@vue/test-utils"
 
 describe("VPickerButton", () => {

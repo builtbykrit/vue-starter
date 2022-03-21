@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils"
-import VRadioGroup from "@/components/_library/formControls/VRadioGroup"
+import VRadioGroup from "@/components/_library/forms/VRadioGroup"
 import { RadioGroupOption } from "@headlessui/vue"
 
 describe("VRadioGroup", () => {

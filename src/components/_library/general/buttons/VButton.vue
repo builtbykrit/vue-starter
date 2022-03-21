@@ -45,10 +45,10 @@ const borderRadius = computed(() => (props.circle ? "rounded-full" : "rounded"))
 
 // Update variant styles to match app
 const variantStyles = {
-  primary: "bg-blue-600 text-white hover:bg-blue-700",
-  secondary: "bg-green-600 text-white hover:bg-green-700",
-  link: "text-blue-600 font-semibold underline hover:bg-blue-100",
+  primary: "bg-primary-600 text-white hover:bg-primary-700",
+  secondary: "bg-secondary-600 text-white hover:bg-secondary-700",
+  link: "text-primary-600 font-semibold underline hover:bg-primary-100",
   transparent:
-    "bg-transparent font-semibold hover:bg-purple-400 hover:text-white",
+    "bg-transparent font-semibold hover:bg-primary-400 hover:text-white",
 }
 </script>

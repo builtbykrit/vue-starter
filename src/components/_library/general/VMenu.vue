@@ -21,7 +21,7 @@
             :class="[
               {
                 'bg-gray-100': item.disabled,
-                'bg-blue-500 text-white': active,
+                'bg-primary-500 text-white': active,
                 'text-gray-900': !active,
               },
             ]"

@@ -1,8 +1,8 @@
 <template>
   <div class="bg-white min-w-[18rem] w-full rounded overflow-hidden py-3 px-5">
     <div
+      class="flex items-center m-2"
       :class="[
-        'flex items-center my-2',
         props.canGoBack || props.canGoForward
           ? 'justify-between'
           : 'justify-center',
@@ -14,7 +14,7 @@
         data-cy="picker-btn-prev"
         @click="$emit('picker:goBack')"
       >
-        <ChevronLeftIcon />
+        <ChevronLeftIcon class="h-6 w-6" />
       </button>
 
       <transition
@@ -35,7 +35,7 @@
         data-cy="picker-btn-next"
         @click="$emit('picker:goForward')"
       >
-        <ChevronRightIcon />
+        <ChevronRightIcon class="h-6 w-6" />
       </button>
     </div>
 
