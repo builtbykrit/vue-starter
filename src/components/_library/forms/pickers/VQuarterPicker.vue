@@ -1,9 +1,16 @@
 <template>
-  <v-date-picker-skin title-text="Select a Quarter">
-    <ul class="grid grid-cols-2 w-full justify-center">
+  <v-date-picker-skin
+    :title-text="`${displayYear}`"
+    can-go-back
+    can-go-forward
+    @picker:go-back="prevYear"
+    @picker:go-forward="nextYear"
+  >
+    <ul :key="displayYear" class="grid grid-cols-2 w-full justify-center">
       <li v-for="quarter in quarters" :key="quarter.value">
         <v-picker-button
           :selected="isSelectedQuarter(quarter.value)"
+          :current="isCurrentQuarter(quarter.value)"
           @click="handleSelection(quarter.value)"
         >
           {{ quarter.text }}
@@ -16,6 +23,8 @@
 <script setup>
 import VDatePickerSkin from "@/components/_library/forms/pickers/VDatePickerSkin.vue"
 import VPickerButton from "@/components/_library/forms/pickers/VPickerButton.vue"
+import clock from "@/modules/clock"
+import { ref } from "vue"
 
 const quarters = [
   { text: "Q1 Jan - Mar", value: 1 },
@@ -26,16 +35,33 @@ const quarters = [
 
 const props = defineProps({
   modelValue: {
-    type: Number,
-    validator: (val) => (val >= 1) & (val <= 4),
+    type: String,
     required: true,
   },
 })
 const emit = defineEmits(["update:modelValue"])
 
-const isSelectedQuarter = (quarter) => props.modelValue === quarter
+const currentDate = clock.format()
+const displayYear = ref(clock.getYear(props.modelValue))
+
+const isSelectedQuarter = (quarter) =>
+  clock.getQuarter(props.modelValue) === quarter
+const isCurrentQuarter = (quarter) =>
+  clock.getQuarter(currentDate) === quarter &&
+  clock.getYear(currentDate) === displayYear.value
+
+const prevYear = () => {
+  displayYear.value = displayYear.value - 1
+}
+const nextYear = () => {
+  displayYear.value = displayYear.value + 1
+}
 
 const handleSelection = (quarter) => {
-  emit("update:modelValue", quarter)
+  const newDate = clock.setYear(
+    clock.setQuarter(props.modelValue, quarter),
+    displayYear.value
+  )
+  emit("update:modelValue", newDate)
 }
 </script>

@@ -1,9 +1,16 @@
 <template>
-  <v-date-picker-skin title-text="Select a Month">
-    <ul class="grid grid-cols-3 w-full justify-center">
+  <v-date-picker-skin
+    :title-text="`${displayYear}`"
+    can-go-back
+    can-go-forward
+    @picker:go-back="prevYear"
+    @picker:go-forward="nextYear"
+  >
+    <ul :key="displayYear" class="grid grid-cols-3 w-full justify-center">
       <li v-for="month in displayableMonths" :key="month">
         <v-picker-button
           :selected="isSelectedMonth(month)"
+          :current="isCurrentMonth(month)"
           @click="handleSelection(month)"
         >
           {{ month }}
@@ -17,23 +24,40 @@
 import VDatePickerSkin from "@/components/_library/forms/pickers/VDatePickerSkin.vue"
 import VPickerButton from "@/components/_library/forms/pickers/VPickerButton.vue"
 import clock from "@/modules/clock"
+import { ref } from "vue"
 
 const emit = defineEmits(["update:modelValue"])
 const props = defineProps({
   modelValue: {
-    type: Number,
-    validator: (val) => (val >= 0) & (val <= 11),
+    type: String,
     required: true,
   },
 })
 
+const currentDate = clock.format()
 const displayableMonths = clock.monthsOfYear(true)
 
+const displayYear = ref(clock.getYear(props.modelValue))
+
 const isSelectedMonth = (month) =>
-  props.modelValue === displayableMonths.indexOf(month)
+  clock.getMonth(props.modelValue) === displayableMonths.indexOf(month)
+const isCurrentMonth = (month) =>
+  clock.getMonth(currentDate) === displayableMonths.indexOf(month) &&
+  clock.getYear(currentDate) === displayYear.value
+
+const prevYear = () => {
+  displayYear.value = displayYear.value - 1
+}
+const nextYear = () => {
+  displayYear.value = displayYear.value + 1
+}
 
 const handleSelection = (month) => {
   const numericMonth = displayableMonths.findIndex((m) => m === month)
-  emit("update:modelValue", numericMonth)
+  const newDate = clock.setYear(
+    clock.setMonth(props.modelValue, numericMonth),
+    displayYear.value
+  )
+  emit("update:modelValue", newDate)
 }
 </script>

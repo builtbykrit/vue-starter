@@ -6,44 +6,34 @@
     @picker:go-back="goBackMonth()"
     @picker:go-forward="goForwardMonth()"
   >
-    <transition
-      enter-active-class="transition-all ease-in-out duration-150"
-      enter-from-class="translate-x-full opacity-0"
-      enter-to-class="translate-x-0 opacity-100"
-      leave-active-class="transition-all ease-in-out duration-150"
-      leave-from-class="translate-x-0 opacity-100"
-      leave-to-class="-translate-x-full opacity-0"
-      mode="out-in"
-    >
-      <ul :key="displayedMonthName" class="grid grid-cols-7">
-        <li
-          v-for="(dayOfWeek, index) in orderedDaysOfWeek()"
-          :key="`${randomKey}-${index}`"
-          class="text-center text-gray-900 text-xs font-semibold py-2 col-span-1"
+    <ul :key="displayedMonthName" class="grid grid-cols-7">
+      <li
+        v-for="(dayOfWeek, index) in orderedDaysOfWeek()"
+        :key="`${randomKey}-${index}`"
+        class="text-center text-gray-900 text-xs font-semibold py-2 col-span-1"
+      >
+        {{ dayOfWeek }}
+      </li>
+      <li
+        v-for="(day, index) in displayableDays"
+        :key="index"
+        :class="['text-center', `col-start-${offset(day)}`]"
+      >
+        <v-picker-button
+          :one-of-set="props.week"
+          :first-of-set="isFirstDayOfSelectedWeek(day)"
+          :last-of-set="isLastDayOfSelectedWeek(day)"
+          :set-is-hovered="props.week && isInSameWeek(day, state.hoverDate)"
+          :selected="isSelectedDate(day) || (props.week && isInSameWeek(day))"
+          :disabled="isDisabled(day)"
+          @click="pickDate(day)"
+          @mouseover="setHoverDate(day)"
+          @mouseleave="setHoverDate()"
         >
-          {{ dayOfWeek }}
-        </li>
-        <li
-          v-for="(day, index) in displayableDays"
-          :key="index"
-          :class="['text-center', `col-start-${offset(day)}`]"
-        >
-          <v-picker-button
-            :one-of-set="props.week"
-            :first-of-set="isFirstDayOfSelectedWeek(day)"
-            :last-of-set="isLastDayOfSelectedWeek(day)"
-            :set-is-hovered="props.week && isInSameWeek(day, state.hoverDate)"
-            :selected="isSelectedDate(day) || (props.week && isInSameWeek(day))"
-            :disabled="isDisabled(day)"
-            @click="pickDate(day)"
-            @mouseover="setHoverDate(day)"
-            @mouseleave="setHoverDate()"
-          >
-            {{ day }}
-          </v-picker-button>
-        </li>
-      </ul>
-    </transition>
+          {{ day }}
+        </v-picker-button>
+      </li>
+    </ul>
   </v-date-picker-skin>
 </template>
 

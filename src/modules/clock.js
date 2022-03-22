@@ -67,6 +67,12 @@ const clock = {
    * Settters
    * ===========================================================
    */
+  setMonth: (date = undefined, month, format = clock.internalDateFormat) =>
+    dayjs(date).month(month).format(format),
+  setQuarter: (date = undefined, quarter, format = clock.internalDateFormat) =>
+    dayjs(date).quarter(quarter).startOf("quarter").format(format),
+  setYear: (date = undefined, year, format = clock.internalDateFormat) =>
+    dayjs(date).year(year).format(format),
 }
 
 export default clock

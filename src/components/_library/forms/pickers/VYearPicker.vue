@@ -4,6 +4,7 @@
       <li v-for="year in displayableYears" :key="year">
         <v-picker-button
           :selected="isSelectedYear(year)"
+          :current="isCurrentYear(year)"
           @click="$emit('update:modelValue', year)"
         >
           {{ year }}
@@ -35,6 +36,8 @@ const props = defineProps({
   },
 })
 
+const currentYear = clock.getYear()
+const isCurrentYear = (year) => currentYear === year
 const displayableYears = computed(() => {
   let startYear = props.firstYear
   const years = []

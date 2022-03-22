@@ -32,8 +32,8 @@ import VYearPicker from "@/components/_library/forms/pickers/VYearPicker.vue"
 const state = reactive({
   dayPicker: clock.format(),
   weekPicker: clock.format(),
-  monthPicker: clock.getMonth(),
-  quarterPicker: clock.getQuarter(),
+  monthPicker: clock.format(),
+  quarterPicker: clock.format(),
   yearPicker: clock.getYear(),
 })
 </script>

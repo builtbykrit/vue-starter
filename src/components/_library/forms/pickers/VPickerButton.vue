@@ -13,6 +13,7 @@
         'selected bg-primary-500 text-white': selected && !disabled,
         'bg-white text-gray-400 hover:bg-primary-100 hover:text-gray-900':
           !disabled && !selected && !setIsHovered,
+        'underline decoration-2 underline-offset-2': current,
       },
     ]"
   >
@@ -61,6 +62,8 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+
+  current: Boolean,
 
   /**
    * Whether another button in the set is being hovered

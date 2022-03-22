@@ -39,7 +39,17 @@
       </button>
     </div>
 
-    <slot />
+    <transition
+      enter-active-class="transition-all ease-in-out duration-150"
+      enter-from-class="translate-x-full opacity-0"
+      enter-to-class="translate-x-0 opacity-100"
+      leave-active-class="transition-all ease-in-out duration-150"
+      leave-from-class="translate-x-0 opacity-100"
+      leave-to-class="-translate-x-full opacity-0"
+      mode="out-in"
+    >
+      <slot />
+    </transition>
   </div>
 </template>
 
