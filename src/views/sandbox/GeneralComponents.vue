@@ -32,16 +32,6 @@
         </template>
       </VCard>
     </SandboxRow>
-    <SandboxRow title="VMenu">
-      <VMenu :items="menuItems">
-        <template #activator>
-          <VButton>Menu</VButton>
-        </template>
-      </VMenu>
-    </SandboxRow>
-    <SandboxRow title="VToast">
-      <VToast :notification="{ message: 'Example Notification' }" />
-    </SandboxRow>
     <SandboxRow title="VCollapsable">
       <VCollapsable
         button="Example Collapsable"
@@ -55,7 +45,7 @@
         elementum vitae varius at, lacinia tincidunt arcu."
       />
       <VCollapsable>
-        <template #button> Example Collapsable </template>
+        <template #button> Example Collapsable</template>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras lacinia
         eget nunc lacinia volutpat. Fusce laoreet neque quis varius venenatis.
         Nunc ultricies, risus nec auctor interdum, quam urna viverra justo, id
@@ -65,6 +55,32 @@
         metus arcu, congue in est at, rhoncus facilisis ante. Nunc lorem metus,
         elementum vitae varius at, lacinia tincidunt arcu."
       </VCollapsable>
+    </SandboxRow>
+    <SandboxRow title="VToast">
+      <VToast :notification="{ message: 'Example Notification' }" />
+    </SandboxRow>
+    <SandboxRow title="VMenu">
+      <VMenu :items="menuItems">
+        <template #activator>
+          <VButton>Menu</VButton>
+        </template>
+      </VMenu>
+    </SandboxRow>
+    <SandboxRow title="VModal">
+      <VButton @click="state.showModal = true">Open Modal</VButton>
+      <VModal
+        v-model="state.showModal"
+        title="Example Modal"
+        subtitle="This is just a test."
+        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras lacinia
+        eget nunc lacinia volutpat. Fusce laoreet neque quis varius venenatis.
+        Nunc ultricies, risus nec auctor interdum, quam urna viverra justo, id
+        posuere leo urna vel orci. Aliquam vel ultrices lacus, a fringilla
+        turpis. Duis nisi lacus, varius sed tortor ac, imperdiet dapibus erat.
+        Donec felis arcu, semper nec felis sed, tincidunt accumsan sem. Quisque
+        metus arcu, congue in est at, rhoncus facilisis ante. Nunc lorem metus,
+        elementum vitae varius at, lacinia tincidunt arcu."
+      />
     </SandboxRow>
   </div>
 </template>
@@ -78,10 +94,16 @@ import VCard from "@/components/_library/general/VCard.vue"
 import VMenu from "@/components/_library/general/VMenu.vue"
 import VToast from "@/components/_library/general/VToast.vue"
 import VCollapsable from "@/components/_library/general/VCollapsable.vue"
+import VModal from "@/components/_library/general/VModal.vue"
+import { reactive } from "vue"
 
 const menuItems = [
   { text: "Link Item", name: "link", to: "https://www.krit.com/" },
   { text: "Span Item", name: "span" },
   { text: "Disabled Item", name: "disabled", disabled: true },
 ]
+
+const state = reactive({
+  showModal: false,
+})
 </script>

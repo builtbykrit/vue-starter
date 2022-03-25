@@ -4,9 +4,9 @@
       <slot name="activator" />
     </MenuButton>
 
-    <div ref="container">
+    <div ref="container" class="absolute z-20">
       <MenuItems
-        class="absolute w-56 bg-white divide-y divide-gray-100 rounded shadow-lg z-20 focus:outline-none overflow-hidden"
+        class="w-56 bg-white divide-y divide-gray-100 rounded shadow-lg z-20 focus:outline-none overflow-hidden"
       >
         <MenuItem
           v-for="(item, index) in items"
