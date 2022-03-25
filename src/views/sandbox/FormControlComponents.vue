@@ -82,7 +82,7 @@
       <VTimeField
         v-model="form.timeField"
         label="Time Field (24h)"
-        display-format="hh:mm"
+        display-format="HH:mm"
         :readonly="readonlyInputs"
       />
     </SandboxRow>

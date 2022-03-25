@@ -2,11 +2,13 @@ import dayjs from "dayjs"
 import localeData from "dayjs/plugin/localeData"
 import weekOfYear from "dayjs/plugin/weekOfYear"
 import quarterOfYear from "dayjs/plugin/quarterOfYear"
+import customParseFormat from "dayjs/plugin/customParseFormat"
 
 /** Dayjs Plugins */
 dayjs.extend(localeData)
 dayjs.extend(weekOfYear)
 dayjs.extend(quarterOfYear)
+dayjs.extend(customParseFormat)
 
 const clock = {
   /**
@@ -25,8 +27,11 @@ const clock = {
    * Formatters
    * ===========================================================
    */
-  format: (date = undefined, format = clock.internalDateFormat) =>
-    dayjs(date).format(format),
+  format: (
+    date = undefined,
+    outputFormat = clock.internalDateFormat,
+    inputFormats = undefined
+  ) => dayjs(date, inputFormats).format(outputFormat),
   formatForServer: (date = undefined, format = clock.serverDateTimeFormat) =>
     dayjs(date).format(format),
   parseUnix: (unix, format = clock.serverDateTimeFormat) =>
@@ -37,7 +42,8 @@ const clock = {
    * Validators
    * ===========================================================
    */
-  isValid: (date) => dayjs(date).isValid(),
+  isValid: (date, formatOptions = undefined) =>
+    dayjs(date, formatOptions).isValid(),
   isBefore: (date1, date2 = undefined, scope = "day") =>
     dayjs(date2).isAfter(date1, scope),
   isAfter: (date1, date2 = undefined, scope = "day") =>

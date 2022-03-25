@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue"
+import { ref, watch } from "vue"
 import clock from "@/modules/clock"
 import VTextField from "@/components/_library/forms/VTextField.vue"
 
@@ -24,23 +24,50 @@ const props = defineProps({
 const emit = defineEmits(["update:modelValue"])
 
 const internalValue = ref(
-  clock.format(`01-01-2020 ${props.modelValue}`, props.displayFormat)
+  clock.format(props.modelValue, props.displayFormat, props.outputFormat)
+)
+
+watch(
+  () => props.modelValue,
+  (newValue) => {
+    internalValue.value = clock.format(
+      newValue,
+      props.displayFormat,
+      props.outputFormat
+    )
+  }
 )
 
 const updateExternalValue = () => {
-  const newDate = `01-01-2020 ${internalValue.value}`
+  if (!internalValue.value) {
+    emit("update:modelValue", undefined)
+    return
+  }
+
+  const timeFormats = ["ha", "h a", "H"]
+  // If user forgot "m" in "pm"
+  const timeLastLetter = internalValue.value[internalValue.value.length - 1]
+  const time =
+    timeLastLetter === "p" ? internalValue.value + "m" : internalValue.value
+
   // Check if inputted time is valid
-  const validTime = clock.isValid(newDate)
+  const validTime = clock.isValid(time, timeFormats)
 
   // If valid, format and update modelValue
   if (validTime) {
-    emit("update:modelValue", clock.format(newDate, props.outputFormat))
-    internalValue.value = clock.format(newDate, props.displayFormat)
+    emit(
+      "update:modelValue",
+      clock.format(time, props.outputFormat, timeFormats)
+    )
+    internalValue.value = clock.format(time, props.displayFormat, timeFormats)
   }
   // Else, revert to old modelValue
   else {
-    const oldDate = `01-01-2020 ${props.modelValue}`
-    internalValue.value = clock.format(oldDate, props.displayFormat)
+    internalValue.value = clock.format(
+      props.modelValue,
+      props.displayFormat,
+      "HH:mm"
+    )
   }
 }
 </script>
