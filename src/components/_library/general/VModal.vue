@@ -33,10 +33,7 @@
             >
               <!-- Modal Title -->
               <div class="flex justify-between">
-                <DialogTitle
-                  as="h3"
-                  class="text-lg font-medium leading-6 text-gray-900"
-                >
+                <DialogTitle as="h3" class="text-lg font-medium leading-6">
                   <slot name="title">{{ title }}</slot>
                 </DialogTitle>
                 <button @click="isOpen = false">
@@ -45,7 +42,7 @@
               </div>
 
               <!-- Modal subtitle -->
-              <DialogDescription class="text-sm">
+              <DialogDescription class="text-sm text-gray-800">
                 <slot name="subtitle">{{ subtitle }}</slot>
               </DialogDescription>
 
