@@ -10,7 +10,7 @@
     "test:unit": "jest"
   },
   "dependencies": {
-    "@sentry/tracing": "^6.16.1",
+    "@sentry/tracing": "^6.19.2",
     "@sentry/vue": "^6.17.4",
     "axios": "^0.25.0",
     "dayjs": "^1.10.7",
