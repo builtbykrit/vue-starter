@@ -1,36 +1,41 @@
 <template>
-  <Menu as="div" class="inline-block text-left">
-    <MenuButton ref="trigger">
+  <Menu as="div" :class="{ 'w-full': !!$slots.default }">
+    <MenuButton ref="trigger" :class="{ 'w-full': !!$slots.default }">
       <slot name="activator" />
     </MenuButton>
 
-    <div ref="container" class="absolute z-20">
+    <div ref="container" class="absolute bg-white z-20">
       <MenuItems
-        class="w-56 bg-white divide-y divide-gray-100 rounded shadow-lg z-20 focus:outline-none overflow-hidden"
+        class="divide-y divide-gray-100 rounded shadow-lg z-20 focus:outline-none overflow-hidden"
       >
-        <MenuItem
-          v-for="(item, index) in items"
-          :key="item.name ?? index"
-          v-slot="{ active }"
-          :disabled="item.disabled"
-        >
-          <component
-            :is="!!item.to ? 'a' : 'button'"
-            :href="item.to"
-            class="group flex items-center w-full px-2 py-2 text-sm"
-            :class="[
-              {
-                'bg-gray-100': item.disabled,
-                'bg-primary-500 text-white': active,
-                'text-gray-900': !active,
-              },
-            ]"
+        <slot name="default">
+          <MenuItem
+            v-for="(item, index) in items"
+            :key="item.name ?? index"
+            v-slot="{ active }"
+            :disabled="item.disabled"
+            class="w-56"
           >
-            <slot :name="`item.${item.name ?? index}`" v-bind="{ item, active }"
-              >{{ item.text }}
-            </slot>
-          </component>
-        </MenuItem>
+            <component
+              :is="!!item.to ? 'a' : 'button'"
+              :href="item.to"
+              class="group flex items-center w-full px-2 py-2 text-sm"
+              :class="[
+                {
+                  'bg-gray-100': item.disabled,
+                  'bg-primary-500 text-white': active,
+                  'text-gray-900': !active,
+                },
+              ]"
+            >
+              <slot
+                :name="`item.${item.name ?? index}`"
+                v-bind="{ item, active }"
+                >{{ item.text }}
+              </slot>
+            </component>
+          </MenuItem>
+        </slot>
       </MenuItems>
     </div>
   </Menu>

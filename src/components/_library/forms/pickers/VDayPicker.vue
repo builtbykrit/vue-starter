@@ -25,6 +25,7 @@
           :last-of-set="isLastDayOfSelectedWeek(day)"
           :set-is-hovered="props.week && isInSameWeek(day, state.hoverDate)"
           :selected="isSelectedDate(day) || (props.week && isInSameWeek(day))"
+          :current="isCurrentDate(day)"
           :disabled="isDisabled(day)"
           @click="pickDate(day)"
           @mouseover="setHoverDate(day)"
@@ -63,6 +64,7 @@ const displayableDays = computed(() =>
 const displayedMonthName = computed(() =>
   clock.format(state.displayedMonth, "MMMM")
 )
+const currentDate = computed(() => clock.format())
 
 const selectedDate = (day) => {
   const selectedYearAndMonth = clock.format(state.displayedMonth, "YYYY-MM")
@@ -71,6 +73,8 @@ const selectedDate = (day) => {
 const pickDate = (day) => {
   emit("update:modelValue", selectedDate(day))
 }
+
+const isCurrentDate = (day) => selectedDate(day) === currentDate.value
 const isSelectedDate = (day) => selectedDate(day) === props.modelValue
 
 const isInSameWeek = (day, dateInWeek = props.modelValue) =>

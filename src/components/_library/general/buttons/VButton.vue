@@ -39,7 +39,7 @@ const padding = computed(() =>
     ? "p-px"
     : props.dense
     ? "px-2 py-1"
-    : "px-4 py-2"
+    : "px-3 py-1.5"
 )
 const borderRadius = computed(() => (props.circle ? "rounded-full" : "rounded"))
 

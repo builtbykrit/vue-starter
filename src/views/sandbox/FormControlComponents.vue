@@ -73,17 +73,29 @@
         clearable
       />
     </SandboxRow>
+    <SandboxRow title="VDateField">
+      <VDateField
+        id="test"
+        v-model="form.dateField"
+        label="Date Field"
+        :readonly="readonlyInputs"
+        :validation="v$.dateField"
+        clearable
+      />
+    </SandboxRow>
     <SandboxRow title="VTimeField">
       <VTimeField
         v-model="form.timeField"
         label="Time Field"
         :readonly="readonlyInputs"
+        :validation="v$.timeField"
       />
       <VTimeField
         v-model="form.timeField"
         label="Time Field (24h)"
         display-format="HH:mm"
         :readonly="readonlyInputs"
+        :validation="v$.timeField"
       />
     </SandboxRow>
     <SandboxRow title="VCheckbox">
@@ -164,6 +176,7 @@ import VDivider from "@/components/_library/general/VDivider.vue"
 import VRadio from "@/components/_library/forms/VRadio.vue"
 import VRadioGroup from "@/components/_library/forms/VRadioGroup.vue"
 import VTimeField from "@/components/_library/forms/VTimeField.vue"
+import VDateField from "@/components/_library/forms/VDateField.vue"
 
 const selectItems = [
   { text: "Item 1", value: 1 },
@@ -177,7 +190,8 @@ const form = reactive({
   textField: "",
   numberField: 0,
   passwordField: "password",
-  timeField: "09:00",
+  timeField: undefined,
+  dateField: undefined,
   textarea:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam porttitor accumsan velit ac faucibus. Curabitur luctus, felis eu placerat suscipit, leo magna gravida lectus, non volutpat lacus nibh sed risus. Nulla eget sapien dignissim erat fringilla pretium. Proin aliquam accumsan dolor. Integer feugiat malesuada vehicula. Quisque lacinia vestibulum vehicula. Sed euismod aliquet tellus, nec rutrum velit ultrices at. Nulla ex ipsum, hendrerit sed mauris eget, faucibus malesuada est. Pellentesque vel nisi vel eros tempus feugiat.",
   selectedItem: undefined,
@@ -195,6 +209,7 @@ const rules = computed(() => ({
   numberField: { required },
   passwordField: { required },
   timeField: { required },
+  dateField: { required },
   textarea: { required },
   selectedItem: { required },
   autocompleteItem: { required },

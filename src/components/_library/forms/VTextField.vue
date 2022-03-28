@@ -11,7 +11,7 @@
         v-model="internalValue"
         :type="internalType"
         :step="step"
-        :readonly="readonly"
+        :readonly="readonly || disabled"
         class="w-full rounded py-1"
         :class="{
           'border-transparent focus:border-transparent focus:ring-0 px-0':
@@ -23,10 +23,16 @@
       />
 
       <div
-        v-if="type === 'password'"
-        class="absolute inset-y-0 right-0 flex items-center pr-2"
+        class="absolute inset-y-0 right-0 flex gap-1 items-center pointer-events-none pr-2"
       >
-        <button data-cy="passwordToggle" @click="toggleShowPassword">
+        <slot name="append-inner-icon" />
+
+        <button
+          v-if="type === 'password'"
+          data-cy="passwordToggle"
+          class="pointer-events-auto"
+          @click="toggleShowPassword"
+        >
           <EyeOffIcon v-if="showPassword" class="h-5 w-5 text-gray-300" />
           <EyeIcon v-else class="h-5 w-5 text-gray-300" />
         </button>
@@ -49,6 +55,7 @@ const props = defineProps({
   type: { type: String, default: "text" },
   step: { type: Number, default: 1 },
   readonly: Boolean,
+  disabled: Boolean,
   autofocus: Boolean,
   validation: {
     type: Object,
@@ -77,6 +84,10 @@ const { hasError, errorMessages } = useValidation(props.validation)
 
 const toggleShowPassword = () => {
   showPassword.value = !showPassword.value
+}
+
+const clearInput = () => {
+  internalValue.value = ""
 }
 
 onMounted(() => {

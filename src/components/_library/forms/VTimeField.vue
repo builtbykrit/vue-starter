@@ -18,23 +18,24 @@ const props = defineProps({
   outputFormat: { type: String, default: "HH:mm" },
   id: { type: String, default: undefined },
   label: { type: String, default: undefined },
+  validation: { type: Object, default: () => undefined },
   readonly: Boolean,
   autofocus: Boolean,
 })
 const emit = defineEmits(["update:modelValue"])
 
 const internalValue = ref(
-  clock.format(props.modelValue, props.displayFormat, props.outputFormat)
+  !!props.modelValue
+    ? clock.format(props.modelValue, props.displayFormat, props.outputFormat)
+    : undefined
 )
 
 watch(
   () => props.modelValue,
   (newValue) => {
-    internalValue.value = clock.format(
-      newValue,
-      props.displayFormat,
-      props.outputFormat
-    )
+    internalValue.value = !!newValue
+      ? clock.format(newValue, props.displayFormat, props.outputFormat)
+      : undefined
   }
 )
 

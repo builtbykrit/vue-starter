@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col w-full relative">
+  <div class="flex flex-col w-full text-left relative">
     <!-- Label -->
     <VLabel :input-id="inputId">
       <slot name="label">

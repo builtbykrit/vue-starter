@@ -20,7 +20,10 @@
           }"
           @change="onChange"
         />
-        <div class="absolute inset-y-0 right-0 pr-2 gap-1 flex items-center">
+        <div
+          v-if="!readonly"
+          class="absolute inset-y-0 right-0 pr-2 gap-1 flex items-center"
+        >
           <button v-if="!!selectedItem" @click="clearInput">
             <XIcon class="h-4 w-4 text-gray-400" />
           </button>

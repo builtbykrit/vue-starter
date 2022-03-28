@@ -28,12 +28,14 @@
           <span v-else class="text-sm text-gray-500">{{ placeholder }}</span>
         </ListboxButton>
 
-        <div class="absolute inset-y-0 right-0 pr-2 gap-1 flex items-center">
+        <div
+          v-if="!readonly"
+          class="absolute inset-y-0 right-0 pr-2 gap-1 flex items-center"
+        >
           <button v-if="clearable && !!selectedItem" @click="clearInput">
             <XIcon class="h-4 w-4 text-gray-400" />
           </button>
           <SelectorIcon
-            v-if="!readonly"
             class="h-5 w-5 text-gray-400 pointer-events-none"
             aria-hidden="true"
           />
