@@ -57,14 +57,14 @@ describe("clock", () => {
       expect(date).toBe("January 1, 2020")
     })
     it("formatForServer returns the server formatted value of a date", () => {
-      clock.serverDateTimeFormat = "YYYY-MM-DDTHH:mm"
+      clock.serverDateTimeFormat = "YYYY-MM-DD[:forServer]"
       const date = clock.formatForServer("01-01-2020")
-      expect(date).toBe("2020-01-01T00:00")
+      expect(date).toBe("2020-01-01:forServer")
     })
     it("parseUnix returns the server formatted value of a unix date", () => {
-      clock.serverDateTimeFormat = "YYYY-MM-DDTHH:mm"
+      clock.serverDateTimeFormat = "YYYY-MM-DD[:forServer]"
       const date = clock.parseUnix(1577862000)
-      expect(date).toBe("2020-01-01T00:00")
+      expect(date).toBe("2020-01-01:forServer")
     })
   })
 
