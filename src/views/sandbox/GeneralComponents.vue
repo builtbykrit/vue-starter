@@ -59,6 +59,12 @@
     <SandboxRow title="VToast">
       <VToast :notification="{ message: 'Example Notification' }" />
     </SandboxRow>
+    <SandboxRow title="VTooltip">
+      <VTooltip>
+        <template #activator>Text with Tooltip!</template>
+        <span>Test Tooltip</span>
+      </VTooltip>
+    </SandboxRow>
     <SandboxRow title="VMenu">
       <VMenu :items="menuItems">
         <template #activator>
@@ -86,6 +92,8 @@
 </template>
 
 <script setup>
+import { reactive } from "vue"
+
 import VDivider from "@/components/_library/general/VDivider.vue"
 import SandboxRow from "@/views/sandbox/SandboxRow.vue"
 import VButton from "@/components/_library/general/buttons/VButton.vue"
@@ -95,7 +103,7 @@ import VMenu from "@/components/_library/general/VMenu.vue"
 import VToast from "@/components/_library/general/VToast.vue"
 import VCollapsable from "@/components/_library/general/VCollapsable.vue"
 import VModal from "@/components/_library/general/VModal.vue"
-import { reactive } from "vue"
+import VTooltip from "@/components/_library/general/VTooltip.vue"
 
 const menuItems = [
   { text: "Link Item", name: "link", to: "https://www.krit.com/" },
