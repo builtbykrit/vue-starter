@@ -1,8 +1,11 @@
 <template>
   <div class="max-w-6xl mx-auto my-6">
-    <GeneralComponents />
-    <FormControlComponents class="mt-8" />
-    <PickerComponents class="mt-8" />
+    <h1 class="text-4xl">Component Library</h1>
+    <div class="mt-6">
+      <GeneralComponents />
+      <FormControlComponents class="mt-8" />
+      <PickerComponents class="mt-8" />
+    </div>
   </div>
 </template>
 

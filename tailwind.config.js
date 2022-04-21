@@ -9,6 +9,15 @@ module.exports = {
         primary: colors.blue,
         secondary: colors.green,
       },
+      animation: {
+        indeterminate: "slideRight 2s ease-in-out infinite",
+      },
+      keyframes: {
+        slideRight: {
+          "0%": { left: "-60%" },
+          "100%": { left: "100%" },
+        },
+      },
     },
   },
   plugins: [require("@tailwindcss/forms")],

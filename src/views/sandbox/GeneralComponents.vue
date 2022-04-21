@@ -88,6 +88,11 @@
         elementum vitae varius at, lacinia tincidunt arcu."
       />
     </SandboxRow>
+    <SandboxRow title="VProgress">
+      <VProgress indeterminate />
+      <VProgress percentage="25" />
+      <VProgress percentage="75" />
+    </SandboxRow>
   </div>
 </template>
 
@@ -104,6 +109,7 @@ import VToast from "@/components/_library/general/VToast.vue"
 import VCollapsable from "@/components/_library/general/VCollapsable.vue"
 import VModal from "@/components/_library/general/VModal.vue"
 import VTooltip from "@/components/_library/general/VTooltip.vue"
+import VProgress from "@/components/_library/general/VProgress.vue"
 
 const menuItems = [
   { text: "Link Item", name: "link", to: "https://www.krit.com/" },
