@@ -1,8 +1,16 @@
 <template>
   <div class="max-w-6xl mx-auto my-6">
-    <h1 class="text-4xl border-b-2 bordergray-400">Component Library</h1>
+    <div class="flex items-center gap-6">
+      <KritLogo />
+      <div>
+        <h1 class="v-heading-lg">Style Sandbox</h1>
+        <PaintUnderline class="text-primary-500" />
+      </div>
+    </div>
 
-    <div class="grid gap-4 mt-6">
+    <div class="grid gap-12 mt-12">
+      <ThemeSection />
+      <TypographySection />
       <GeneralComponents />
       <FormControlComponents />
       <PickerComponents />
@@ -11,6 +19,11 @@
 </template>
 
 <script setup>
+import KritLogo from "@/assets/krit-logo.svg"
+import PaintUnderline from "@/assets/paint-underline.svg"
+
+import ThemeSection from "@/views/sandbox/ThemeSection.vue"
+import TypographySection from "@/views/sandbox/TypographySection.vue"
 import GeneralComponents from "@/views/sandbox/GeneralComponents.vue"
 import FormControlComponents from "@/views/sandbox/FormControlComponents.vue"
 import PickerComponents from "@/views/sandbox/PickerComponents.vue"

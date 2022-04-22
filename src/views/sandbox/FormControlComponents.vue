@@ -1,18 +1,21 @@
 <template>
   <div>
-    <div class="flex justify-between">
-      <h2 class="text-xl font-semibold">Form Control Components</h2>
+    <div class="flex justify-between mb-6">
+      <div>
+        <h2 class="v-heading-lg">Form Control Components</h2>
+        <PaintUnderline class="text-primary-500" />
+      </div>
       <div class="flex items-center gap-4">
         <VSwitch v-model="readonlyInputs" label="Read Only" />
         <VButtonGroup>
           <VButton dense @click="validate">Validate</VButton>
-          <VButton variant="secondary" dense @click="resetValidation"
+          <VButton variant="outline" dense @click="resetValidation"
             >Reset
           </VButton>
         </VButtonGroup>
       </div>
     </div>
-    <VDivider class="mb-3" />
+
     <SandboxRow title="VTextField">
       <VTextField
         v-model="form.textField"
@@ -162,6 +165,7 @@
 import { computed, reactive, ref } from "vue"
 import { required } from "@vuelidate/validators"
 import useVuelidate from "@vuelidate/core"
+import PaintUnderline from "@/assets/paint-underline.svg"
 
 import SandboxRow from "@/views/sandbox/SandboxRow.vue"
 import VButton from "@/components/_library/general/buttons/VButton.vue"
@@ -172,7 +176,6 @@ import VSelect from "@/components/_library/forms/VSelect.vue"
 import VAutocomplete from "@/components/_library/forms/VAutocomplete.vue"
 import VCheckbox from "@/components/_library/forms/VCheckbox.vue"
 import VSwitch from "@/components/_library/forms/VSwitch.vue"
-import VDivider from "@/components/_library/general/VDivider.vue"
 import VRadio from "@/components/_library/forms/VRadio.vue"
 import VRadioGroup from "@/components/_library/forms/VRadioGroup.vue"
 import VTimeField from "@/components/_library/forms/VTimeField.vue"

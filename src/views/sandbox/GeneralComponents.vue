@@ -1,19 +1,45 @@
 <template>
   <div>
-    <h2 class="text-xl font-semibold">General Components</h2>
-    <VDivider class="mb-3" />
+    <h3 class="v-heading-lg">Base Components</h3>
+    <PaintUnderline class="text-primary-500 mb-6" />
 
     <SandboxRow title="VButton">
-      <VButton variant="primary">Primary</VButton>
-      <VButton variant="secondary">Secondary</VButton>
-      <VButton variant="transparent">Transparent</VButton>
-      <VButton variant="link">Link</VButton>
+      <div class="flex flex-col gap-2">
+        <div class="flex items-center gap-2">
+          <VButton
+            v-for="color in colorOptions"
+            :key="`default-${color}`"
+            variant="default"
+            :color="color"
+            >Default
+          </VButton>
+        </div>
+        <div class="flex gap-2">
+          <VButton
+            v-for="color in colorOptions"
+            :key="`outline-${color}`"
+            variant="outline"
+            :color="color"
+            >Outline
+          </VButton>
+        </div>
+        <div class="flex gap-2">
+          <VButton
+            v-for="color in colorOptions"
+            :key="`transparent-${color}`"
+            variant="transparent"
+            :color="color"
+          >
+            Transparent
+          </VButton>
+        </div>
+      </div>
     </SandboxRow>
 
     <SandboxRow title="VButtonGroup">
       <VButtonGroup>
-        <VButton variant="primary">Primary</VButton>
-        <VButton variant="secondary">Secondary</VButton>
+        <VButton>Default</VButton>
+        <VButton variant="outline">Outline</VButton>
       </VButtonGroup>
     </SandboxRow>
 
@@ -101,8 +127,8 @@
 
 <script setup>
 import { reactive } from "vue"
+import PaintUnderline from "@/assets/paint-underline.svg"
 
-import VDivider from "@/components/_library/general/VDivider.vue"
 import SandboxRow from "@/views/sandbox/SandboxRow.vue"
 import VButton from "@/components/_library/general/buttons/VButton.vue"
 import VButtonGroup from "@/components/_library/general/buttons/VButtonGroup.vue"
@@ -115,6 +141,14 @@ import VTooltip from "@/components/_library/general/VTooltip.vue"
 import VProgress from "@/components/_library/general/VProgress.vue"
 import VTabs from "@/components/_library/general/VTabs.vue"
 
+const colorOptions = [
+  "primary",
+  "secondary",
+  "tertiary",
+  "success",
+  "warning",
+  "error",
+]
 const menuItems = [
   { text: "Link Item", name: "link", to: "https://www.krit.com/" },
   { text: "Span Item", name: "span" },

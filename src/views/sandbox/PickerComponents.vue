@@ -1,7 +1,8 @@
 <template>
   <div>
-    <h2 class="text-xl font-semibold">Picker Components</h2>
-    <VDivider class="mb-3" />
+    <h2 class="v-heading-lg">Picker Components</h2>
+    <PaintUnderline class="text-primary-500 mb-6" />
+
     <SandboxRow title="VDayPicker">
       <VDayPicker v-model="state.dayPicker" />
       <VDayPicker v-model="state.weekPicker" week />
@@ -21,9 +22,9 @@
 <script setup>
 import { reactive } from "vue"
 import clock from "@/modules/clock"
+import PaintUnderline from "@/assets/paint-underline.svg"
 
 import SandboxRow from "@/views/sandbox/SandboxRow.vue"
-import VDivider from "@/components/_library/general/VDivider.vue"
 import VDayPicker from "@/components/_library/forms/pickers/VDayPicker.vue"
 import VMonthPicker from "@/components/_library/forms/pickers/VMonthPicker.vue"
 import VQuarterPicker from "@/components/_library/forms/pickers/VQuarterPicker.vue"
