@@ -6,8 +6,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: colors.blue,
-        secondary: colors.green,
+        primary: colors.sky,
+        secondary: colors.teal,
       },
       animation: {
         indeterminate: "slideRight 2s ease-in-out infinite",

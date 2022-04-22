@@ -12,7 +12,7 @@
 defineProps({
   indeterminate: Boolean,
   percentage: {
-    type: Number,
+    type: [Number, String],
     default: 50,
   },
 })

@@ -93,6 +93,9 @@
       <VProgress percentage="25" />
       <VProgress percentage="75" />
     </SandboxRow>
+    <SandboxRow title="VTabs">
+      <VTabs :tabs="['Tab 1', 'Tab 2', 'Tab 3']" />
+    </SandboxRow>
   </div>
 </template>
 
@@ -110,6 +113,7 @@ import VCollapsable from "@/components/_library/general/VCollapsable.vue"
 import VModal from "@/components/_library/general/VModal.vue"
 import VTooltip from "@/components/_library/general/VTooltip.vue"
 import VProgress from "@/components/_library/general/VProgress.vue"
+import VTabs from "@/components/_library/general/VTabs.vue"
 
 const menuItems = [
   { text: "Link Item", name: "link", to: "https://www.krit.com/" },

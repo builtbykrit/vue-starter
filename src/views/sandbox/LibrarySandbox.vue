@@ -1,10 +1,11 @@
 <template>
   <div class="max-w-6xl mx-auto my-6">
-    <h1 class="text-4xl">Component Library</h1>
-    <div class="mt-6">
+    <h1 class="text-4xl border-b-2 bordergray-400">Component Library</h1>
+
+    <div class="grid gap-4 mt-6">
       <GeneralComponents />
-      <FormControlComponents class="mt-8" />
-      <PickerComponents class="mt-8" />
+      <FormControlComponents />
+      <PickerComponents />
     </div>
   </div>
 </template>
