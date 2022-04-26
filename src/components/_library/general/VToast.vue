@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-primary-300 rounded px-2 py-3 group" data-cy="v-toast">
+  <div class="bg-primary-300 rounded-sm px-2 py-1 group" data-cy="v-toast">
     <div class="flex items-center justify-between">
       <p class="max-w-[235px] mr-2">
         {{ notification.message }}

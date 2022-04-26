@@ -8,7 +8,7 @@
             class="transition-colors px-4 py-2 rounded-t border-b-2"
             :class="[
               selected
-                ? 'bg-primary-100 border-primary-600 font-semibold text-primary-800'
+                ? 'bg-primary-100 border-primary-600 font-semibold text-primary-600'
                 : 'border-white',
               tab.disabled ? 'bg-gray-50 text-gray-400' : '',
             ]"

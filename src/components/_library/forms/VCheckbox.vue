@@ -7,6 +7,7 @@
       :disabled="disabled || readonly"
       type="checkbox"
       class="rounded h-5 w-5 border-gray-300 focus:ring-offset-0 focus:ring-primary-500/50"
+      :class="bgClass"
       @input="onChange"
     />
     <span class="ml-2">
@@ -25,6 +26,7 @@ const props = defineProps({
   id: { type: String, default: undefined },
   label: { type: String, default: undefined },
   value: { type: [Boolean, String, Number], default: true },
+  bgColor: { type: String, default: "primary" },
   readonly: Boolean,
   disabled: Boolean,
 })
@@ -37,6 +39,7 @@ const checked = computed(() => {
     Array.isArray(props.modelValue) && props.modelValue.includes(props.value)
   )
 })
+const bgClass = computed(() => `text-${props.bgColor}-500`)
 
 const onChange = () => {
   // when there's only a single checkbox, return a boolean

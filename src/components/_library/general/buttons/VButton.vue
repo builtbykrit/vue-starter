@@ -19,13 +19,11 @@ const props = defineProps({
   variant: {
     type: String,
     default: "default",
-    // eslint-disable-next-line vue/valid-define-props
     validator: (value) => ["default", "outline", "transparent"].includes(value),
   },
   color: {
     type: String,
     default: "primary",
-    // eslint-disable-next-line vue/valid-define-props
     validator: (value) =>
       [
         "primary",
@@ -50,10 +48,12 @@ const buttonComponent = computed(() => (!!props.to ? "RouterLink" : "button"))
 const buttonStyles = computed(() => variantStyles.value[props.variant])
 const padding = computed(() => {
   if (props.icon) return "p-px"
-  else return props.dense ? "px-2 py-1" : "px-3 py-1.5"
+  else return props.dense ? "px-3 py-1" : "px-4 py-1.5"
 })
 
-const borderRadius = computed(() => (props.circle ? "rounded-full" : "rounded"))
+const borderRadius = computed(() =>
+  props.circle ? "rounded-full" : "rounded-sm"
+)
 
 // Update variant styles to match app
 // Remember to write out everything so PurgeCSS doesn't remove them
