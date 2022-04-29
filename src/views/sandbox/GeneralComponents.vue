@@ -119,6 +119,15 @@
         </template>
       </VModal>
     </SandboxRow>
+    <SandboxRow title="VDrawer">
+      <VRadioGroup
+        v-model="state.drawerLocation"
+        :items="['left', 'right', 'top', 'bottom']"
+        horizontal
+        @update:model-value="state.showDrawer = true"
+      />
+      <VDrawer v-model="state.showDrawer" :position="state.drawerLocation" />
+    </SandboxRow>
     <SandboxRow title="VProgress">
       <VProgress indeterminate />
       <VProgress percentage="25" />
@@ -151,5 +160,7 @@ const menuItems = [
 
 const state = reactive({
   showModal: false,
+  showDrawer: false,
+  drawerLocation: "left",
 })
 </script>

@@ -6,7 +6,7 @@
   >
     <div :class="{ 'flex space-x-2': horizontal, 'space-y-2': !horizontal }">
       <RadioGroupOption
-        v-for="item in items"
+        v-for="item in internalItems"
         :key="item[itemKey]"
         v-slot="{ active, checked }"
         :value="item[itemValue]"
@@ -56,5 +56,14 @@ const internalId = computed(() => (props.id ? props.id : uuid()))
 const internalValue = computed({
   get: () => props.modelValue,
   set: (value) => emit("update:modelValue", value),
+})
+const internalItems = computed(() => {
+  if (typeof props.items[0] === "string") {
+    return props.items.map((item) => ({
+      [props.itemValue]: item,
+      [props.itemText]: item,
+    }))
+  }
+  return props.items
 })
 </script>
