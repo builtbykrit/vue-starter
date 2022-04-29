@@ -1,6 +1,6 @@
 <template>
-  <div class="max-w-6xl mx-auto my-6">
-    <div class="flex items-center gap-6">
+  <div class="max-w-6xl mx-auto my-6 px-4">
+    <div class="flex items-center flex-wrap gap-6">
       <KritLogo />
       <div>
         <h1 class="v-heading-lg">Style Sandbox</h1>

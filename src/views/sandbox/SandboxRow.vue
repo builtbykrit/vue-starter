@@ -1,9 +1,9 @@
 <template>
-  <div class="grid grid-cols-2 md:grid-cols-7 my-2">
+  <div class="lg:grid grid-cols-7 my-4 lg:my-2">
     <div v-if="title" class="v-paragraph font-semibold text-gray-700">
       {{ title }}
     </div>
-    <div class="md:col-span-6 flex items-center gap-4">
+    <div class="col-span-6 flex flex-wrap lg:flex-nowrap items-center gap-4">
       <slot />
     </div>
   </div>

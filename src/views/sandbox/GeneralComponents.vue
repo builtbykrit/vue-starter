@@ -5,7 +5,7 @@
 
     <SandboxRow title="VButton">
       <div class="flex flex-col gap-2">
-        <div class="flex items-center gap-2">
+        <div class="flex items-center flex-wrap lg:flex-nowrap gap-2">
           <VButton
             v-for="color in colorOptions"
             :key="`default-${color}`"
@@ -14,7 +14,7 @@
             >Default
           </VButton>
         </div>
-        <div class="flex gap-2">
+        <div class="flex items-center flex-wrap lg:flex-nowrap gap-2">
           <VButton
             v-for="color in colorOptions"
             :key="`outline-${color}`"
@@ -23,7 +23,7 @@
             >Outline
           </VButton>
         </div>
-        <div class="flex gap-2">
+        <div class="flex items-center flex-wrap lg:flex-nowrap gap-2">
           <VButton
             v-for="color in colorOptions"
             :key="`transparent-${color}`"
@@ -128,18 +128,8 @@
 <script setup>
 import { reactive } from "vue"
 import PaintUnderline from "@/assets/paint-underline.svg"
-
 import SandboxRow from "@/views/sandbox/SandboxRow.vue"
-import VButton from "@/components/_library/general/buttons/VButton.vue"
-import VButtonGroup from "@/components/_library/general/buttons/VButtonGroup.vue"
-import VCard from "@/components/_library/general/VCard.vue"
-import VMenu from "@/components/_library/general/VMenu.vue"
-import VToast from "@/components/_library/general/VToast.vue"
-import VCollapsable from "@/components/_library/general/VCollapsable.vue"
-import VModal from "@/components/_library/general/VModal.vue"
-import VTooltip from "@/components/_library/general/VTooltip.vue"
-import VProgress from "@/components/_library/general/VProgress.vue"
-import VTabs from "@/components/_library/general/VTabs.vue"
+
 
 const colorOptions = [
   "primary",
