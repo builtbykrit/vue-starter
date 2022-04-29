@@ -6,8 +6,8 @@
     <Switch
       :id="internalId"
       v-model="internalValue"
-      :class="internalValue ? 'bg-primary-600' : 'bg-gray-200'"
-      class="relative inline-flex items-center h-6 transition-colors rounded-full w-11 focus:outline-none focus:ring-2 focus:ring-offset-0"
+      :class="internalValue ? 'bg-primary-500' : 'bg-gray-400'"
+      class="relative inline-flex items-center h-6 transition-colors rounded-full w-11 ring-primary-500/25 focus:outline-none focus:ring-2 focus:ring-offset-0"
     >
       <span
         :class="internalValue ? 'translate-x-6' : 'translate-x-1'"

@@ -6,7 +6,7 @@
 
     <div ref="container" class="absolute bg-white z-20">
       <MenuItems
-        class="divide-y divide-gray-100 rounded shadow-lg z-20 focus:outline-none overflow-hidden"
+        class="rounded shadow-lg z-20 focus:outline-none overflow-hidden"
       >
         <slot name="default">
           <MenuItem
@@ -19,12 +19,11 @@
             <component
               :is="!!item.to ? 'a' : 'button'"
               :href="item.to"
-              class="group flex items-center w-full px-2 py-2 text-sm"
+              class="group flex items-center text-primary-500 w-full px-2 py-2 text-sm"
               :class="[
                 {
                   'bg-gray-100': item.disabled,
-                  'bg-primary-500 text-white': active,
-                  'text-gray-900': !active,
+                  'bg-primary-100': active,
                 },
               ]"
             >

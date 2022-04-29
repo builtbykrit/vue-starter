@@ -5,12 +5,10 @@
       <TabList>
         <Tab v-for="tab in internalTabs" :key="tab.index" v-slot="{ selected }">
           <button
-            class="transition-colors px-4 py-2 rounded-t border-b-2"
+            class="transition-colors text-primary-500 focus:text-primary-700 px-4 py-2 rounded-t border-b-2"
             :class="[
-              selected
-                ? 'bg-primary-100 border-primary-600 font-semibold text-primary-600'
-                : 'border-white',
-              tab.disabled ? 'bg-gray-50 text-gray-400' : '',
+              selected ? 'bg-primary-100 border-primary-500' : 'border-white',
+              tab.disabled ? 'bg-gray-50 text-gray-400' : 'font-semibold',
             ]"
             :disabled="tab.disabled"
           >

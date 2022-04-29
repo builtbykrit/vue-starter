@@ -11,7 +11,7 @@
         'bg-white text-gray-200': disabled,
         'group-hover bg-primary-100 text-gray-900': setIsHovered && !selected,
         'selected bg-primary-500 text-white': selected && !disabled,
-        'bg-white text-gray-400 hover:bg-primary-100 hover:text-gray-900':
+        'bg-white text-gray-800 hover:bg-primary-100 hover:text-gray-900':
           !disabled && !selected && !setIsHovered,
         'underline decoration-2 underline-offset-2': current,
       },

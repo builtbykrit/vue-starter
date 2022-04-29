@@ -29,11 +29,11 @@
             leave-to="opacity-0 scale-95"
           >
             <div
-              class="inline-block w-full max-w-md p-4 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded"
+              class="inline-block w-full max-w-md my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded"
             >
               <!-- Modal Title -->
-              <div class="flex justify-between">
-                <DialogTitle as="h3" class="text-lg font-medium leading-6">
+              <div class="flex justify-between px-4 pt-4">
+                <DialogTitle as="h3" class="v-heading-sm">
                   <slot name="title">{{ title }}</slot>
                 </DialogTitle>
                 <button @click="isOpen = false">
@@ -42,19 +42,25 @@
               </div>
 
               <!-- Modal subtitle -->
-              <DialogDescription class="text-sm text-gray-800">
+              <DialogDescription class="v-paragraph text-gray-800 px-4">
                 <slot name="subtitle">{{ subtitle }}</slot>
               </DialogDescription>
 
               <!-- Modal Content -->
-              <div v-if="!!$slots.default || !!content" class="mt-2">
+              <div
+                v-if="!!$slots.default || !!content"
+                class="v-paragraph-xs text-gray-700 p-4"
+              >
                 <slot>
                   {{ content }}
                 </slot>
               </div>
 
               <!-- Modal Actions -->
-              <div v-if="!!$slots.actions" class="mt-3">
+              <div
+                v-if="!!$slots.actions"
+                class="bg-gray-100 flex items-center gap-2 px-4 py-3"
+              >
                 <slot name="actions" />
               </div>
             </div>

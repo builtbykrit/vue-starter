@@ -6,7 +6,7 @@
       :checked="selected"
       :disabled="disabled || readonly"
       type="radio"
-      class="h-5 w-5 border-gray-300 focus:ring-offset-0 focus:ring-primary-500/50"
+      class="h-5 w-5 border-gray-300 hover:bg-primary-100 focus:ring-offset-0 focus:ring-primary-100"
       :class="bgClass"
       @input="onChange"
     />

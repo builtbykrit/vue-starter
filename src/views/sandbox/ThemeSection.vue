@@ -4,7 +4,7 @@
     <PaintUnderline class="text-primary-500 mb-6" />
 
     <SandboxRow title="Heading Font">
-      <div class="v-heading-md">Klinic Slab</div>
+      <div class="v-heading-md">Roboto</div>
     </SandboxRow>
     <SandboxRow title="Paragraph Font">
       <div class="v-paragraph">Roboto</div>

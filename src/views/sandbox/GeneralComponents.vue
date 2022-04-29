@@ -112,7 +112,12 @@
         Donec felis arcu, semper nec felis sed, tincidunt accumsan sem. Quisque
         metus arcu, congue in est at, rhoncus facilisis ante. Nunc lorem metus,
         elementum vitae varius at, lacinia tincidunt arcu."
-      />
+      >
+        <template #actions>
+          <VButton>Default</VButton>
+          <VButton variant="outline">Outline</VButton>
+        </template>
+      </VModal>
     </SandboxRow>
     <SandboxRow title="VProgress">
       <VProgress indeterminate />
@@ -129,7 +134,6 @@
 import { reactive } from "vue"
 import PaintUnderline from "@/assets/paint-underline.svg"
 import SandboxRow from "@/views/sandbox/SandboxRow.vue"
-
 
 const colorOptions = [
   "primary",

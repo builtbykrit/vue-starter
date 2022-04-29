@@ -13,10 +13,10 @@
       >
         <slot v-bind="{ item, active, checked }">
           <VCard
-            class="cursor-pointer"
+            class="cursor-pointer hover:text-primary-500"
             :class="{
-              'ring-2 ring-offset-2 ring-offset-primary-500': active,
-              'bg-primary-500 bg-opacity-75 text-white': checked,
+              'ring-2 ring-primary-500/25': active,
+              'bg-primary-500 text-white hover:text-white': checked,
             }"
           >
             <div class="flex items-center gap-3">

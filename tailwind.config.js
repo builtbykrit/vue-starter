@@ -76,6 +76,17 @@ module.exports = {
           800: "#8C271D",
           900: "#66120A",
         },
+        gray: {
+          100: "#FCFCFC",
+          200: "#F7F7F8",
+          300: "#EAEAEB",
+          400: "#D5D5D7",
+          500: "#B8B7BD",
+          600: "#86858E",
+          700: "#6F6D78",
+          800: "#302F37",
+          900: "#1C1C22",
+        },
       },
       animation: {
         indeterminate: "slideRight 2s ease-in-out infinite",
