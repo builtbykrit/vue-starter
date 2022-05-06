@@ -12,6 +12,7 @@
       <ThemeSection />
       <TypographySection />
       <GeneralComponents />
+      <TableComponents />
       <FormControlComponents />
       <PickerComponents />
     </div>
@@ -25,6 +26,7 @@ import PaintUnderline from "@/assets/paint-underline.svg"
 import ThemeSection from "@/views/sandbox/ThemeSection.vue"
 import TypographySection from "@/views/sandbox/TypographySection.vue"
 import GeneralComponents from "@/views/sandbox/GeneralComponents.vue"
+import TableComponents from "@/views/sandbox/TableComponents.vue"
 import FormControlComponents from "@/views/sandbox/FormControlComponents.vue"
 import PickerComponents from "@/views/sandbox/PickerComponents.vue"
 </script>
