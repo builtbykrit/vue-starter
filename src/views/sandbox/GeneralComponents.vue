@@ -3,6 +3,15 @@
     <h3 class="v-heading-lg">Base Components</h3>
     <PaintUnderline class="text-primary-500 mb-6" />
 
+    <SandboxRow title="VBadge">
+      <VBadge color="primary">Primary</VBadge>
+      <VBadge color="secondary">Secondary</VBadge>
+      <VBadge color="tertiary">Tertiary</VBadge>
+      <VBadge color="success">Success</VBadge>
+      <VBadge color="warning">Warning</VBadge>
+      <VBadge color="error">Error</VBadge>
+    </SandboxRow>
+
     <SandboxRow title="VButton">
       <div class="flex flex-col gap-2">
         <div class="flex items-center flex-wrap lg:flex-nowrap gap-2">
@@ -58,6 +67,7 @@
         </template>
       </VCard>
     </SandboxRow>
+
     <SandboxRow title="VCollapsable">
       <VCollapsable
         button="Example Collapsable"
@@ -82,15 +92,17 @@
         elementum vitae varius at, lacinia tincidunt arcu."
       </VCollapsable>
     </SandboxRow>
-    <SandboxRow title="VToast">
-      <VToast :notification="{ message: 'Example Notification' }" />
+
+    <SandboxRow title="VDrawer">
+      <VRadioGroup
+        v-model="state.drawerLocation"
+        :items="['left', 'right', 'top', 'bottom']"
+        horizontal
+        @update:model-value="state.showDrawer = true"
+      />
+      <VDrawer v-model="state.showDrawer" :position="state.drawerLocation" />
     </SandboxRow>
-    <SandboxRow title="VTooltip">
-      <VTooltip>
-        <template #activator>Text with Tooltip!</template>
-        <span>Test Tooltip</span>
-      </VTooltip>
-    </SandboxRow>
+
     <SandboxRow title="VMenu">
       <VMenu :items="menuItems">
         <template #activator>
@@ -98,6 +110,7 @@
         </template>
       </VMenu>
     </SandboxRow>
+
     <SandboxRow title="VModal">
       <VButton @click="state.showModal = true">Open Modal</VButton>
       <VModal
@@ -119,22 +132,26 @@
         </template>
       </VModal>
     </SandboxRow>
-    <SandboxRow title="VDrawer">
-      <VRadioGroup
-        v-model="state.drawerLocation"
-        :items="['left', 'right', 'top', 'bottom']"
-        horizontal
-        @update:model-value="state.showDrawer = true"
-      />
-      <VDrawer v-model="state.showDrawer" :position="state.drawerLocation" />
-    </SandboxRow>
+
     <SandboxRow title="VProgress">
       <VProgress indeterminate />
       <VProgress percentage="25" />
       <VProgress percentage="75" />
     </SandboxRow>
+
     <SandboxRow title="VTabs">
       <VTabs :tabs="['Tab 1', 'Tab 2', 'Tab 3']" />
+    </SandboxRow>
+
+    <SandboxRow title="VToast">
+      <VToast :notification="{ message: 'Example Notification' }" />
+    </SandboxRow>
+
+    <SandboxRow title="VTooltip">
+      <VTooltip>
+        <template #activator>Text with Tooltip!</template>
+        <span>Test Tooltip</span>
+      </VTooltip>
     </SandboxRow>
   </div>
 </template>

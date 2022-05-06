@@ -168,7 +168,6 @@ import useVuelidate from "@vuelidate/core"
 import PaintUnderline from "@/assets/paint-underline.svg"
 import SandboxRow from "@/views/sandbox/SandboxRow.vue"
 
-
 const selectItems = [
   { text: "Item 1", value: 1 },
   { text: "Item 2", value: 2 },
