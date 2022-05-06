@@ -4,12 +4,9 @@
     <PaintUnderline class="text-primary-500 mb-6" />
 
     <SandboxRow title="VBadge">
-      <VBadge color="primary">Primary</VBadge>
-      <VBadge color="secondary">Secondary</VBadge>
-      <VBadge color="tertiary">Tertiary</VBadge>
-      <VBadge color="success">Success</VBadge>
-      <VBadge color="warning">Warning</VBadge>
-      <VBadge color="error">Error</VBadge>
+      <VBadge v-for="color in colorOptions" :key="color" :color="color">{{
+        color
+      }}</VBadge>
     </SandboxRow>
 
     <SandboxRow title="VButton">
