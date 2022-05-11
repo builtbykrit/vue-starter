@@ -4,9 +4,9 @@
     <PaintUnderline class="text-primary-500 mb-6" />
 
     <SandboxRow title="VBadge">
-      <VBadge v-for="color in colorOptions" :key="color" :color="color">{{
-        color
-      }}</VBadge>
+      <VBadge v-for="color in colorOptions" :key="color" :color="color"
+        >{{ color }}
+      </VBadge>
     </SandboxRow>
 
     <SandboxRow title="VButton">
@@ -145,9 +145,8 @@
     </SandboxRow>
 
     <SandboxRow title="VTooltip">
-      <VTooltip>
+      <VTooltip tooltip-text="Test Tooltip">
         <template #activator>Text with Tooltip!</template>
-        <span>Test Tooltip</span>
       </VTooltip>
     </SandboxRow>
   </div>

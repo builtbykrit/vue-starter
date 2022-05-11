@@ -12,7 +12,7 @@ export function usePopper(options) {
       if (!popper.value) return
       if (!reference.value) return
 
-      let popperEl = reference.value.el ?? popper.value.$el ?? popper.value
+      let popperEl = popper.value.el ?? popper.value.$el ?? popper.value
       let referenceEl =
         reference.value.el ?? reference.value.$el ?? reference.value
 

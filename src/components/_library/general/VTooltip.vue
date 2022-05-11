@@ -1,30 +1,21 @@
 <template>
-  <div data-cy="v-tooltip" class="group">
-    <!-- Tooltip -->
-    <div
-      ref="container"
-      class="hidden group-hover:inline-block absolute rounded-sm bg-gray-900 shadow py-0.5 p-2.5 z-10"
-    >
-      <p class="v-paragraph--lg text-white">
-        <slot />
-      </p>
-    </div>
-    <!-- Activator -->
-    <div ref="trigger">
+  <Popper :placement="position" offset-distance="8" hover arrow>
+    <template #default>
       <slot name="activator" />
-    </div>
-  </div>
+    </template>
+    <template #content>
+      <span class="text-[12px] leading-[16px] font-medium">
+        <slot name="tooltip">{{ tooltipText }}</slot>
+      </span>
+    </template>
+  </Popper>
 </template>
 
 <script setup>
-import { usePopper } from "@/composables/usePopper"
+import Popper from "vue3-popper"
 
 const props = defineProps({
   position: { type: String, default: "top" },
-})
-
-let [trigger, container] = usePopper({
-  placement: props.position,
-  modifiers: [{ name: "offset", options: { offset: [0, 4] } }],
+  tooltipText: { type: String, default: undefined },
 })
 </script>
