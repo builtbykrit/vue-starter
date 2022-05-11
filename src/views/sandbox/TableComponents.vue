@@ -5,7 +5,7 @@
 
     <SandboxRow title="VTable">
       <VTable :headers="headers" :items="items">
-        <template #item[customFormat]="{ item }">
+        <template #item.customFormat="{ item }">
           {{ item.text }} : {{ item.number }} : {{ item.date }}
         </template>
       </VTable>
@@ -21,7 +21,12 @@ const headers = [
   { text: "Text", value: "text", class: "text-left" },
   { text: "Number", value: "number", class: "text-left" },
   { text: "Date", value: "date", class: "text-left" },
-  { text: "Custom Format", value: "customFormat", class: "text-left", sortable: false },
+  {
+    text: "Custom Format",
+    value: "customFormat",
+    class: "text-left",
+    sortable: false,
+  },
 ]
 
 const items = [
