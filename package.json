@@ -21,13 +21,13 @@
     "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
-    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/plugin-transform-runtime": "^7.17.10",
     "@babel/preset-env": "^7.16.7",
     "@vitejs/plugin-vue": "^2.0.1",
     "@vue/test-utils": "^2.0.0-rc.18",
     "@vue/vue3-jest": "^27.0.0-alpha.4",
     "autoprefixer": "^10.4.2",
-    "babel-plugin-transform-import-meta": "^2.1.0",
+    "babel-plugin-transform-import-meta": "^2.1.1",
     "eslint": "^8.7.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier-vue": "^3.1.0",
