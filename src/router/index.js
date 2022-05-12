@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from "vue-router"
 
 const routes = [
   {
-    path: "/",
+    path: "/sandbox",
     name: ROUTER_CONFIG.ROUTE_NAMES.SANDBOX,
     meta: {
       title: ROUTER_CONFIG.PAGE_TITLES.SANDBOX,
@@ -11,6 +11,13 @@ const routes = [
       splash: false,
     },
     component: () => import("../views/sandbox/LibrarySandbox.vue"),
+  },
+  // App level redirect
+  {
+    path: "/:pathMatch(.*)*",
+    redirect: () => ({
+      name: ROUTER_CONFIG.ROUTE_NAMES.SANDBOX,
+    }),
   },
 ]
 

@@ -6,6 +6,6 @@ export default {
   },
 
   PAGE_TITLES: {
-    SANDBOX: "Welcome to Vue",
+    SANDBOX: "Component Sandbox",
   },
 }
