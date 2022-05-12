@@ -16,7 +16,7 @@
     "dayjs": "^1.10.7",
     "uuid": "^8.3.2",
     "vue": "^3.2.30",
-    "vue-router": "^4.0.12",
+    "vue-router": "^4.0.15",
     "vuex": "^4.0.2",
     "vuex-persistedstate": "^4.1.0"
   },
