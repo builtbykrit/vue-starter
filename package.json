@@ -10,6 +10,7 @@
     "test:unit": "jest"
   },
   "dependencies": {
+    "@heroicons/vue": "^1.0.6",
     "@sentry/tracing": "^6.19.7",
     "@sentry/vue": "^6.17.4",
     "axios": "^0.25.0",

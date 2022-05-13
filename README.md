@@ -12,15 +12,15 @@ npm run dev
 
 ## Stack
 
-| Tooling  | Purpose
-| -------- | -------
-| Vue      | Frontend framework
-| Vite     | Build tool
-| Vuex     | State management
-| Axios    | HTTP client
-| Routing  | Vue Router
-| Tailwind | Styling
-| Sentry   | Logging
+| Tooling  | Purpose            |
+|----------|--------------------|
+| Vue      | Frontend framework |
+| Vite     | Build tool         |
+| Vuex     | State management   |
+| Axios    | HTTP client        |
+| Routing  | Vue Router         |
+| Tailwind | Styling            |
+| Sentry   | Logging            |
 
 ### Build tool
 
