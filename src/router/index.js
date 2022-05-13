@@ -2,15 +2,7 @@ import ROUTER_CONFIG from "./config"
 import { createRouter, createWebHistory } from "vue-router"
 import { appendPageTitle, authenticationGuard } from "@/router/guards"
 
-const routes = [
-  {
-    path: "/",
-    name: ROUTER_CONFIG.ROUTE_NAMES.SANDBOX,
-    meta: {
-      title: ROUTER_CONFIG.PAGE_TITLES.SANDBOX,
-    },
-    component: () => import("../views/Sandbox.vue"),
-  },
+let routes = [
   {
     path: "/404",
     name: ROUTER_CONFIG.ROUTE_NAMES.ERROR_404,
@@ -27,7 +19,37 @@ const routes = [
     },
     component: () => import("../views/errors/500Error.vue"),
   },
-];
+]
+
+if (process.env.VITE_ENV === "development") {
+  routes = routes.concat([
+    {
+      path: "/sandbox",
+      name: ROUTER_CONFIG.ROUTE_NAMES.SANDBOX,
+      meta: {
+        title: ROUTER_CONFIG.PAGE_TITLES.SANDBOX,
+      },
+      component: () => import("../views/sandbox/LibrarySandbox.vue"),
+    },
+    // App level redirect
+    {
+      path: "/:pathMatch(.*)*",
+      redirect: () => ({
+        name: ROUTER_CONFIG.ROUTE_NAMES.SANDBOX,
+      }),
+    },
+  ])
+} else {
+  routes = routes.concat([
+    // App level redirect
+    {
+      path: "/:pathMatch(.*)*",
+      redirect: () => ({
+        name: ROUTER_CONFIG.ROUTE_NAMES.ERROR_404,
+      }),
+    },
+  ])
+}
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
@@ -37,7 +59,8 @@ const router = createRouter({
   },
 })
 
-router.beforeEach(authenticationGuard)
+// TODO: enable when auth is implemented
+//router.beforeEach(authenticationGuard)
 router.afterEach(appendPageTitle)
 
 export default router

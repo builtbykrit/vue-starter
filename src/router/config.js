@@ -8,8 +8,8 @@ export default {
   },
 
   PAGE_TITLES: {
-    SANDBOX: "Welcome to Vue",
+    SANDBOX: "Component Sandbox",
     ERROR_404: "Page not Found",
     ERROR_500: "Server Error",
   },
-};
+}

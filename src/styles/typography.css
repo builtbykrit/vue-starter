@@ -1,0 +1,46 @@
+@layer components {
+    /** Typography */
+    .v-heading-lg {
+        @apply text-[32px] font-medium leading-[150%]
+    }
+    .v-heading-md {
+        @apply text-[24px] font-medium leading-[150%]
+    }
+    .v-heading-sm {
+        @apply text-[20px] font-medium leading-[150%]
+    }
+
+    .v-paragraph {
+        @apply text-[16px] font-normal leading-[120%]
+    }
+    .v-paragraph-sm {
+        @apply text-[14px] font-normal leading-[120%]
+    }
+    .v-paragraph-xs {
+        @apply text-[12px] font-normal leading-[120%]
+    }
+
+    .v-link {
+        @apply text-[16px] font-normal leading-[120%] underline text-primary-500
+    }
+    .v-link-sm {
+        @apply text-[14px] font-normal leading-[120%] underline text-primary-500
+    }
+    .v-link-xs {
+        @apply text-[12px] font-normal leading-[120%] underline text-primary-500
+    }
+
+    .v-overline {
+        @apply text-[16px] font-medium uppercase
+    }
+    .v-overline-sm {
+        @apply text-[14px] font-medium uppercase
+    }
+    .v-overline-xs {
+        @apply text-[12px] font-medium uppercase
+    }
+
+    .v-caption {
+        @apply text-[10px] font-normal leading-[120%]
+    }
+}
