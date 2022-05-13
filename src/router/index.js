@@ -8,12 +8,26 @@ const routes = [
     name: ROUTER_CONFIG.ROUTE_NAMES.SANDBOX,
     meta: {
       title: ROUTER_CONFIG.PAGE_TITLES.SANDBOX,
-      requiresAuth: false,
-      splash: false,
     },
     component: () => import("../views/Sandbox.vue"),
   },
-]
+  {
+    path: "/404",
+    name: ROUTER_CONFIG.ROUTE_NAMES.ERROR_404,
+    meta: {
+      title: ROUTER_CONFIG.PAGE_TITLES.ERROR_404,
+    },
+    component: () => import("../views/errors/404Error.vue"),
+  },
+  {
+    path: "/500",
+    name: ROUTER_CONFIG.ROUTE_NAMES.ERROR_500,
+    meta: {
+      title: ROUTER_CONFIG.PAGE_TITLES.ERROR_500,
+    },
+    component: () => import("../views/errors/500Error.vue"),
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
