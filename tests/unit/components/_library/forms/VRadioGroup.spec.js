@@ -3,13 +3,6 @@ import VRadioGroup from "@/components/_library/forms/VRadioGroup"
 import { RadioGroupOption } from "@headlessui/vue"
 
 describe("VRadioGroup", () => {
-  it("should render an input with id", () => {
-    const wrapper = mount(VRadioGroup, {
-      props: { id: "test-input", items: [] },
-    })
-
-    expect(wrapper.find('[id="test-input"]').exists()).toBe(true)
-  })
   it("should render children items", () => {
     const wrapper = mount(VRadioGroup, {
       props: {
