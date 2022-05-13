@@ -2,7 +2,7 @@
 import logger from "../../../src/modules/logger"
 import * as Sentry from "@sentry/vue"
 import { createApp } from "@vue/runtime-dom"
-import mocks from "../../mocks"
+import { mockUser } from "../../mocks"
 import { createRouterMock, injectRouterMock } from "vue-router-mock"
 
 describe("logger", () => {
@@ -88,14 +88,14 @@ describe("logger", () => {
 
     it("does nothing if not in production env", () => {
       process.env.VITE_ENV = "development"
-      logger.setUser(mocks.user)
+      logger.setUser(mockUser)
       expect(spy).not.toHaveBeenCalled()
     })
 
     it("clears user context from Sentry if in production", () => {
       process.env.VITE_ENV = "production"
-      logger.setUser(mocks.user)
-      expect(spy).not.toHaveBeenCalledWith(mocks.user)
+      logger.setUser(mockUser)
+      expect(spy).not.toHaveBeenCalledWith(mockUser)
     })
   })
 })

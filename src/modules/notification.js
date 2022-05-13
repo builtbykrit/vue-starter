@@ -34,7 +34,7 @@ function createNotification(message, options) {
 /**
  * Syntactic sugar for generating an Error Notification
  * @param message
- * @param options
+ * @param [options]
  * @returns {{id: (*|string), message, type}}
  */
 function createErrorNotification(message, options) {
@@ -47,7 +47,7 @@ function createErrorNotification(message, options) {
 /**
  * Syntactic sugar for generating a Success Notification
  * @param message
- * @param options
+ * @param [options]
  * @returns {{id: (*|string), message, type}}
  */
 function createSuccessNotification(message, options) {

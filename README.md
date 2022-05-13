@@ -16,7 +16,7 @@ npm run dev
 |----------|--------------------|
 | Vue      | Frontend framework |
 | Vite     | Build tool         |
-| Vuex     | State management   |
+| Pinia    | State management   |
 | Axios    | HTTP client        |
 | Routing  | Vue Router         |
 | Tailwind | Styling            |
@@ -68,12 +68,12 @@ const state = ref({
 ### State management
 
 - When to use a store:
-  1. To persist data, such as current User and authentication data, between views or sessions.
+  1. To persist data, such as current User and authentication data, between views.
   2. As a global event listener. For example, when an Alert is generated that must be displayed by the Toaster.
-- Why [Vuex](https://vuex.vuejs.org/) was chosen:
+- Why [Pinia](https://pinia.vuejs.org/) was chosen:
   1. Enable visibility when using Vue Developer Tools
-  2. Persist data beyond the current session
-  3. Obfuscate sensitive data stored locally
+  2. Enhanced composition API support
+  3. Reduce library size from Vuex
 
 ### HTTP client
 
