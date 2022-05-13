@@ -4,14 +4,15 @@ export function useValidation(validation) {
   let hasError = ref(false)
   let errorMessages = ref([])
 
-  watch(
-    () => validation,
-    () => {
-      hasError.value = validation.$error
-      errorMessages.value = validation.$errors.map((error) => error.$message)
-    },
-    { deep: true }
-  )
+  const updateValidation = () => {
+    hasError.value = validation.$error
+    errorMessages.value = validation.$errors.map((error) => error.$message)
+  }
+
+  // On mounted, update validation
+  updateValidation()
+  // On change, update validation
+  watch(() => validation, updateValidation, { deep: true })
 
   return { hasError, errorMessages }
 }

@@ -193,5 +193,15 @@ describe("clock", () => {
     })
   })
 
-  describe("Setters", () => {})
+  describe("Setters", () => {
+    it("setMonth sets the month", () => {
+      expect(clock.setMonth("2020-01-01", 1)).toBe("2020-02-01")
+    })
+    it("setQuarter sets the quarter", () => {
+      expect(clock.setQuarter("2020-01-01", 2)).toBe("2020-04-01")
+    })
+    it("setYear sets the year", () => {
+      expect(clock.setYear("2020-01-01", 2022)).toBe("2022-01-01")
+    })
+  })
 })
