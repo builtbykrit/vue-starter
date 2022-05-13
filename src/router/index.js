@@ -1,5 +1,6 @@
 import ROUTER_CONFIG from "./config"
 import { createRouter, createWebHistory } from "vue-router"
+import { appendPageTitle, authenticationGuard } from "@/router/guards"
 
 const routes = [
   {
@@ -7,8 +8,6 @@ const routes = [
     name: ROUTER_CONFIG.ROUTE_NAMES.SANDBOX,
     meta: {
       title: ROUTER_CONFIG.PAGE_TITLES.SANDBOX,
-      requiresAuth: false,
-      splash: false,
     },
     component: () => import("../views/sandbox/LibrarySandbox.vue"),
   },
@@ -19,7 +18,23 @@ const routes = [
       name: ROUTER_CONFIG.ROUTE_NAMES.SANDBOX,
     }),
   },
-]
+  {
+    path: "/404",
+    name: ROUTER_CONFIG.ROUTE_NAMES.ERROR_404,
+    meta: {
+      title: ROUTER_CONFIG.PAGE_TITLES.ERROR_404,
+    },
+    component: () => import("../views/errors/404Error.vue"),
+  },
+  {
+    path: "/500",
+    name: ROUTER_CONFIG.ROUTE_NAMES.ERROR_500,
+    meta: {
+      title: ROUTER_CONFIG.PAGE_TITLES.ERROR_500,
+    },
+    component: () => import("../views/errors/500Error.vue"),
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
@@ -29,11 +44,7 @@ const router = createRouter({
   },
 })
 
-/**
- * Append the page title to each route
- */
-router.afterEach((to) => {
-  document.title = `${ROUTER_CONFIG.APP_NAME} | ${to.meta["title"]}`
-})
+router.beforeEach(authenticationGuard)
+router.afterEach(appendPageTitle)
 
 export default router

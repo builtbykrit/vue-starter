@@ -1,4 +1,9 @@
 @layer base {
+    html, body, #app {
+        @apply min-h-screen text-gray-900 overflow-x-hidden overflow-y-auto;
+    }
+
+    /** Define global styles here */
     :root {
         --popper-theme-background-color: #302F37;
         --popper-theme-background-color-hover: #302F37;

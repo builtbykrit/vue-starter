@@ -1,28 +1,26 @@
 import interceptors from "../../../src/http/interceptors"
 import logger from "../../../src/modules/logger"
-import clock from "../../../src/modules/clock"
-import mocks from "../../mocks"
-import store from "../../../src/store"
+import { createPinia, setActivePinia } from "pinia"
+import { useAuthStore } from "@/store/authStore"
+import { mockToken } from "../../mocks"
 
 describe("interceptors", () => {
-  describe("injectAuthorizationHeader", () => {
-    it("adds an Authorization header only when a Token exists", () => {
-      store.state.token.accessToken = null
-      store.state.token.accessTokenExpiresAt = null
-      jest.spyOn(clock, "isBefore").mockReturnValueOnce(false)
-      let config = interceptors.injectAuthorizationHeader({
-        headers: [],
-      })
-      expect(config.headers).not.toContain("Authorization")
+  beforeEach(() => {
+    // creates a fresh pinia and make it active so it's automatically picked
+    // up by any useStore() call without having to pass it to it:
+    // `useStore(pinia)`
+    setActivePinia(createPinia())
+  })
 
-      store.state.token.accessToken = mocks.token
-      store.state.token.accessTokenExpiresAt = 123512351235235
-      jest.spyOn(clock, "isBefore").mockReturnValueOnce(true)
-      config = interceptors.injectAuthorizationHeader({
+  describe("injectAuthorizationHeader", () => {
+    it("adds an Authorization header", async () => {
+      const authStore = useAuthStore()
+      authStore.getAccessToken = jest.fn(() => mockToken)
+      const config = await interceptors.injectAuthorizationHeader({
         headers: [],
       })
       expect(config.headers["Authorization"]).toStrictEqual(
-        `Bearer ${mocks.token}`
+        `Bearer ${mockToken}`
       )
     })
   })
