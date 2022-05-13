@@ -1,5 +1,7 @@
 @layer base {
-    /**
-    Define global styles here
-     */
+    html, body, #app {
+        @apply min-h-screen text-gray-900 overflow-x-hidden overflow-y-auto;
+    }
+
+    /** Define global styles here */
 }
