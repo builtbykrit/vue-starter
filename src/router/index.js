@@ -4,20 +4,33 @@ import { appendPageTitle, authenticationGuard } from "@/router/guards"
 
 let routes = [
   {
-    path: "/404",
-    name: ROUTER_CONFIG.ROUTE_NAMES.ERROR_404,
-    meta: {
-      title: ROUTER_CONFIG.PAGE_TITLES.ERROR_404,
-    },
-    component: () => import("../views/errors/404Error.vue"),
-  },
-  {
-    path: "/500",
-    name: ROUTER_CONFIG.ROUTE_NAMES.ERROR_500,
-    meta: {
-      title: ROUTER_CONFIG.PAGE_TITLES.ERROR_500,
-    },
-    component: () => import("../views/errors/500Error.vue"),
+    path: "/app",
+    component: () => import("@/layouts/AppLayout.vue"),
+    children: [
+      {
+        path: "404",
+        name: ROUTER_CONFIG.ROUTE_NAMES.ERROR_404,
+        meta: {
+          title: ROUTER_CONFIG.PAGE_TITLES.ERROR_404,
+        },
+        component: () => import("../views/errors/404Error.vue"),
+      },
+      {
+        path: "500",
+        name: ROUTER_CONFIG.ROUTE_NAMES.ERROR_500,
+        meta: {
+          title: ROUTER_CONFIG.PAGE_TITLES.ERROR_500,
+        },
+        component: () => import("../views/errors/500Error.vue"),
+      },
+      // App level redirect
+      {
+        path: ":pathMatch(.*)*",
+        redirect: () => ({
+          name: ROUTER_CONFIG.ROUTE_NAMES.ERROR_404,
+        }),
+      },
+    ],
   },
 ]
 
@@ -36,16 +49,6 @@ if (process.env.VITE_ENV === "development") {
       path: "/:pathMatch(.*)*",
       redirect: () => ({
         name: ROUTER_CONFIG.ROUTE_NAMES.SANDBOX,
-      }),
-    },
-  ])
-} else {
-  routes = routes.concat([
-    // App level redirect
-    {
-      path: "/:pathMatch(.*)*",
-      redirect: () => ({
-        name: ROUTER_CONFIG.ROUTE_NAMES.ERROR_404,
       }),
     },
   ])
