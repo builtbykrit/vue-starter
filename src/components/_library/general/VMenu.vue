@@ -26,6 +26,9 @@
                   'bg-primary-100': active,
                 },
               ]"
+              @click="
+                !!item.onClick ? item.onClick() : $emit('item-clicked', item)
+              "
             >
               <slot
                 :name="`item.${item.name ?? index}`"
@@ -44,14 +47,14 @@
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue"
 import { usePopper } from "@/composables/usePopper"
 
-defineProps({
+const props = defineProps({
+  position: { type: String, default: "bottom-end" },
   items: { type: Array, default: () => [] },
 })
+defineEmits(["item-clicked"])
 
 let [trigger, container] = usePopper({
-  placement: "bottom",
+  placement: props.position,
   modifiers: [{ name: "offset", options: { offset: [0, 4] } }],
 })
 </script>
-
-<style scoped></style>

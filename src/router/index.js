@@ -8,6 +8,14 @@ let routes = [
     component: () => import("@/layouts/AppLayout.vue"),
     children: [
       {
+        path: "",
+        name: ROUTER_CONFIG.ROUTE_NAMES.HOME,
+        meta: {
+          title: ROUTER_CONFIG.PAGE_TITLES.HOME,
+        },
+        component: () => import("../views/sandbox/LibrarySandbox.vue"),
+      },
+      {
         path: "404",
         name: ROUTER_CONFIG.ROUTE_NAMES.ERROR_404,
         meta: {
@@ -25,7 +33,7 @@ let routes = [
       },
       // App level redirect
       {
-        path: ":pathMatch(.*)*",
+        path: "/:pathMatch(.*)*",
         redirect: () => ({
           name: ROUTER_CONFIG.ROUTE_NAMES.ERROR_404,
         }),
