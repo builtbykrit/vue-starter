@@ -4,7 +4,7 @@
     :class="sizes[size]"
   >
     <img v-if="!!imageUrl" :src="imageUrl" alt="user" />
-    <div v-else class="font-semibold" :class="textSizes[size]">
+    <div v-else class="font-semibold text-primary-800" :class="textSizes[size]">
       {{ initials }}
     </div>
   </div>
