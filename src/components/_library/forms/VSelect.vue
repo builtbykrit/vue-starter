@@ -7,6 +7,7 @@
   >
     <Listbox
       :id="internalId"
+      v-slot="{ open }"
       v-model="internalValue"
       :disabled="readonly || disabled"
       as="div"
@@ -14,9 +15,9 @@
     >
       <div class="relative">
         <ListboxButton
-          as="div"
-          class="w-full h-[34px] border rounded py-1"
+          class="w-full h-[34px] border rounded text-left py-1 focus:border-primary-500 focus:ring-primary-500 focus:ring-1"
           :class="{
+            'border-primary-500 ring-primary-500 ring-1': open,
             'border-transparent px-0': readonly,
             'border-gray-300 px-1.5': !readonly,
             'border-red-500 bg-red-100/25': hasError,

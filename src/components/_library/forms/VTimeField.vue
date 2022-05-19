@@ -45,7 +45,7 @@ const updateExternalValue = () => {
     return
   }
 
-  const timeFormats = ["ha", "h a", "H"]
+  const timeFormats = ["h:mma", "h:mm a", "H:mm", "ha", "h a", "H"]
   // If user forgot "m" in "pm"
   const timeLastLetter = internalValue.value[internalValue.value.length - 1]
   const time =

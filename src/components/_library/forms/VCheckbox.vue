@@ -6,7 +6,7 @@
       :checked="checked"
       :disabled="disabled || readonly"
       type="checkbox"
-      class="rounded h-5 w-5 border-gray-300 hover:bg-primary-100 focus:ring-offset-0 focus:ring-primary-100"
+      class="rounded h-5 w-5 border-gray-300 hover:bg-primary-100 focus:ring-offset-0 focus:ring-primary-500/25 focus:border-primary-500"
       :class="bgClass"
       @input="onChange"
     />

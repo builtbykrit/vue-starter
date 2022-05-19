@@ -61,39 +61,39 @@ const variantStyles = computed(() => {
   switch (props.color) {
     default:
       return {
-        default: `bg-primary-500 border-primary-500 text-white hover:bg-primary-400 hover:border-primary-400 active:bg-primary-600 active:border-primary-600`,
-        outline: `bg-transparent border-primary-500 text-primary-500 hover:bg-primary-500/10 active:bg-primary-500 active:text-white`,
-        transparent: `bg-transparent border-transparent hover:bg-gray-500/10 hover:text-primary-500 active:bg-primary-500/10 active:text-primary-500`,
+        default: `bg-primary-500 border-primary-500 text-white hover:bg-primary-400 hover:border-primary-400 active:bg-primary-600 active:border-primary-600 focus:ring-primary-500/25`,
+        outline: `bg-transparent border-primary-500 text-primary-500 hover:bg-primary-500/10 active:bg-primary-500 active:text-white focus:ring-primary-500/25`,
+        transparent: `bg-transparent border-transparent hover:bg-gray-500/10 hover:text-primary-500 active:bg-primary-500/10 active:text-primary-500 focus:ring-primary-500/25`,
       }
     case "secondary":
       return {
-        default: `bg-secondary-500 border-secondary-500 text-white hover:bg-secondary-400 hover:border-secondary-400 active:bg-secondary-600 active:border-secondary-600`,
-        outline: `bg-transparent border-secondary-500 text-secondary-500 hover:bg-secondary-500/10 active:bg-secondary-500 active:text-white`,
-        transparent: `bg-transparent border-transparent hover:bg-gray-500/10 hover:text-secondary-500 active:bg-secondary-500/10 active:text-secondary-500`,
+        default: `bg-secondary-500 border-secondary-500 text-white hover:bg-secondary-400 hover:border-secondary-400 active:bg-secondary-600 active:border-secondary-600 focus:ring-secondary-500/25`,
+        outline: `bg-transparent border-secondary-500 text-secondary-500 hover:bg-secondary-500/10 active:bg-secondary-500 active:text-white focus:ring-secondary-500/25`,
+        transparent: `bg-transparent border-transparent hover:bg-gray-500/10 hover:text-secondary-500 active:bg-secondary-500/10 active:text-secondary-500 focus:ring-secondary-500/25`,
       }
     case "tertiary":
       return {
-        default: `bg-tertiary-500 border-tertiary-500 text-white hover:bg-tertiary-400 hover:border-tertiary-400 active:bg-tertiary-600 active:border-tertiary-600`,
-        outline: `bg-transparent border-tertiary-500 text-tertiary-500 hover:bg-tertiary-500/10 active:bg-tertiary-500 active:text-white`,
-        transparent: `bg-transparent border-transparent hover:bg-gray-500/10 hover:text-tertiary-500 active:bg-tertiary-500/10 active:text-tertiary-500`,
+        default: `bg-tertiary-500 border-tertiary-500 text-white hover:bg-tertiary-400 hover:border-tertiary-400 active:bg-tertiary-600 active:border-tertiary-600 focus:ring-tertiary-500/25`,
+        outline: `bg-transparent border-tertiary-500 text-tertiary-500 hover:bg-tertiary-500/10 active:bg-tertiary-500 active:text-white focus:ring-tertiary-500/25`,
+        transparent: `bg-transparent border-transparent hover:bg-gray-500/10 hover:text-tertiary-500 active:bg-tertiary-500/10 active:text-tertiary-500 focus:ring-tertiary-500/25`,
       }
     case "success":
       return {
-        default: `bg-success-500 border-success-500 text-white hover:bg-success-400 hover:border-success-400 active:bg-success-600 active:border-success-600`,
-        outline: `bg-transparent border-success-500 text-success-500 hover:bg-success-500/10 active:bg-success-500 active:text-white`,
-        transparent: `bg-transparent border-transparent hover:bg-gray-500/10 hover:text-success-500 active:bg-success-500/10 active:text-success-500`,
+        default: `bg-success-500 border-success-500 text-white hover:bg-success-400 hover:border-success-400 active:bg-success-600 active:border-success-600 focus:ring-success-500/25`,
+        outline: `bg-transparent border-success-500 text-success-500 hover:bg-success-500/10 active:bg-success-500 active:text-white focus:ring-success-500/25`,
+        transparent: `bg-transparent border-transparent hover:bg-gray-500/10 hover:text-success-500 active:bg-success-500/10 active:text-success-500 focus:ring-success-500/25`,
       }
     case "warning":
       return {
-        default: `bg-warning-500 border-warning-500 text-white hover:bg-warning-400 hover:border-warning-400 active:bg-warning-600 active:border-warning-600`,
-        outline: `bg-transparent border-warning-500 text-warning-500 hover:bg-warning-500/10 active:bg-warning-500 active:text-white`,
-        transparent: `bg-transparent border-transparent hover:bg-gray-500/10 hover:text-warning-500 active:bg-warning-500/10 active:text-warning-500`,
+        default: `bg-warning-500 border-warning-500 text-white hover:bg-warning-400 hover:border-warning-400 active:bg-warning-600 active:border-warning-600 focus:ring-warning-500/25`,
+        outline: `bg-transparent border-warning-500 text-warning-500 hover:bg-warning-500/10 active:bg-warning-500 active:text-white focus:ring-warning-500/25`,
+        transparent: `bg-transparent border-transparent hover:bg-gray-500/10 hover:text-warning-500 active:bg-warning-500/10 active:text-warning-500 focus:ring-warning-500/25`,
       }
     case "error":
       return {
-        default: `bg-error-500 border-error-500 text-white hover:bg-error-400 hover:border-error-400 active:bg-error-600 active:border-error-600`,
-        outline: `bg-transparent border-error-500 text-error-500 hover:bg-error-500/10 active:bg-error-500 active:text-white`,
-        transparent: `bg-transparent border-transparent hover:bg-gray-500/10 hover:text-error-500 active:bg-error-500/10 active:text-error-500`,
+        default: `bg-error-500 border-error-500 text-white hover:bg-error-400 hover:border-error-400 active:bg-error-600 active:border-error-600 focus:ring-error-500/25`,
+        outline: `bg-transparent border-error-500 text-error-500 hover:bg-error-500/10 active:bg-error-500 active:text-white focus:ring-error-500/25`,
+        transparent: `bg-transparent border-transparent hover:bg-gray-500/10 hover:text-error-500 active:bg-error-500/10 active:text-error-500 focus:ring-error-500/25`,
       }
   }
 })
