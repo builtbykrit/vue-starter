@@ -3,7 +3,6 @@
         @apply min-h-screen text-gray-900 overflow-x-hidden overflow-y-auto;
     }
 
-    /** Define global styles here */
     :root {
         --popper-theme-background-color: #302F37;
         --popper-theme-background-color-hover: #302F37;
@@ -14,5 +13,31 @@
         --popper-theme-padding: 2px 8px 6px 8px;
         --popper-theme-box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
     }
+
+    [type='text']:focus,
+    [type='email']:focus,
+    [type='url']:focus,
+    [type='password']:focus,
+    [type='number']:focus,
+    [type='date']:focus,
+    [type='datetime-local']:focus,
+    [type='month']:focus,
+    [type='search']:focus,
+    [type='tel']:focus,
+    [type='time']:focus,
+    [type='week']:focus,
+    [multiple]:focus,
+    textarea:focus,
+    select:focus {
+        --tw-ring-color: theme("colors.primary.500");
+        border-color: var(--tw-ring-color);
+    }
+
+    button:focus,
+    a:focus {
+        @apply ring ring-primary-500/25;
+        outline: none;
+    }
+
     /** Define global styles here */
 }

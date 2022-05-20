@@ -12,13 +12,14 @@
         :type="internalType"
         :step="step"
         :readonly="readonly || disabled"
-        class="w-full rounded py-1"
+        class="w-full rounded py-1 focus:ring-primary-500 outline-none"
         :class="{
           'border-transparent focus:border-transparent focus:ring-0 px-0':
             readonly,
           'border-gray-300 px-1.5': !readonly,
           'border-red-500 bg-red-100/25': hasError,
         }"
+        @focus="$emit('focus')"
         @blur="$emit('blur')"
       />
 
@@ -66,7 +67,7 @@ const props = defineProps({
     }),
   },
 })
-const emit = defineEmits(["update:modelValue", "blur"])
+const emit = defineEmits(["update:modelValue", "focus", "blur"])
 
 const input = ref(null)
 const showPassword = ref(false)
@@ -84,10 +85,6 @@ const { hasError, errorMessages } = useValidation(props.validation)
 
 const toggleShowPassword = () => {
   showPassword.value = !showPassword.value
-}
-
-const clearInput = () => {
-  internalValue.value = ""
 }
 
 onMounted(() => {

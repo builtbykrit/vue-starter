@@ -3,7 +3,12 @@
     <div class="flex justify-between border-b">
       <slot name="prepend-tabs" />
       <TabList>
-        <Tab v-for="tab in internalTabs" :key="tab.index" v-slot="{ selected }">
+        <Tab
+          v-for="tab in internalTabs"
+          :key="tab.index"
+          v-slot="{ selected }"
+          as="template"
+        >
           <button
             class="transition-colors text-primary-500 focus:text-primary-700 px-4 py-2 rounded-t border-b-2"
             :class="[

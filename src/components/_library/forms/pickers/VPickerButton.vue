@@ -3,7 +3,7 @@
     type="button"
     :disabled="disabled"
     :class="[
-      'p-2 font-semibold text-sm w-full uppercase transition-all ease-linear duration-[250]',
+      'p-2 font-semibold text-sm w-full uppercase transition-all ease-linear duration-[250] focus:ring-0 focus:bg-primary-100/50',
       {
         rounded: !oneOfSet,
         'first rounded-l': firstOfSet,
