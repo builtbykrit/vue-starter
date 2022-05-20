@@ -53,7 +53,6 @@
 <script setup>
 import {
   Dialog,
-  DialogDescription,
   DialogOverlay,
   DialogTitle,
   TransitionChild,

@@ -31,13 +31,6 @@ let routes = [
         },
         component: () => import("../views/errors/500Error.vue"),
       },
-      // App level redirect
-      {
-        path: "/:pathMatch(.*)*",
-        redirect: () => ({
-          name: ROUTER_CONFIG.ROUTE_NAMES.ERROR_404,
-        }),
-      },
     ],
   },
 ]
@@ -57,6 +50,16 @@ if (process.env.VITE_ENV === "development") {
       path: "/:pathMatch(.*)*",
       redirect: () => ({
         name: ROUTER_CONFIG.ROUTE_NAMES.SANDBOX,
+      }),
+    },
+  ])
+} else {
+  routes = routes.concat([
+    // App level redirect
+    {
+      path: "/:pathMatch(.*)*",
+      redirect: () => ({
+        name: ROUTER_CONFIG.ROUTE_NAMES.ERROR_404,
       }),
     },
   ])

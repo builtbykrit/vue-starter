@@ -1,10 +1,11 @@
 <template>
-  <div class="flex flex-col min-h-screen">
+  <div class="flex flex-col h-screen">
     <app-navbar />
-
-    <div class="relative flex flex-row">
+    <div class="grow flex flex-row relative max-h-full overflow-hidden">
       <app-sidenav />
-      <router-view class="grow" />
+      <div class="grow overflow-auto">
+        <router-view />
+      </div>
     </div>
   </div>
 </template>

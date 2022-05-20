@@ -20,7 +20,9 @@ export function usePopper(options) {
       if (!(popperEl instanceof HTMLElement)) return
 
       popperInstance = createPopper(referenceEl, popperEl, options)
-      onInvalidate(popperInstance.value?.destroy())
+      onInvalidate(() => {
+        popperInstance.value?.destroy()
+      })
     })
   })
 

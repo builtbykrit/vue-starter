@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-center gap-12">
+  <div class="flex items-center justify-center gap-12 h-full">
     <FireIcon class="h-48 w-48 text-gray-700" />
     <div class="max-w-[596px]">
       <h1 class="font-fancy font-semibold text-8xl tracking-[0.07em]">500</h1>

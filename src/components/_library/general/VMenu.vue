@@ -1,6 +1,6 @@
 <template>
-  <Menu as="div" :class="{ 'w-full': !!$slots.default }">
-    <MenuButton ref="trigger" :class="{ 'w-full': !!$slots.default }">
+  <Menu as="div">
+    <MenuButton ref="trigger" :class="{ 'rounded-full': circleButton }">
       <slot name="activator" />
     </MenuButton>
 
@@ -50,6 +50,7 @@ import { usePopper } from "@/composables/usePopper"
 const props = defineProps({
   position: { type: String, default: "bottom-end" },
   items: { type: Array, default: () => [] },
+  circleButton: { type: Boolean, default: false },
 })
 defineEmits(["item-clicked"])
 

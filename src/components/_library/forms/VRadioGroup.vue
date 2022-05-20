@@ -8,14 +8,13 @@
       <RadioGroupOption
         v-for="item in internalItems"
         :key="item[itemKey]"
-        v-slot="{ active, checked }"
+        v-slot="{ checked }"
         :value="item[itemValue]"
       >
-        <slot v-bind="{ item, active, checked }">
+        <slot v-bind="{ item, checked }">
           <VCard
-            class="cursor-pointer hover:text-primary-500"
+            class="cursor-pointer hover:text-white hover:bg-primary-500/75"
             :class="{
-              'ring-2 ring-primary-500/25': active,
               'bg-primary-500 text-white hover:text-white': checked,
             }"
           >

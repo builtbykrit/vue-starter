@@ -4,10 +4,12 @@
     :class="{ 'fixed w-full': fixed }"
   >
     <router-link :to="{ name: 'HOME' }">
-      <span class="text-xl font-bold">[App Logo]</span>
+      <span class="text-xl font-bold text-primary-400 drop-shadow"
+        >[App Logo]</span
+      >
     </router-link>
 
-    <VMenu :items="menuItems">
+    <VMenu :items="menuItems" circle-button>
       <template #activator>
         <VAvatar user-name="Test User" />
       </template>
