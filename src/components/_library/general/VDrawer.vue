@@ -1,5 +1,10 @@
 <template>
-  <TransitionRoot appear :show="isOpen" as="template">
+  <TransitionRoot
+    :key="`drawer-${position}`"
+    appear
+    :show="isOpen"
+    as="template"
+  >
     <Dialog as="div" @close="isOpen = false">
       <div class="fixed inset-0 z-10 overflow-y-auto">
         <div class="min-h-screen w-screen">

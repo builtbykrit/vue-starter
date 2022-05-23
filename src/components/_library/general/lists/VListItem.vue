@@ -4,7 +4,7 @@
     :to="to"
     :exact="exact"
     class="block hover:bg-primary-500/25 hover:text-primary-900 focus:bg-primary-500/25 focus:ring-0"
-    exact-active-class="bg-primary-300 text-primary-900 font-semibold hover:bg-primary-200 focus:bg-primary-300"
+    exact-active-class="bg-primary-200 text-primary-900 font-semibold hover:bg-primary-200 focus:bg-primary-300"
     :class="paddingClass"
     role="listitem"
   >

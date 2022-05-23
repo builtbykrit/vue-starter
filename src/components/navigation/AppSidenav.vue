@@ -1,16 +1,6 @@
 <template>
   <TransitionRoot appear :show="isOpen" as="template">
-    <TransitionChild
-      as="template"
-      v-bind="{
-        enter: 'transition-transform ease-in-out duration-500',
-        enterFrom: '-translate-x-full',
-        enterTo: 'translate-x-0',
-        leave: 'transition-transform ease-in-out duration-500',
-        leaveFrom: 'translate-x-0',
-        leaveTo: '-translate-x-full',
-      }"
-    >
+    <TransitionChild as="template" v-bind="transition">
       <div
         class="min-h-full w-64 shadow-md flex flex-col overflow-hidden"
         v-bind="$attrs"
@@ -35,11 +25,22 @@ import { computed } from "vue"
 
 const props = defineProps({
   modelValue: { type: Boolean, default: true },
-  fixed: { type: Boolean, default: false },
+  static: { type: Boolean, default: false },
 })
 
 const isOpen = computed({
   get: () => props.modelValue,
   set: (val) => emit("update:modelValue", val),
 })
+const transition = computed(
+  () =>
+    !props.static && {
+      enter: "transition-transform ease-in-out duration-500",
+      enterFrom: "-translate-x-full",
+      enterTo: "translate-x-0",
+      leave: "transition-transform ease-in-out duration-500",
+      leaveFrom: "translate-x-0",
+      leaveTo: "-translate-x-full",
+    }
+)
 </script>
