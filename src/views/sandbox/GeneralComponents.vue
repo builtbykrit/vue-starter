@@ -157,6 +157,21 @@ import { reactive } from "vue"
 import PaintUnderline from "@/assets/paint-underline.svg"
 import SandboxRow from "@/views/sandbox/SandboxRow.vue"
 
+/** Components */
+import VBadge from "@/components/_library/general/VBadge.vue"
+import VButton from "@/components/_library/general/buttons/VButton.vue"
+import VButtonGroup from "@/components/_library/general/buttons/VButtonGroup.vue"
+import VCard from "@/components/_library/general/VCard.vue"
+import VCollapsable from "@/components/_library/general/VCollapsable.vue"
+import VDrawer from "@/components/_library/general/VDrawer.vue"
+import VMenu from "@/components/_library/general/VMenu.vue"
+import VModal from "@/components/_library/general/VModal.vue"
+import VProgress from "@/components/_library/general/VProgress.vue"
+import VTabs from "@/components/_library/general/VTabs.vue"
+import VToast from "@/components/_library/general/VToast.vue"
+import VTooltip from "@/components/_library/general/VTooltip.vue"
+import VRadioGroup from "@/components/_library/forms/VRadioGroup.vue"
+
 const colorOptions = [
   "primary",
   "secondary",

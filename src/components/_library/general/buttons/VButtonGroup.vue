@@ -4,12 +4,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "VButtonGroup",
-}
-</script>
-
 <style>
 .v-button-group > * {
   border-radius: 0;

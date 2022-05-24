@@ -17,6 +17,8 @@
 import PaintUnderline from "@/assets/paint-underline.svg"
 import SandboxRow from "./SandboxRow.vue"
 
+import VTable from "@/components/_library/tables/VTable.vue"
+
 const headers = [
   { text: "Text", value: "text", class: "text-left" },
   { text: "Number", value: "number", class: "text-left" },
