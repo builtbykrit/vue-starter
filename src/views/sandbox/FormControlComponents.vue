@@ -107,6 +107,7 @@
         label="One Time Password Field"
         :readonly="readonlyInputs"
         :validation="v$.otpField"
+        @completed="alertComplete"
       />
     </SandboxRow>
     <SandboxRow title="VCheckbox">
@@ -190,7 +191,7 @@ const form = reactive({
   passwordField: "password",
   timeField: undefined,
   dateField: undefined,
-  otpField: "123456",
+  otpField: undefined,
   textarea:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam porttitor accumsan velit ac faucibus. Curabitur luctus, felis eu placerat suscipit, leo magna gravida lectus, non volutpat lacus nibh sed risus. Nulla eget sapien dignissim erat fringilla pretium. Proin aliquam accumsan dolor. Integer feugiat malesuada vehicula. Quisque lacinia vestibulum vehicula. Sed euismod aliquet tellus, nec rutrum velit ultrices at. Nulla ex ipsum, hendrerit sed mauris eget, faucibus malesuada est. Pellentesque vel nisi vel eros tempus feugiat.",
   selectedItem: undefined,
@@ -224,5 +225,9 @@ const validate = () => {
 }
 const resetValidation = () => {
   v$.value.$reset()
+}
+
+const alertComplete = () => {
+  alert("OTP Complete!")
 }
 </script>

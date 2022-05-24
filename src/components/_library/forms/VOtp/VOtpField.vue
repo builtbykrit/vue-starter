@@ -1,6 +1,6 @@
 <template>
   <VInputSkin :input-id="internalId" :label="label" :messages="errorMessages">
-    <div ref="inputsContainer" class="flex items-center gap-2">
+    <div :id="internalId" ref="inputsContainer" class="flex items-center gap-2">
       <VOtpSingleInput
         v-for="(character, index) in characters"
         ref="inputs"
@@ -26,12 +26,13 @@ import { useValidation } from "@/composables/useValidation"
 import { v4 as uuid } from "uuid"
 
 const props = defineProps({
+  id: { type: String, default: undefined },
   modelValue: {
     type: [Array, String],
     default: () => Array(6).fill(""),
     validator: (value) => value.length < 6 || value.length === 6,
   },
-  label: { type: String, default: "      " },
+  label: { type: String, default: undefined },
   characters: { type: Number, default: 6 },
   readonly: Boolean,
   disabled: Boolean,
@@ -112,6 +113,10 @@ const onPaste = (index, event) => {
     focusInput(combinedWithPastedData.slice(0, props.characters).length)
   }
   emit("update:modelValue", newValue.join(""))
+
+  if (props.modelValue.length === props.characters) {
+    emit("completed")
+  }
 }
 
 const focusInput = (inputIndex) => {
@@ -143,12 +148,11 @@ const onKeyDown = (index, event) => {
     case BACKSPACE:
       event.preventDefault()
       onInput(index, "")
-      focusPreviousInput() // Stay in the same input
+      focusPreviousInput()
       break
     case DELETE:
       event.preventDefault()
       onInput(index, "")
-      focusPreviousInput() // Stay in the same input
       break
     case LEFT_ARROW:
       event.preventDefault()
