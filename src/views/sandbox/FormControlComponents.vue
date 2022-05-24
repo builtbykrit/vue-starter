@@ -101,6 +101,14 @@
         :validation="v$.timeField"
       />
     </SandboxRow>
+    <SandboxRow title="VOtpField">
+      <VOtpField
+        v-model="form.otpField"
+        label="One Time Password Field"
+        :readonly="readonlyInputs"
+        :validation="v$.otpField"
+      />
+    </SandboxRow>
     <SandboxRow title="VCheckbox">
       <div class="flex items-center gap-2">
         <VCheckbox
@@ -163,7 +171,7 @@
 
 <script setup>
 import { computed, reactive, ref } from "vue"
-import { required } from "@vuelidate/validators"
+import { minLength, required } from "@vuelidate/validators"
 import useVuelidate from "@vuelidate/core"
 import PaintUnderline from "@/assets/paint-underline.svg"
 import SandboxRow from "@/views/sandbox/SandboxRow.vue"
@@ -182,6 +190,7 @@ const form = reactive({
   passwordField: "password",
   timeField: undefined,
   dateField: undefined,
+  otpField: "123456",
   textarea:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam porttitor accumsan velit ac faucibus. Curabitur luctus, felis eu placerat suscipit, leo magna gravida lectus, non volutpat lacus nibh sed risus. Nulla eget sapien dignissim erat fringilla pretium. Proin aliquam accumsan dolor. Integer feugiat malesuada vehicula. Quisque lacinia vestibulum vehicula. Sed euismod aliquet tellus, nec rutrum velit ultrices at. Nulla ex ipsum, hendrerit sed mauris eget, faucibus malesuada est. Pellentesque vel nisi vel eros tempus feugiat.",
   selectedItem: undefined,
@@ -200,6 +209,7 @@ const rules = computed(() => ({
   passwordField: { required },
   timeField: { required },
   dateField: { required },
+  otpField: { required, minLength: minLength(6) },
   textarea: { required },
   selectedItem: { required },
   autocompleteItem: { required },
