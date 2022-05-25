@@ -18,5 +18,6 @@ module.exports = {
         semi: false,
       },
     ],
+    "vue/valid-v-slot": ["error", { allowModifiers: true }],
   },
 }

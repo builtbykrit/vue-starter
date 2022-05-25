@@ -15,29 +15,33 @@
     >
       <div class="relative">
         <ListboxButton
-          class="w-full h-[34px] border rounded text-left py-1 focus:border-primary-500 focus:ring-primary-500 focus:ring-1"
+          class="w-full border rounded text-left flex items-center focus:border-primary-500 focus:ring-primary-500 focus:ring-1"
           :class="{
             'border-primary-500 ring-primary-500 ring-1': open,
             'border-transparent px-0': readonly,
             'border-gray-300 px-1.5': !readonly,
             'border-red-500 bg-red-100/25': hasError,
+            'py-1 h-[34px]': !dense,
+            'h-[28px]': dense,
           }"
         >
-          <template v-if="!!selectedItem"
+          <span v-if="!!selectedItem" :class="{ 'text-sm': dense }"
             >{{ selectedItem[itemText] }}
-          </template>
+          </span>
           <span v-else class="text-sm text-gray-500">{{ placeholder }}</span>
         </ListboxButton>
 
         <div
           v-if="!readonly"
-          class="absolute inset-y-0 right-0 pr-2 gap-1 flex items-center"
+          class="absolute inset-y-0 right-0 gap-1 flex items-center"
+          :class="dense ? 'pr-1' : 'pr-2'"
         >
           <button v-if="clearable && !!selectedItem" @click="clearInput">
             <XIcon class="h-4 w-4 text-gray-400" />
           </button>
           <SelectorIcon
-            class="h-5 w-5 text-gray-400 pointer-events-none"
+            class="text-gray-400 pointer-events-none"
+            :class="dense ? 'h-4 w-4' : 'h-5 w-5'"
             aria-hidden="true"
           />
         </div>
@@ -55,7 +59,7 @@
             :value="item[itemValue]"
           >
             <li
-              class="px-2 py-1"
+              class="px-2 py-1 cursor-pointer"
               :class="{
                 'bg-primary-500/25': selected && !active,
                 'bg-primary-500 text-white': active,
@@ -97,6 +101,7 @@ const props = defineProps({
   readonly: Boolean,
   disabled: Boolean,
   clearable: Boolean,
+  dense: Boolean,
   validation: {
     type: Object,
     default: () => ({
