@@ -33,6 +33,12 @@ import PaintUnderline from "@/assets/paint-underline.svg"
 
 import SandboxRow from "@/views/sandbox/SandboxRow.vue"
 
+/** Components */
+import VDayPicker from "@/components/_library/forms/pickers/VDayPicker.vue"
+import VMonthPicker from "@/components/_library/forms/pickers/VMonthPicker.vue"
+import VQuarterPicker from "@/components/_library/forms/pickers/VQuarterPicker.vue"
+import VYearPicker from "@/components/_library/forms/pickers/VYearPicker.vue"
+
 const state = reactive({
   dayPicker: clock.format(),
   weekPicker: clock.format(),

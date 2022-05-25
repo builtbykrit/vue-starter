@@ -49,9 +49,11 @@ import clock from "@/modules/clock"
 import { CalendarIcon, XIcon } from "@heroicons/vue/solid"
 import { Menu, MenuButton, MenuItems } from "@headlessui/vue"
 import { usePopper } from "@/composables/usePopper"
-import VDayPicker from "@/components/_library/forms/pickers/VDayPicker.vue"
 import { v4 as uuid } from "uuid"
 import { useValidation } from "@/composables/useValidation"
+
+import VDayPicker from "@/components/_library/forms/pickers/VDayPicker.vue"
+import VInputSkin from "@/components/_library/forms/VInputSkin.vue"
 
 const props = defineProps({
   id: { type: String, default: undefined },
