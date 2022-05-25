@@ -3,6 +3,12 @@
     <h3 class="v-heading-lg">Base Components</h3>
     <PaintUnderline class="text-primary-500 mb-6" />
 
+    <SandboxRow title="VAvatar">
+      <VAvatar user-name="Test User" size="sm" />
+      <VAvatar user-name="Test User" size="md" />
+      <VAvatar user-name="Test User" size="lg" />
+    </SandboxRow>
+
     <SandboxRow title="VBadge">
       <VBadge v-for="color in colorOptions" :key="color" :color="color"
         >{{ color }}

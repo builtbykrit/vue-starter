@@ -24,7 +24,8 @@ export const useAuthStore = defineStore("authStore", {
       }),
     logout: async () => {
       localStorage.clear()
-      auth.logout({ returnTo: process.env.VITE_AUTH0_LOGOUT_URI })
+      alert("This is a simulated logout")
+      //auth.logout({ returnTo: process.env.VITE_AUTH0_LOGOUT_URI })
     },
   },
 

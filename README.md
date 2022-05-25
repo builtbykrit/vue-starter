@@ -1,4 +1,5 @@
 # Vue Starter
+![sandbox.png](public/sandbox.png)
 
 This template should help get you started developing with a Vue web app.
 

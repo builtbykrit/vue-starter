@@ -7,4 +7,5 @@ import "./styles/index.css"
 
 const app = createApp(App)
 logger.init(app, router)
-app.use(router).use(createPinia).mount("#app")
+const pinia = createPinia()
+app.use(router).use(pinia).mount("#app")
