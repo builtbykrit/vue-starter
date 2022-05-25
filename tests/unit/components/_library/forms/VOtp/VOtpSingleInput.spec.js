@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils"
-import VOtpSingleInput from "@/components/_library/forms/VOtp/VOtpSingleInput"
+import VOtpSingleInput from "@/components/_library/forms/VOtpField/VOtpSingleInput"
 
 describe("VOtpSingleInput", () => {
   it("On Focus should emit a 'focus' event", async () => {
