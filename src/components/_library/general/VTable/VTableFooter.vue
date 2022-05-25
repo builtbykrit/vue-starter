@@ -16,8 +16,8 @@
         <span v-if="pagination.pageStart > 0">{{ pagination.pageStart }}</span>
         -
         <span v-if="pagination.pageStop > 0">{{ pagination.pageStop }}</span>
-        <span v-if="pagination.totalItems > 0"
-          >of {{ pagination.totalItems }}</span
+        <span v-if="pagination.totalItems > 0">
+          of {{ pagination.totalItems }}</span
         >
       </div>
       <div class="flex items-center gap-2">

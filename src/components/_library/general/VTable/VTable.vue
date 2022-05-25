@@ -1,6 +1,9 @@
 <template>
-  <div class="w-full">
-    <table class="w-full table-auto border-collapse border border rounded-t">
+  <div class="w-full overflow-hidden">
+    <table
+      class="w-full table-auto border-collapse border border rounded-t"
+      :class="{ 'rounded-b': hideFooter }"
+    >
       <VTableHeader
         v-if="!hideHeader"
         v-model:options="internalOptions"
@@ -10,30 +13,46 @@
           <slot :name="name" v-bind="slotData" />
         </template>
       </VTableHeader>
+
       <tbody>
         <tr v-if="loading">
           <td :colspan="internalHeaders.length" class="p-0">
             <VProgress indeterminate flat dense />
           </td>
         </tr>
-        <tr
-          v-for="item in internalItems"
-          :key="item.id"
-          class="hover:bg-gray-100"
-        >
-          <slot name="item" :item="item">
-            <td
-              v-for="header in internalHeaders"
-              :key="header.value"
-              :class="header.cellClass"
-              class="px-2 py-1"
-            >
-              <slot :name="`item.${header.value}`" :item="item"
-                >{{ item[header.value] }}
-              </slot>
+        <template v-for="item in internalItems" :key="item.id">
+          <tr class="hover:bg-primary-500/10">
+            <slot name="item" :item="item">
+              <td
+                v-for="header in internalHeaders"
+                :key="header.value"
+                :class="header.cellClass"
+                class="px-2 py-1"
+              >
+                <button
+                  v-if="header.value === 'data-table-expand'"
+                  class="rounded"
+                >
+                  <ChevronDownIcon
+                    class="w-6 transition-transform duration-300"
+                    :class="{ 'rotate-180': state.expanded.includes(item.id) }"
+                    @click="toggleExpand(item.id)"
+                  />
+                </button>
+
+                <slot v-else :name="`item.${header.value}`" :item="item"
+                  >{{ item[header.value] }}
+                </slot>
+              </td>
+            </slot>
+          </tr>
+          <tr v-if="state.expanded.includes(item.id)" class="bg-gray-100">
+            <td :colspan="internalHeaders.length" class="px-2 py-1">
+              <slot :name="`item.data-table-expand`" :item="item" />
             </td>
-          </slot>
-        </tr>
+          </tr>
+        </template>
+
         <tr v-if="internalItems.length === 0">
           <td
             :colspan="internalHeaders.length"
@@ -45,7 +64,9 @@
         </tr>
       </tbody>
     </table>
+
     <VTableFooter
+      v-if="!hideFooter"
       v-model:options="internalOptions"
       :items-length="totalItemCount"
     />
@@ -54,6 +75,7 @@
 
 <script setup>
 import { computed, reactive, useSlots, watch } from "vue"
+import { ChevronDownIcon } from "@heroicons/vue/solid"
 import VTableHeader from "@/components/_library/general/VTable/VTableHeader.vue"
 import VTableFooter from "@/components/_library/general/VTable/VTableFooter.vue"
 import VProgress from "@/components/_library/general/VProgress.vue"
@@ -73,9 +95,10 @@ const props = defineProps({
   serverItemsLength: { type: Number, default: undefined },
   loadingText: { type: String, default: "Loading... Please Wait" },
   noDataText: { type: String, default: "No Items..." },
-  hideHeader: Boolean,
-  hideFooter: Boolean,
-  loading: Boolean,
+  hideHeader: Boolean, // Hides the default header
+  hideFooter: Boolean, // Hides the default footer
+  showExpand: Boolean, // Shows the expand toggle in default rows
+  loading: Boolean, // Shows the loading bar
 })
 const emit = defineEmits(["update:options"])
 
@@ -86,6 +109,7 @@ const state = reactive({
     sortBy: null,
     sortDesc: true,
   },
+  expanded: [],
 })
 const isServerControlled = computed(() => !!props.serverItemsLength)
 const totalItemCount = computed(
@@ -107,9 +131,22 @@ const baseHeader = {
   class: undefined, // Class to be applied to the header
   cellClass: undefined, // Class to be applied to the cell
 }
-const internalHeaders = computed(() =>
-  props.headers.map((header) => ({ ...baseHeader, ...header }))
-)
+const internalHeaders = computed(() => {
+  const internalHeaders = props.headers.map((header) => ({
+    ...baseHeader,
+    ...header,
+  }))
+
+  if (props.showExpand) {
+    internalHeaders.push({
+      text: null,
+      value: "data-table-expand",
+      cellClass: "w-8",
+    })
+  }
+
+  return internalHeaders
+})
 
 /** Internal Options */
 const internalOptions = computed({
@@ -149,4 +186,13 @@ const internalItems = computed(() => {
 
   return items
 })
+
+/** Methods */
+const toggleExpand = (id) => {
+  if (state.expanded.includes(id)) {
+    state.expanded = state.expanded.filter((item) => item !== id)
+  } else {
+    state.expanded.push(id)
+  }
+}
 </script>

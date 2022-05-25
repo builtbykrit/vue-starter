@@ -6,13 +6,18 @@
     <SandboxRow title="VTable">
       <div class="w-full">
         <VTable :headers="headers" :items="[]" loading />
-        <VTable :headers="headers" :items="items" class="mt-4">
+        <VTable :headers="headers" :items="items" show-expand class="mt-4">
           <template #header.customFormat="{ header }">
             <EmojiHappyIcon class="h-4 w-4" />
             {{ header.text }}
           </template>
           <template #item.customFormat="{ item }">
             {{ item.text }} : {{ item.number }} : {{ item.date }}
+          </template>
+          <template #item.data-table-expand="{ item }">
+            <span class="text-gray-600"
+              >Additional details about {{ item.text }}...</span
+            >
           </template>
         </VTable>
       </div>
