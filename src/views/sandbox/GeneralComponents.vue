@@ -164,9 +164,10 @@ import PaintUnderline from "@/assets/paint-underline.svg"
 import SandboxRow from "@/views/sandbox/SandboxRow.vue"
 
 /** Components */
+import VAvatar from "@/components/_library/general/VAvatar.vue"
 import VBadge from "@/components/_library/general/VBadge.vue"
-import VButton from "@/components/_library/general/buttons/VButton.vue"
-import VButtonGroup from "@/components/_library/general/buttons/VButtonGroup.vue"
+import VButton from "@/components/_library/general/VButton.vue"
+import VButtonGroup from "@/components/_library/general/VButtonGroup.vue"
 import VCard from "@/components/_library/general/VCard.vue"
 import VCollapsable from "@/components/_library/general/VCollapsable.vue"
 import VDrawer from "@/components/_library/general/VDrawer.vue"

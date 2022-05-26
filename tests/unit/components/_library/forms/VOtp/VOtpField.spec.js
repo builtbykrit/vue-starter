@@ -1,5 +1,5 @@
 import { mount } from "@vue/test-utils"
-import VOtpField from "@/components/_library/forms/VOtp/VOtpField"
+import VOtpField from "@/components/_library/forms/VOtpField/VOtpField"
 
 describe("VOtpField", () => {
   it("should render an input with id", () => {
