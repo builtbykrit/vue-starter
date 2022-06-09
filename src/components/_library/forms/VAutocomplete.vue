@@ -5,7 +5,11 @@
     :label="label"
     :messages="errorMessages"
   >
-    <Combobox v-model="internalValue" :disabled="readonly || disabled" as="div">
+    <Combobox
+      v-model="internalValue"
+      :disabled="isReadonly || isDisabled"
+      as="div"
+    >
       <div class="relative">
         <ComboboxInput
           :id="internalId"
@@ -14,22 +18,23 @@
           class="w-full placeholder:text-sm h-[34px] border rounded py-1"
           :class="{
             'border-transparent focus:border-transparent focus:ring-0 px-0':
-              readonly,
-            'border-gray-300 px-1.5': !readonly,
+              isReadonly,
+            'border-gray-300 px-1.5': !isReadonly,
             'border-red-500 bg-red-100/25': hasError,
           }"
           @change="onChange"
         />
         <div
-          v-if="!readonly"
+          v-if="!isReadonly"
           class="absolute inset-y-0 right-0 pr-2 gap-1 flex items-center"
         >
           <button v-if="!!selectedItem" @click="clearInput">
-            <XIcon class="h-4 w-4 text-gray-400" />
+            <VIcon name="X" size-class="h-4 w-4" class="text-gray-400" />
           </button>
-          <SelectorIcon
-            v-if="!readonly"
-            class="h-5 w-5 text-gray-400 pointer-events-none"
+          <VIcon
+            v-if="!isReadonly"
+            name="Selector"
+            class="text-gray-400 pointer-events-none"
             aria-hidden="true"
           />
         </div>
@@ -64,7 +69,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue"
+import { ref, computed, inject } from "vue"
 import { v4 as uuid } from "uuid"
 import {
   Combobox,
@@ -72,10 +77,11 @@ import {
   ComboboxOption,
   ComboboxOptions,
 } from "@headlessui/vue"
-import { SelectorIcon, XIcon } from "@heroicons/vue/solid"
-import VInputSkin from "@/components/_library/forms/VInputSkin.vue"
 import { usePopper } from "@/composables/usePopper"
 import { useValidation } from "@/composables/useValidation"
+
+import VInputSkin from "@/components/_library/forms/VInputSkin.vue"
+import VIcon from "@/components/_library/general/VIcon.vue"
 
 const props = defineProps({
   modelValue: { type: [String, Number], default: undefined },
@@ -97,7 +103,13 @@ const props = defineProps({
     }),
   },
 })
-const emit = defineEmits(["update:modelValue"])
+const emit = defineEmits(["update:model-value"])
+
+/** Inject form level state */
+const formIsDisabled = inject("formIsDisabled", false)
+const formIsReadonly = inject("formIsReadonly", false)
+const isDisabled = computed(() => props.disabled || formIsDisabled.value)
+const isReadonly = computed(() => props.readonly || formIsReadonly.value)
 
 let [trigger, container] = usePopper({
   placement: "bottom",
@@ -109,7 +121,7 @@ const searchText = ref("")
 const internalId = computed(() => (props.id ? props.id : uuid()))
 const internalValue = computed({
   get: () => props.modelValue,
-  set: (value) => emit("update:modelValue", value),
+  set: (value) => emit("update:model-value", value),
 })
 const selectedItem = computed(() =>
   props.items.find((item) => item[props.itemValue] === internalValue.value)

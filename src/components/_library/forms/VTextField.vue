@@ -5,19 +5,29 @@
     </template>
 
     <div class="relative">
+      <div
+        v-if="$slots['prepend-icon'] || prependIcon"
+        class="absolute inset-y-0 left-0 flex items-center px-1.5"
+      >
+        <slot name="prepend-icon">
+          <VIcon :name="prependIcon" class="text-gray-400" />
+        </slot>
+      </div>
       <input
         :id="internalId"
         ref="input"
         v-model="internalValue"
         :type="internalType"
         :step="step"
-        :readonly="readonly || disabled"
-        class="w-full rounded py-1 focus:ring-primary-500 outline-none"
+        :readonly="isReadonly || isDisabled"
+        :placeholder="placeholder"
+        class="w-full placeholder:text-sm rounded py-1 focus:ring-primary-500 outline-none"
         :class="{
           'border-transparent focus:border-transparent focus:ring-0 px-0':
-            readonly,
-          'border-gray-300 px-1.5': !readonly,
+            isReadonly,
+          'border-gray-300 px-1.5': !isReadonly,
           'border-red-500 bg-red-100/25': hasError,
+          'pl-8': $slots['prepend-icon'] || prependIcon,
         }"
         @focus="$emit('focus')"
         @blur="$emit('blur')"
@@ -34,8 +44,8 @@
           class="pointer-events-auto"
           @click="toggleShowPassword"
         >
-          <EyeOffIcon v-if="showPassword" class="h-5 w-5 text-gray-300" />
-          <EyeIcon v-else class="h-5 w-5 text-gray-300" />
+          <VIcon v-if="showPassword" name="EyeOff" class="text-gray-300" />
+          <VIcon v-else name="Eye" class="text-gray-300" />
         </button>
       </div>
     </div>
@@ -43,11 +53,12 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from "vue"
+import { computed, onMounted, ref, inject } from "vue"
 import { v4 as uuid } from "uuid"
-import VInputSkin from "@/components/_library/forms/VInputSkin.vue"
-import { EyeIcon, EyeOffIcon } from "@heroicons/vue/solid"
 import { useValidation } from "@/composables/useValidation"
+
+import VInputSkin from "@/components/_library/forms/VInputSkin.vue"
+import VIcon from "@/components/_library/general/VIcon.vue"
 
 const props = defineProps({
   modelValue: { type: [String, Number], default: "" },
@@ -55,6 +66,8 @@ const props = defineProps({
   label: { type: String, default: undefined },
   type: { type: String, default: "text" },
   step: { type: Number, default: 1 },
+  prependIcon: { type: String, default: undefined },
+  placeholder: { type: String, default: undefined },
   readonly: Boolean,
   disabled: Boolean,
   autofocus: Boolean,
@@ -67,14 +80,20 @@ const props = defineProps({
     }),
   },
 })
-const emit = defineEmits(["update:modelValue", "focus", "blur"])
+const emit = defineEmits(["update:model-value", "focus", "blur"])
+
+/** Inject form level state */
+const formIsDisabled = inject("formIsDisabled", false)
+const formIsReadonly = inject("formIsReadonly", false)
+const isDisabled = computed(() => props.disabled || formIsDisabled.value)
+const isReadonly = computed(() => props.readonly || formIsReadonly.value)
 
 const input = ref(null)
 const showPassword = ref(false)
 const internalId = computed(() => (props.id ? props.id : uuid()))
 const internalValue = computed({
   get: () => props.modelValue,
-  set: (value) => emit("update:modelValue", value),
+  set: (value) => emit("update:model-value", value),
 })
 const internalType = computed(() => {
   if (props.type !== "password") return props.type

@@ -33,8 +33,9 @@
                   v-if="header.value === 'data-table-expand'"
                   class="rounded"
                 >
-                  <ChevronDownIcon
-                    class="w-6 transition-transform duration-300"
+                  <VIcon
+                    name="ChevronDown"
+                    class="transition-transform duration-300 -mb-1"
                     :class="{ 'rotate-180': state.expanded.includes(item.id) }"
                     @click="toggleExpand(item.id)"
                   />
@@ -75,7 +76,7 @@
 
 <script setup>
 import { computed, reactive, useSlots, watch } from "vue"
-import { ChevronDownIcon } from "@heroicons/vue/solid"
+import VIcon from "@/components/_library/general/VIcon.vue"
 import VTableHeader from "@/components/_library/general/VTable/VTableHeader.vue"
 import VTableFooter from "@/components/_library/general/VTable/VTableFooter.vue"
 import VProgress from "@/components/_library/general/VProgress.vue"

@@ -16,157 +16,137 @@
       </div>
     </div>
 
-    <SandboxRow title="VTextField">
-      <VTextField
-        v-model="form.textField"
-        label="Text Field"
-        :readonly="readonlyInputs"
-        :validation="v$.textField"
-      />
-      <VTextField
-        v-model="form.numberField"
-        label="Number Field"
-        type="number"
-        :step="0.5"
-        :readonly="readonlyInputs"
-        :validation="v$.numberField"
-      />
-      <VTextField
-        v-model="form.passwordField"
-        type="password"
-        label="Password Field"
-        :readonly="readonlyInputs"
-        :validation="v$.passwordField"
-      />
-    </SandboxRow>
-    <SandboxRow title="VTextarea">
-      <VTextarea
-        v-model="form.textarea"
-        label="Textarea"
-        :readonly="readonlyInputs"
-        :validation="v$.textarea"
-      />
-      <VTextarea
-        v-model="form.textarea"
-        label="Autogrow Textarea"
-        auto-grow
-        :readonly="readonlyInputs"
-        :validation="v$.textarea"
-      />
-    </SandboxRow>
-    <SandboxRow title="VSelect">
-      <VSelect
-        v-model="form.selectedItem"
-        label="Select"
-        placeholder="Select an item"
-        :items="selectItems"
-        :readonly="readonlyInputs"
-        :validation="v$.selectedItem"
-        clearable
-      />
-    </SandboxRow>
-    <SandboxRow title="VAutocomplete">
-      <VAutocomplete
-        v-model="form.autocompleteItem"
-        label="Autocomplete (typeahead)"
-        placeholder="Start typing..."
-        :items="selectItems"
-        :readonly="readonlyInputs"
-        :validation="v$.autocompleteItem"
-        clearable
-      />
-    </SandboxRow>
-    <SandboxRow title="VDateField">
-      <VDateField
-        id="test"
-        v-model="form.dateField"
-        label="Date Field"
-        :readonly="readonlyInputs"
-        :validation="v$.dateField"
-        clearable
-      />
-    </SandboxRow>
-    <SandboxRow title="VTimeField">
-      <VTimeField
-        v-model="form.timeField"
-        label="Time Field"
-        :readonly="readonlyInputs"
-        :validation="v$.timeField"
-      />
-      <VTimeField
-        v-model="form.timeField"
-        label="Time Field (24h)"
-        display-format="HH:mm"
-        :readonly="readonlyInputs"
-        :validation="v$.timeField"
-      />
-    </SandboxRow>
-    <SandboxRow title="VOtpField">
-      <VOtpField
-        v-model="form.otpField"
-        label="One Time Password Field"
-        :readonly="readonlyInputs"
-        :validation="v$.otpField"
-        @completed="alertComplete"
-      />
-    </SandboxRow>
-    <SandboxRow title="VCheckbox">
-      <div class="flex items-center gap-2">
-        <VCheckbox
-          v-model="form.singleCheckbox"
-          :readonly="readonlyInputs"
-          label="Checkbox"
+    <VForm :readonly="readonlyInputs">
+      <SandboxRow title="VTextField">
+        <VTextField
+          v-model="form.textField"
+          label="Text Field"
+          :validation="v$.textField"
         />
-        <span class="text-gray-500">value: {{ form.singleCheckbox }}</span>
-      </div>
-      <div class="flex items-center gap-2">
-        <VCheckbox
-          v-for="n in 3"
-          :key="n"
-          v-model="form.checkboxGroup"
-          :readonly="readonlyInputs"
-          :label="`Option ${n}`"
-          :value="n"
+        <VTextField
+          v-model="form.numberField"
+          label="Number Field"
+          type="number"
+          :step="0.5"
+          :validation="v$.numberField"
         />
-        <span class="text-gray-500 ml-3">value: {{ form.checkboxGroup }}</span>
-      </div>
-    </SandboxRow>
-    <SandboxRow title="VRadio">
-      <div class="flex items-center gap-2">
-        <VRadio
-          v-model="form.singleRadio"
-          :readonly="readonlyInputs"
-          label="Radio"
+        <VTextField
+          v-model="form.passwordField"
+          type="password"
+          label="Password Field"
+          :validation="v$.passwordField"
         />
-        <span class="text-gray-500">value: {{ form.singleRadio }}</span>
-      </div>
-      <div class="flex items-center gap-2">
-        <VRadio
-          v-for="n in 3"
-          :key="n"
-          v-model="form.radioMultiple"
-          :value="n"
-          :readonly="readonlyInputs"
-          :label="`Option ${n}`"
+      </SandboxRow>
+      <SandboxRow title="VTextarea">
+        <VTextarea
+          v-model="form.textarea"
+          label="Textarea"
+          :validation="v$.textarea"
         />
-        <span class="text-gray-500 ml-3">value: {{ form.radioMultiple }}</span>
-      </div>
-    </SandboxRow>
-    <SandboxRow title="VRadioGroup">
-      <VRadioGroup
-        v-model="form.radioGroup"
-        :items="selectItems"
-        :readonly="readonlyInputs"
-        horizontal
-      />
-    </SandboxRow>
-    <SandboxRow title="VSwitch">
-      <VSwitch
-        v-model="form.switchEnabled"
-        :readonly="readonlyInputs"
-        label="Switch"
-      />
-    </SandboxRow>
+        <VTextarea
+          v-model="form.textarea"
+          label="Autogrow Textarea"
+          auto-grow
+          :validation="v$.textarea"
+        />
+      </SandboxRow>
+      <SandboxRow title="VSelect">
+        <VSelect
+          v-model="form.selectedItem"
+          label="Select"
+          placeholder="Select an item"
+          :items="selectItems"
+          :validation="v$.selectedItem"
+          clearable
+        />
+      </SandboxRow>
+      <SandboxRow title="VAutocomplete">
+        <VAutocomplete
+          v-model="form.autocompleteItem"
+          label="Autocomplete (typeahead)"
+          placeholder="Start typing..."
+          :items="selectItems"
+          :validation="v$.autocompleteItem"
+          clearable
+        />
+      </SandboxRow>
+      <SandboxRow title="VDateField">
+        <VDateField
+          id="test"
+          v-model="form.dateField"
+          label="Date Field"
+          :validation="v$.dateField"
+          clearable
+        />
+      </SandboxRow>
+      <SandboxRow title="VTimeField">
+        <VTimeField
+          v-model="form.timeField"
+          label="Time Field"
+          :validation="v$.timeField"
+        />
+        <VTimeField
+          v-model="form.timeField"
+          label="Time Field (24h)"
+          display-format="HH:mm"
+          :validation="v$.timeField"
+        />
+      </SandboxRow>
+      <SandboxRow title="VOtpField">
+        <VOtpField
+          v-model="form.otpField"
+          label="One Time Password Field"
+          :validation="v$.otpField"
+          @completed="alertComplete"
+        />
+      </SandboxRow>
+      <SandboxRow title="VCheckbox">
+        <div class="flex items-center gap-2">
+          <VCheckbox v-model="form.singleCheckbox" label="Checkbox" />
+          <span class="text-gray-500">value: {{ form.singleCheckbox }}</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <VCheckbox
+            v-for="n in 3"
+            :key="n"
+            v-model="form.checkboxGroup"
+            :label="`Option ${n}`"
+            :value="n"
+          />
+          <span class="text-gray-500 ml-3"
+            >value: {{ form.checkboxGroup }}</span
+          >
+        </div>
+      </SandboxRow>
+      <SandboxRow title="VRadio">
+        <div class="flex items-center gap-2">
+          <VRadio v-model="form.singleRadio" label="Radio" />
+          <span class="text-gray-500">value: {{ form.singleRadio }}</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <VRadio
+            v-for="n in 3"
+            :key="n"
+            v-model="form.radioMultiple"
+            :value="n"
+            :label="`Option ${n}`"
+          />
+          <span class="text-gray-500 ml-3"
+            >value: {{ form.radioMultiple }}</span
+          >
+        </div>
+      </SandboxRow>
+      <SandboxRow title="VRadioGroup">
+        <VRadioGroup
+          v-model="form.radioGroup"
+          :items="selectItems"
+          horizontal
+        />
+      </SandboxRow>
+      <SandboxRow title="VSwitch">
+        <VSwitch v-model="form.switchEnabled" label="Switch" />
+      </SandboxRow>
+    </VForm>
   </div>
 </template>
 
@@ -178,6 +158,7 @@ import PaintUnderline from "@/assets/paint-underline.svg"
 import SandboxRow from "@/views/sandbox/SandboxRow.vue"
 
 /** Components */
+import VForm from "@/components/_library/forms/VForm.vue"
 import VTextField from "@/components/_library/forms/VTextField.vue"
 import VTextarea from "@/components/_library/forms/VTextarea.vue"
 import VSelect from "@/components/_library/forms/VSelect.vue"

@@ -14,7 +14,7 @@
         data-cy="picker-btn-prev"
         @click="$emit('picker:goBack')"
       >
-        <ChevronLeftIcon class="h-6 w-6" />
+        <VIcon name="ChevronLeft" />
       </button>
 
       <transition
@@ -35,7 +35,7 @@
         data-cy="picker-btn-next"
         @click="$emit('picker:goForward')"
       >
-        <ChevronRightIcon class="h-6 w-6" />
+        <VIcon name="ChevronRight" />
       </button>
     </div>
 
@@ -54,7 +54,7 @@
 </template>
 
 <script setup>
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid"
+import VIcon from "@/components/_library/general/VIcon.vue"
 
 const emit = defineEmits(["picker:goBack", "picker:goForward"])
 const props = defineProps({

@@ -9,7 +9,7 @@
           :items="pagingOptions"
           class="w-12"
           dense
-          @update:modelValue="updatePerPage"
+          @update:model-value="updatePerPage"
         />
       </div>
       <div class="v-paragraph-xs">
@@ -26,14 +26,14 @@
           class="rounded text-gray-900 disabled:text-gray-400"
           @click="updatePage(pagination.page - 1)"
         >
-          <ChevronLeftIcon class="w-6" />
+          <VIcon name="ChevronLeft" />
         </button>
         <button
           :disabled="!hasNextPage"
           class="rounded text-gray-900 disabled:text-gray-400"
           @click="updatePage(pagination.page + 1)"
         >
-          <ChevronRightIcon class="w-6" />
+          <VIcon name="ChevronRight" />
         </button>
       </div>
     </div>
@@ -42,7 +42,7 @@
 
 <script setup>
 import { computed } from "vue"
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/vue/solid"
+import VIcon from "@/components/_library/general/VIcon.vue"
 import VSelect from "@/components/_library/forms/VSelect.vue"
 
 const props = defineProps({

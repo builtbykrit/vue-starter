@@ -9,21 +9,23 @@
       ref="textarea"
       v-model="internalValue"
       :rows="rows"
-      :readonly="readonly"
-      class="w-full rounded py-1 min-h-[34px] resize-none"
+      :readonly="isReadonly"
+      :disabled="isDisabled"
+      :placeholder="placeholder"
+      class="w-full placeholder:text-sm rounded py-1 min-h-[34px] resize-none"
       :class="{
         'border-transparent focus:border-transparent focus:ring-0 px-0':
-          readonly,
-        'border-gray-300 px-1.5': !readonly,
+          isReadonly,
+        'border-gray-300 px-1.5': !isReadonly,
         'border-red-500 bg-red-100/25': hasError,
-        'hover:resize-y': !autoGrow && !readonly,
+        'hover:resize-y': !autoGrow && !isReadonly,
       }"
     />
   </VInputSkin>
 </template>
 
 <script setup>
-import { computed, onMounted, watch, ref } from "vue"
+import { computed, onMounted, watch, ref, inject } from "vue"
 import { v4 as uuid } from "uuid"
 import VInputSkin from "@/components/_library/forms/VInputSkin.vue"
 import { useValidation } from "@/composables/useValidation"
@@ -33,9 +35,11 @@ const props = defineProps({
   id: { type: String, default: undefined },
   label: { type: String, default: undefined },
   rows: { type: Number, default: 2 },
+  placeholder: { type: String, default: undefined },
   autoGrow: Boolean,
   autoFocus: Boolean,
   readonly: Boolean,
+  disabled: Boolean,
   validation: {
     type: Object,
     default: () => ({
@@ -45,13 +49,19 @@ const props = defineProps({
     }),
   },
 })
-const emit = defineEmits(["update:modelValue"])
+const emit = defineEmits(["update:model-value"])
+
+/** Inject form level state */
+const formIsDisabled = inject("formIsDisabled", false)
+const formIsReadonly = inject("formIsReadonly", false)
+const isDisabled = computed(() => props.disabled || formIsDisabled.value)
+const isReadonly = computed(() => props.readonly || formIsReadonly.value)
 
 const textarea = ref(null)
 const internalId = computed(() => (props.id ? props.id : uuid()))
 const internalValue = computed({
   get: () => props.modelValue,
-  set: (value) => emit("update:modelValue", value),
+  set: (value) => emit("update:model-value", value),
 })
 const { hasError, errorMessages } = useValidation(props.validation)
 
