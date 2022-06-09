@@ -23,6 +23,9 @@
 import { TransitionChild, TransitionRoot } from "@headlessui/vue"
 import { computed } from "vue"
 
+import VList from "@/components/_library/general/VList/VList.vue"
+import VListItem from "@/components/_library/general/VList/VListItem.vue"
+
 const props = defineProps({
   modelValue: { type: Boolean, default: true },
   static: { type: Boolean, default: false },
@@ -30,7 +33,7 @@ const props = defineProps({
 
 const isOpen = computed({
   get: () => props.modelValue,
-  set: (val) => emit("update:modelValue", val),
+  set: (val) => emit("update:model-value", val),
 })
 const transition = computed(
   () =>

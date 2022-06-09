@@ -26,7 +26,7 @@ import VPickerButton from "@/components/_library/forms/pickers/VPickerButton.vue
 import clock from "@/modules/clock"
 import { ref } from "vue"
 
-const emit = defineEmits(["update:modelValue"])
+const emit = defineEmits(["update:model-value"])
 const props = defineProps({
   modelValue: {
     type: String,
@@ -58,6 +58,6 @@ const handleSelection = (month) => {
     clock.setMonth(props.modelValue, numericMonth),
     displayYear.value
   )
-  emit("update:modelValue", newDate)
+  emit("update:model-value", newDate)
 }
 </script>
