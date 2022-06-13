@@ -15,7 +15,7 @@ describe("VMonthPicker", () => {
     expect(btns[6].text()).toBe("May")
     await btns[6].trigger("click")
 
-    expect(wrapper.emitted("update:modelValue")[0][0]).toEqual("2020-05-01")
+    expect(wrapper.emitted("update:model-value")[0][0]).toEqual("2020-05-01")
   })
 
   it("emits when a month with a different year is chosen", async () => {
@@ -26,6 +26,6 @@ describe("VMonthPicker", () => {
     expect(btns[6].text()).toBe("May")
     await btns[6].trigger("click")
     // Month numbers are zero-indexed
-    expect(wrapper.emitted("update:modelValue")[0][0]).toEqual("2021-05-01")
+    expect(wrapper.emitted("update:model-value")[0][0]).toEqual("2021-05-01")
   })
 })

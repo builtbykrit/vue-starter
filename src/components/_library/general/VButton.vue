@@ -1,6 +1,7 @@
 <template>
   <component
     :is="buttonComponent"
+    :type="type"
     :disabled="disabled || loading"
     class="block border"
     :class="[{ 'w-full': block }, buttonStyles, padding, borderRadius]"

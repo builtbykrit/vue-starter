@@ -37,7 +37,7 @@
                   <slot name="title">{{ title }}</slot>
                 </DialogTitle>
                 <button @click="isOpen = false">
-                  <XIcon class="h-5 w-5" />
+                  <VIcon name="X" />
                 </button>
               </div>
 
@@ -80,8 +80,8 @@ import {
   TransitionChild,
   TransitionRoot,
 } from "@headlessui/vue"
-import { XIcon } from "@heroicons/vue/solid"
 import { computed } from "vue"
+import VIcon from "@/components/_library/general/VIcon.vue"
 
 const props = defineProps({
   modelValue: { type: Boolean, required: true },
@@ -89,10 +89,10 @@ const props = defineProps({
   subtitle: { type: String, default: undefined },
   content: { type: String, default: undefined },
 })
-const emit = defineEmits(["update:modelValue"])
+const emit = defineEmits(["update:model-value"])
 
 const isOpen = computed({
   get: () => props.modelValue,
-  set: (val) => emit("update:modelValue", val),
+  set: (val) => emit("update:model-value", val),
 })
 </script>

@@ -44,7 +44,7 @@ const props = defineProps({
   defaultIndex: { type: Number, default: 0 },
   vertical: Boolean,
 })
-const emit = defineEmits(["update:modelValue", "change"])
+const emit = defineEmits(["change"])
 
 const internalTabs = computed(() => {
   return props.tabs.map((tab, index) => {

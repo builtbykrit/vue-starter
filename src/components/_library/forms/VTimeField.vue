@@ -18,11 +18,12 @@ const props = defineProps({
   outputFormat: { type: String, default: "HH:mm" },
   id: { type: String, default: undefined },
   label: { type: String, default: undefined },
+  placeholder: { type: String, default: undefined },
   validation: { type: Object, default: () => undefined },
   readonly: Boolean,
   autofocus: Boolean,
 })
-const emit = defineEmits(["update:modelValue"])
+const emit = defineEmits(["update:model-value"])
 
 const internalValue = ref(
   !!props.modelValue
@@ -41,7 +42,7 @@ watch(
 
 const updateExternalValue = () => {
   if (!internalValue.value) {
-    emit("update:modelValue", undefined)
+    emit("update:model-value", undefined)
     return
   }
 
@@ -57,7 +58,7 @@ const updateExternalValue = () => {
   // If valid, format and update modelValue
   if (validTime) {
     emit(
-      "update:modelValue",
+      "update:model-value",
       clock.format(time, props.outputFormat, timeFormats)
     )
     internalValue.value = clock.format(time, props.displayFormat, timeFormats)

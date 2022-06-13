@@ -11,14 +11,15 @@
         >
           <div
             class="flex items-center gap-1 group"
-            :class="`justify-${header.align ?? 'start'}`"
+            :class="genAlignClass(header.align)"
           >
             <slot :name="`header.${header.value}`" :header="header">
               {{ header.text }}
             </slot>
-            <ArrowUpIcon
+            <VIcon
               v-if="header.sortable"
-              class="h-4 w-4"
+              name="ArrowUp"
+              size="sm"
               :class="[
                 {
                   'rotate-180':
@@ -39,7 +40,7 @@
 
 <script setup>
 import { computed } from "vue"
-import { ArrowUpIcon } from "@heroicons/vue/solid"
+import VIcon from "@/components/_library/general/VIcon.vue"
 
 const props = defineProps({
   headers: { type: Array, default: () => [] },
@@ -61,6 +62,16 @@ const internalOptions = computed({
 })
 
 /** Methods */
+const genAlignClass = (alignment) => {
+  switch (alignment) {
+    case "center":
+      return "justify-center"
+    case "end":
+      return "justify-end"
+    default:
+      return "justify-start"
+  }
+}
 const updateSort = (value) => {
   const { sortBy, sortDesc } = internalOptions.value
   const newSort = { ...internalOptions.value }

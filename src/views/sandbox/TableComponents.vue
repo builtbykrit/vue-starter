@@ -8,7 +8,7 @@
         <VTable :headers="headers" :items="[]" loading />
         <VTable :headers="headers" :items="items" show-expand class="mt-4">
           <template #header.customFormat="{ header }">
-            <EmojiHappyIcon class="h-4 w-4" />
+            <VIcon name="BadgeCheck" size-class="h-4 w-4" />
             {{ header.text }}
           </template>
           <template #item.customFormat="{ item }">
@@ -29,7 +29,7 @@
 import PaintUnderline from "@/assets/paint-underline.svg"
 import SandboxRow from "./SandboxRow.vue"
 
-import { EmojiHappyIcon } from "@heroicons/vue/outline"
+import VIcon from "@/components/_library/general/VIcon.vue"
 import VTable from "@/components/_library/general/VTable/VTable.vue"
 
 const headers = [

@@ -22,13 +22,13 @@ describe("VTextField", () => {
     const input = wrapper.find("input")
     expect(input.element.type).toBe("text")
   })
-  it("should emit `update:modelValue` on input", async () => {
+  it("should emit `update:model-value` on input", async () => {
     const wrapper = mount(VTextField)
 
     const input = wrapper.find("input")
     await input.setValue("Test input")
 
-    expect(wrapper.emitted("update:modelValue")[0][0]).toBe("Test input")
+    expect(wrapper.emitted("update:model-value")[0][0]).toBe("Test input")
   })
 
   describe("When `type` prop is `number`", () => {

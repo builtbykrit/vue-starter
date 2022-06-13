@@ -12,7 +12,7 @@ describe("VDayPicker", () => {
     const wrapper = mount(VDayPicker, options)
     const btns = wrapper.findAll("button")
     await btns[11].trigger("click")
-    expect(wrapper.emitted("update:modelValue")).toBeTruthy()
+    expect(wrapper.emitted("update:model-value")).toBeTruthy()
   })
 
   it("can optionally select a full week", async () => {

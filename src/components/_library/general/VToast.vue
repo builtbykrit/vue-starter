@@ -11,7 +11,7 @@
           data-cy="v-toast--close"
           @click="$emit('click:close')"
         >
-          <XIcon class="h-5 w-5" />
+          <VIcon name="X" />
         </button>
       </div>
     </div>
@@ -20,7 +20,7 @@
 
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from "vue"
-import { XIcon } from "@heroicons/vue/solid"
+import VIcon from "@/components/_library/general/VIcon.vue"
 
 const emit = defineEmits(["click:undo", "click:close", "expired"])
 const props = defineProps({

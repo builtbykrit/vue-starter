@@ -7,8 +7,8 @@
         :key="`OTP-${index}`"
         :model-value="displayValue[index]"
         :focused="state.focused"
-        :readonly="readonly"
-        :disabled="disabled"
+        :readonly="isReadonly"
+        :disabled="isDisabled"
         :has-error="hasError"
         @focus="onFocus(index)"
         @blur="onBlur"
@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import { computed, reactive, ref, watch } from "vue"
+import { computed, reactive, ref, watch, inject } from "vue"
 import { useValidation } from "@/composables/useValidation"
 import { v4 as uuid } from "uuid"
 
@@ -48,7 +48,14 @@ const props = defineProps({
     }),
   },
 })
-const emit = defineEmits(["update:modelValue", "completed"])
+const emit = defineEmits(["update:model-value", "completed"])
+
+/** Inject form level state */
+const formIsDisabled = inject("formIsDisabled", false)
+const formIsReadonly = inject("formIsReadonly", false)
+const isDisabled = computed(() => props.disabled || formIsDisabled.value)
+const isReadonly = computed(() => props.readonly || formIsReadonly.value)
+
 const { hasError, errorMessages } = useValidation(props.validation)
 
 const inputs = ref(null)
@@ -86,7 +93,7 @@ const onInput = (index, char) => {
   newValue[index] = char
 
   if (newValue.join("") !== props.modelValue) {
-    emit("update:modelValue", newValue.join(""))
+    emit("update:model-value", newValue.join(""))
     focusNextInput()
   }
 }
@@ -115,7 +122,7 @@ const onPaste = (index, event) => {
   } else {
     focusInput(combinedWithPastedData.slice(0, props.characters).length)
   }
-  emit("update:modelValue", newValue.join(""))
+  emit("update:model-value", newValue.join(""))
 
   if (props.modelValue.length === props.characters) {
     emit("completed")

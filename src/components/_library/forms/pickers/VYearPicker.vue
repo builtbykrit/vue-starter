@@ -5,7 +5,7 @@
         <v-picker-button
           :selected="isSelectedYear(year)"
           :current="isCurrentYear(year)"
-          @click="$emit('update:modelValue', year)"
+          @click="$emit('update:model-value', year)"
         >
           {{ year }}
         </v-picker-button>
@@ -20,7 +20,7 @@ import VPickerButton from "@/components/_library/forms/pickers/VPickerButton.vue
 import clock from "@/modules/clock"
 import { computed } from "vue"
 
-defineEmits(["update:modelValue"])
+defineEmits(["update:model-value"])
 const props = defineProps({
   modelValue: {
     type: Number,

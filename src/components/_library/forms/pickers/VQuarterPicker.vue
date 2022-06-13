@@ -39,7 +39,7 @@ const props = defineProps({
     required: true,
   },
 })
-const emit = defineEmits(["update:modelValue"])
+const emit = defineEmits(["update:model-value"])
 
 const currentDate = clock.format()
 const displayYear = ref(clock.getYear(props.modelValue))
@@ -62,6 +62,6 @@ const handleSelection = (quarter) => {
     clock.setQuarter(props.modelValue, quarter),
     displayYear.value
   )
-  emit("update:modelValue", newDate)
+  emit("update:model-value", newDate)
 }
 </script>

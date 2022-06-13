@@ -16,14 +16,14 @@ describe("VTimeField", () => {
 
     expect(wrapper.find('[for="test-input"]').exists()).toBe(true)
   })
-  it("should emit `update:modelValue` on input blur", async () => {
+  it("should emit `update:model-value` on input blur", async () => {
     const wrapper = mount(VTimeField, { props: { modelValue: "01:00" } })
 
     const input = wrapper.find("input")
     await input.setValue("1p")
     await input.trigger("blur")
 
-    expect(wrapper.emitted("update:modelValue")[0][0]).toBe("13:00")
+    expect(wrapper.emitted("update:model-value")[0][0]).toBe("13:00")
   })
 
   describe("When `readonly` prop is `true`", () => {

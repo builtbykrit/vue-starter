@@ -13,7 +13,7 @@ describe("VYearPicker", () => {
     const wrapper = mount(VYearPicker, options)
     const btns = wrapper.findAll("button")
     await btns[1].trigger("click")
-    expect(wrapper.emitted("update:modelValue")).toEqual([[2022]])
+    expect(wrapper.emitted("update:model-value")).toEqual([[2022]])
   })
 
   it("displays only the number of years specified", async () => {

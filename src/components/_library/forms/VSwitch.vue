@@ -27,13 +27,12 @@ const props = defineProps({
   id: { type: String, default: undefined },
   modelValue: { type: Boolean, default: false },
   label: { type: String, default: undefined },
-  readonly: Boolean,
 })
-const emit = defineEmits(["update:modelValue"])
+const emit = defineEmits(["update:model-value"])
 
 const internalId = computed(() => (props.id ? props.id : uuid()))
 const internalValue = computed({
   get: () => props.modelValue,
-  set: (value) => emit("update:modelValue", value),
+  set: (value) => emit("update:model-value", value),
 })
 </script>

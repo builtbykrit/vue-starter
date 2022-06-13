@@ -45,7 +45,7 @@ import clock from "@/modules/clock"
 import { v4 as uuid } from "uuid"
 import { computed, reactive } from "vue"
 
-const emit = defineEmits(["update:modelValue"])
+const emit = defineEmits(["update:model-value"])
 const props = defineProps({
   modelValue: { type: String, default: undefined },
   week: Boolean,
@@ -71,7 +71,7 @@ const selectedDate = (day) => {
   return clock.format(`${selectedYearAndMonth}-${day}`)
 }
 const pickDate = (day) => {
-  emit("update:modelValue", selectedDate(day))
+  emit("update:model-value", selectedDate(day))
 }
 
 const isCurrentDate = (day) => selectedDate(day) === currentDate.value

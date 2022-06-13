@@ -9,7 +9,7 @@
       :id="internalId"
       v-slot="{ open }"
       v-model="internalValue"
-      :disabled="readonly || disabled"
+      :disabled="isReadonly || isDisabled"
       as="div"
       class="relative"
     >
@@ -18,8 +18,8 @@
           class="w-full border rounded text-left flex items-center focus:border-primary-500 focus:ring-primary-500 focus:ring-1"
           :class="{
             'border-primary-500 ring-primary-500 ring-1': open,
-            'border-transparent px-0': readonly,
-            'border-gray-300 px-1.5': !readonly,
+            'border-transparent px-0': isReadonly,
+            'border-gray-300 px-1.5': !isReadonly,
             'border-red-500 bg-red-100/25': hasError,
             'py-1 h-[34px]': !dense,
             'h-[28px]': dense,
@@ -32,16 +32,17 @@
         </ListboxButton>
 
         <div
-          v-if="!readonly"
+          v-if="!isReadonly"
           class="absolute inset-y-0 right-0 gap-1 flex items-center"
           :class="dense ? 'pr-1' : 'pr-2'"
         >
           <button v-if="clearable && !!selectedItem" @click="clearInput">
-            <XIcon class="h-4 w-4 text-gray-400" />
+            <VIcon name="X" size-class="h-4 w-4" class="text-gray-400" />
           </button>
-          <SelectorIcon
+          <VIcon
+            name="Selector"
+            :size-class="{ 'h-4': dense }"
             class="text-gray-400 pointer-events-none"
-            :class="dense ? 'h-4 w-4' : 'h-5 w-5'"
             aria-hidden="true"
           />
         </div>
@@ -76,18 +77,19 @@
 </template>
 
 <script setup>
-import { computed } from "vue"
+import { computed, inject } from "vue"
 import { v4 as uuid } from "uuid"
-import VInputSkin from "@/components/_library/forms/VInputSkin.vue"
 import {
   Listbox,
   ListboxButton,
   ListboxOption,
   ListboxOptions,
 } from "@headlessui/vue"
-import { SelectorIcon, XIcon } from "@heroicons/vue/solid"
 import { usePopper } from "@/composables/usePopper"
 import { useValidation } from "@/composables/useValidation"
+
+import VInputSkin from "@/components/_library/forms/VInputSkin.vue"
+import VIcon from "@/components/_library/general/VIcon.vue"
 
 const props = defineProps({
   modelValue: { type: [String, Number], default: undefined },
@@ -111,7 +113,13 @@ const props = defineProps({
     }),
   },
 })
-const emit = defineEmits(["update:modelValue"])
+const emit = defineEmits(["update:model-value"])
+
+/** Inject form level state */
+const formIsDisabled = inject("formIsDisabled", false)
+const formIsReadonly = inject("formIsReadonly", false)
+const isDisabled = computed(() => props.disabled || formIsDisabled.value)
+const isReadonly = computed(() => props.readonly || formIsReadonly.value)
 
 let [trigger, container] = usePopper({
   placement: "bottom",
@@ -122,7 +130,7 @@ const { hasError, errorMessages } = useValidation(props.validation)
 const internalId = computed(() => (props.id ? props.id : uuid()))
 const internalValue = computed({
   get: () => props.modelValue,
-  set: (value) => emit("update:modelValue", value),
+  set: (value) => emit("update:model-value", value),
 })
 const selectedItem = computed(() =>
   props.items.find((item) => item[props.itemValue] === internalValue.value)

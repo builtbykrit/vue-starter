@@ -2,7 +2,7 @@
   <RadioGroup
     :id="internalId"
     v-model="internalValue"
-    :disabled="disabled || readonly"
+    :disabled="isDisabled || isReadonly"
   >
     <div :class="{ 'flex space-x-2': horizontal, 'space-y-2': !horizontal }">
       <RadioGroupOption
@@ -21,7 +21,7 @@
             <div class="flex items-center gap-3">
               {{ item[itemText] }}
               <div v-show="checked" class="flex-shrink-0 text-white">
-                <CheckCircleIcon class="w-6 h-6" />
+                <VIcon name="CheckCircle" />
               </div>
             </div>
           </VCard>
@@ -32,11 +32,12 @@
 </template>
 
 <script setup>
-import { computed } from "vue"
+import { computed, inject } from "vue"
 import { v4 as uuid } from "uuid"
 import { RadioGroup, RadioGroupOption } from "@headlessui/vue"
-import { CheckCircleIcon } from "@heroicons/vue/solid"
+
 import VCard from "@/components/_library/general/VCard.vue"
+import VIcon from "@/components/_library/general/VIcon.vue"
 
 const props = defineProps({
   modelValue: { type: [String, Number], default: undefined },
@@ -50,11 +51,18 @@ const props = defineProps({
   readonly: Boolean,
   disabled: Boolean,
 })
-const emit = defineEmits(["update:modelValue"])
+const emit = defineEmits(["update:model-value"])
+
+/** Inject form level state */
+const formIsDisabled = inject("formIsDisabled", false)
+const formIsReadonly = inject("formIsReadonly", false)
+const isDisabled = computed(() => props.disabled || formIsDisabled.value)
+const isReadonly = computed(() => props.readonly || formIsReadonly.value)
+
 const internalId = computed(() => (props.id ? props.id : uuid()))
 const internalValue = computed({
   get: () => props.modelValue,
-  set: (value) => emit("update:modelValue", value),
+  set: (value) => emit("update:model-value", value),
 })
 const internalItems = computed(() => {
   if (typeof props.items[0] === "string") {

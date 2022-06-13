@@ -8,16 +8,22 @@
       <MenuButton
         ref="trigger"
         class="relative w-full h-[34px] border rounded text-left py-1 focus:ring-1 focus:ring-primary-500 focus:border-primary-500"
+        :disabled="isDisabled || isReadonly"
         :class="{
           'border-transparent focus:border-transparent focus:ring-0 px-0':
-            readonly,
-          'border-gray-300 px-1.5': !readonly,
+            isReadonly,
+          'border-gray-300 px-1.5': !isReadonly,
           'border-red-500 bg-red-100/25': hasError,
         }"
       >
-        <span>{{ displayDate }}</span>
+        <span v-if="!!displayDate" class="whitespace-nowrap mr-8">{{
+          displayDate
+        }}</span>
+        <span v-else class="text-sm text-gray-500 whitespace-nowrap mr-8">{{
+          placeholder
+        }}</span>
         <div
-          v-if="!readonly"
+          v-if="!isReadonly"
           class="absolute inset-y-0 right-0 flex gap-1 items-center pointer-events-none pr-2"
         >
           <button
@@ -25,10 +31,10 @@
             class="pointer-events-auto"
             @click="clearInput"
           >
-            <XIcon class="h-4 w-4 text-gray-400" />
+            <VIcon name="X" size-class="h-4 w-4" class="text-gray-400" />
           </button>
 
-          <CalendarIcon class="h-5 w-5 text-gray-400" />
+          <VIcon name="Calendar" class="text-gray-400" />
         </div>
       </MenuButton>
 
@@ -44,23 +50,25 @@
 </template>
 
 <script setup>
-import { computed } from "vue"
-import clock from "@/modules/clock"
-import { CalendarIcon, XIcon } from "@heroicons/vue/solid"
+import { computed, inject } from "vue"
+import { v4 as uuid } from "uuid"
 import { Menu, MenuButton, MenuItems } from "@headlessui/vue"
 import { usePopper } from "@/composables/usePopper"
-import { v4 as uuid } from "uuid"
 import { useValidation } from "@/composables/useValidation"
+import clock from "@/modules/clock"
 
 import VDayPicker from "@/components/_library/forms/pickers/VDayPicker.vue"
 import VInputSkin from "@/components/_library/forms/VInputSkin.vue"
+import VIcon from "@/components/_library/general/VIcon.vue"
 
 const props = defineProps({
   id: { type: String, default: undefined },
   modelValue: { type: String, default: undefined },
   label: { type: String, default: undefined },
   displayFormat: { type: String, default: "MMMM D, YYYY" },
+  placeholder: { type: String, default: undefined },
   readonly: Boolean,
+  disabled: Boolean,
   clearable: Boolean,
   autofocus: Boolean,
   validation: {
@@ -72,7 +80,14 @@ const props = defineProps({
     }),
   },
 })
-const emit = defineEmits(["update:modelValue"])
+const emit = defineEmits(["update:model-value"])
+
+/** Inject form level state */
+const formIsDisabled = inject("formIsDisabled", false)
+const formIsReadonly = inject("formIsReadonly", false)
+const isDisabled = computed(() => props.disabled || formIsDisabled.value)
+const isReadonly = computed(() => props.readonly || formIsReadonly.value)
+
 let [trigger, container] = usePopper({
   placement: "bottom",
   modifiers: [{ name: "offset", options: { offset: [0, 4] } }],
@@ -85,7 +100,7 @@ const internalValue = computed({
     return props.modelValue
   },
   set(val) {
-    emit("update:modelValue", val)
+    emit("update:model-value", val)
   },
 })
 
